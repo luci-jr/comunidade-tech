@@ -2,3 +2,53 @@ body, html {
   margin: 0;
   padding: 0;
 }
+
+/* ===== Design System (Global) ===== */
+:root {
+  /* Tipografia */
+  --font-montserrat: 'Montserrat', sans-serif;
+
+  /* Cores (Soft Dark Theme) */
+  --color-bg: #121212;        /* fundo escuro */
+  --color-surface: #1E1E1E;   /* cards escuros */
+  --color-text: #E0E0E0;      /* texto claro */
+  --color-muted: #B0B0B0;     /* texto secundário */
+
+  --color-primary: #4DA3FF;   
+  --color-accent: #A0522D;    /* Sepia/Barro */
+
+  /* UI */
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --neon-sepia: 0 0 15px rgba(160, 82, 45, 0.6), 0 0 30px rgba(160, 82, 45, 0.4);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-montserrat);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Imagens nunca estouram */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container padrão (opcional) */
+.container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 16px;
+}

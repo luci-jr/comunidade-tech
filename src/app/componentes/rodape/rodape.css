@@ -1,5 +1,22 @@
-.banner rodape img {
+.banner-rodape {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px 0;
+  background-color: transparent;
+}
+
+.banner-rodape img {
+  width: 100%;
+  max-height: 120px; /* Um pouco maior que antes, mas controlado */
+  object-fit: cover; /* Faz a imagem ocupar toda a largura */
   display: block;
-  margin-top: 120px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.banner-rodape img:hover {
+  opacity: 1;
 }

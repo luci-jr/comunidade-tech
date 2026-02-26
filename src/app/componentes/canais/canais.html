@@ -1,0 +1,13 @@
+<div class="lista-cards-container container">
+    @for (categoria of listaCategorias(); track categoria.titulo) {
+        <section [routerLink]="categoria.rota" class="card-link">
+            <div class="info-canal">
+                <span class="icone-categoria">{{ categoria.icone }}</span>
+                <h2 class="texto-h2">{{ categoria.titulo }}</h2>
+                <h3 class="texto-h3">{{ categoria.descricao }}</h3>
+            </div>
+        </section>
+    } @empty {
+        <p>Nenhuma categoria encontrada.</p>
+    }
+</div>

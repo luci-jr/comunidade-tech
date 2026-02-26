@@ -1,0 +1,29 @@
+<div class="container-canais">
+    <header class="header-pagina">
+        <h1>🚀 CANAIS DE TECNOLOGIA PARA ACOMPANHAR</h1>
+    </header>
+
+    <div class="grid-canais">
+        @for (canal of listaCanais(); track canal.nome) {
+            <a [href]="canal.url" target="_blank" class="card-youtube">
+                <div class="card-header">
+                    <span class="play-icon">▶</span>
+                    <h2>{{ canal.nome }}</h2>
+                    <span class="play-icon">▶</span>
+                </div>
+                <div class="card-body">
+                    <p class="description">{{ canal.description }}</p>
+                    <p class="detalhes">{{ canal.detalhes }}</p>
+                </div>
+                <div class="card-footer">
+                    <span class="link-texto">Visitar Canal 🔗</span>
+                </div>
+            </a>
+        }
+    </div>
+
+    <!-- Container para o botão no final da página, alinhado à direita -->
+    <div class="footer-controles">
+        <button routerLink="/" class="btn-voltar-estilizado">⬅ Voltar</button>
+    </div>
+</div>
