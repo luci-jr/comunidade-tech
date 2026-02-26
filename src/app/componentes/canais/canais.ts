@@ -1,38 +1,50 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Categoria } from '../../models/categoria.model';
+import { LoadingService } from '../../servicos/loading.service';
 
 @Component({
   selector: 'app-canais',
-  imports: [RouterLink],
+  standalone: true,
   templateUrl: './canais.html',
   styleUrl: './canais.css',
 })
 export class Canais {
+  private router = inject(Router);
+  private loadingService = inject(LoadingService);
+
   listaCategorias = signal<Categoria[]>([
     {
       titulo: 'Sistemas Operacionais',
       descricao: 'Dicas de SO para devs.',
       rota: '/sistemas-operacionais',
-      icone: '💻'
+      icone: '💻',
     },
     {
       titulo: 'Canais de Tecnologia',
       descricao: 'Os melhores influenciadores.',
       rota: '/canais-tecnologia',
-      icone: '📺'
+      icone: '📺',
     },
     {
-      titulo: 'Sites de Aprendizado',
-      descricao: 'Documentações e cursos.',
+      titulo: 'Plataformas de Ensino',
+      descricao: 'Onde aprender e evoluir.',
       rota: '/sites-aprendizado',
-      icone: '📚'
+      icone: '🎓',
     },
     {
       titulo: 'Podcasts',
       descricao: 'Ouça e aprenda.',
       rota: '/podcasts',
-      icone: '🎙️'
-    }
+      icone: '🎙️',
+    },
   ]);
+
+  navegar(rota: string) {
+    this.loadingService.show();
+    setTimeout(() => {
+      this.router.navigate([rota]);
+      this.loadingService.hide();
+    }, 2000);
+  }
 }
