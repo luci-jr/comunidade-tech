@@ -93,6 +93,11 @@
 .play-icon {
     font-size: 1.4rem;
     color: #FF0000;
+    display: inline-block; /* Necessário para o transform funcionar */
+}
+
+.play-icon-flipped {
+    transform: scaleX(-1); /* Espelha o ícone horizontalmente */
 }
 
 .card-header h2 {
