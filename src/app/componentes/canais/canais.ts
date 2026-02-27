@@ -21,34 +21,34 @@ export class Canais {
       icone: '💻',
     },
     {
-      titulo: 'Canais de Tecnologia',
-      descricao: 'Os melhores influenciadores.',
-      rota: '/canais-tecnologia',
-      icone: '📺',
-    },
-    {
-      titulo: 'Ensino Gamificado',
-      descricao: 'Aprenda praticando com desafios.',
-      rota: '/plataformas-ensino-jogo',
-      icone: '🎮',
-    },
-    {
       titulo: 'Plataformas de Ensino',
       descricao: 'Onde aprender e evoluir.',
       rota: '/sites-aprendizado',
       icone: '🎓',
     },
     {
-      titulo: 'Podcasts',
-      descricao: 'Ouça e aprenda.',
-      rota: '/podcasts',
-      icone: '🎙️',
+      titulo: 'Frameworks',
+      descricao: 'Ferramentas e tecnologias para backend, frontend e mobile.',
+      rota: '/referencias-tecnologia',
+      icone: '📚',
     },
     {
       titulo: 'Repositórios para estudo',
       descricao: 'Códigos e referências.',
       rota: '/repositorios',
       icone: '🐙',
+    },
+    {
+      titulo: 'Canais de Tecnologia',
+      descricao: 'Os melhores influenciadores.',
+      rota: '/canais-tecnologia',
+      icone: '📺',
+    },
+    {
+      titulo: 'Podcasts',
+      descricao: 'Ouça e aprenda.',
+      rota: '/podcasts',
+      icone: '🎙️',
     },
   ]);
 

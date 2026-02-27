@@ -4,7 +4,6 @@
     <p>Escolha uma trilha para filtrar os canais.</p>
 
     <nav class="menu-canais">
-      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
       <button [class.ativo]="filtroAtivo() === 'backend'" (click)="alterarFiltro('backend')">
         Backend
       </button>
@@ -14,6 +13,7 @@
       <button [class.ativo]="filtroAtivo() === 'carreira'" (click)="alterarFiltro('carreira')">
         Carreira
       </button>
+      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
     </nav>
 
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>

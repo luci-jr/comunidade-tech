@@ -1,17 +1,20 @@
-<div class="plataformas-layout">
-  <aside class="sidebar-plataformas">
-    <h2>Ensino Gamificado</h2>
-    <p>Escolha uma trilha para encontrar plataformas mais direcionadas.</p>
+<div class="referencias-layout">
+  <aside class="sidebar-referencias">
+    <h2>Frameworks</h2>
+    <p>Escolha uma trilha para acessar ferramentas e tecnologias usadas no mercado.</p>
 
-    <nav class="menu-plataformas">
-      <button [class.ativo]="filtroAtivo() === 'algoritmos'" (click)="alterarFiltro('algoritmos')">
-        Algoritmos
+    <nav class="menu-referencias">
+      <button [class.ativo]="filtroAtivo() === 'backend'" (click)="alterarFiltro('backend')">
+        Backend
       </button>
       <button [class.ativo]="filtroAtivo() === 'frontend'" (click)="alterarFiltro('frontend')">
-        Front-end
+        Frontend
       </button>
-      <button [class.ativo]="filtroAtivo() === 'ia-dados'" (click)="alterarFiltro('ia-dados')">
-        Dados e IA
+      <button [class.ativo]="filtroAtivo() === 'mobile'" (click)="alterarFiltro('mobile')">
+        Mobile
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'devops'" (click)="alterarFiltro('devops')">
+        DevOps
       </button>
       <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
     </nav>
@@ -19,14 +22,15 @@
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
   </aside>
 
-  <main class="conteudo-plataformas">
+  <main class="conteudo-referencias">
     <header class="header-pagina">
-      <h1>🎮 PLATAFORMAS COMO JOGO - PARA APRENDER PRATICANDO 🎮</h1>
+      <h1>📚 FRAMEWORKS</h1>
+      <p>Ferramentas e tecnologias para backend, frontend, mobile e devops.</p>
     </header>
 
-    <div class="grid-plataformas">
-      @for (item of plataformasFiltradas(); track item.nome) {
-        <a [href]="item.url" target="_blank" class="card-plataforma">
+    <div class="grid-referencias">
+      @for (item of referenciasFiltradas(); track item.nome) {
+        <a [href]="item.url" target="_blank" rel="noopener noreferrer" class="card-referencia">
           <div class="card-header">
             <span class="site-icon">{{ item.icone }}</span>
             <h2>{{ item.nome }}</h2>
@@ -40,7 +44,7 @@
             <p class="detalhes">{{ item.detalhes }}</p>
           </div>
           <div class="card-footer">
-            <span class="link-texto">Acessar Plataforma 🔗</span>
+            <span class="link-texto">Abrir referencia 🔗</span>
           </div>
         </a>
       }

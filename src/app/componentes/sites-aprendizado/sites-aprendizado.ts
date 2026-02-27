@@ -105,7 +105,19 @@ export class SitesAprendizado {
   private firestoreService = inject(FirestoreService);
   private loadingService = inject(LoadingService);
   private router = inject(Router);
-  filtroAtivo = signal<'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops'>('todos');
+  filtroAtivo = signal<'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado'>('todos');
+  private nomesGamificados = new Set([
+    'codecombat',
+    'checkio',
+    'hackerrank',
+    'leetcode',
+    'codewars',
+    'codingame',
+    'exercism',
+    'frontend mentor',
+    'cssbattle',
+    'kaggle',
+  ]);
 
   listaPlataformas = signal<PlataformaEnsino[]>([
     {
@@ -193,6 +205,79 @@ export class SitesAprendizado {
       detalhes: 'Documentação profunda de HTML, CSS, JavaScript e APIs.',
       icone: '📘',
     },
+    {
+      nome: 'CodeCombat',
+      url: 'https://codecombat.com',
+      descricao: '🎮 Aprenda programacao jogando',
+      detalhes: 'Plataforma gamificada com desafios de logica, Python e JavaScript por fases.',
+      icone: '🕹️',
+    },
+    {
+      nome: 'CheckiO',
+      url: 'https://checkio.org',
+      descricao: '🧩 Desafios de programacao em formato de missao',
+      detalhes: 'Resolva problemas em Python ou JavaScript e veja como outros devs solucionaram.',
+      icone: '🧩',
+    },
+    {
+      nome: 'HackerRank',
+      url: 'https://www.hackerrank.com',
+      descricao: '🏆 Desafios e ranking tecnico',
+      detalhes: 'Problemas de programacao com sistema de ranking, trilhas e badges.',
+      icone: '🏆',
+    },
+    {
+      nome: 'LeetCode',
+      url: 'https://leetcode.com',
+      descricao: '🧠 Treino para entrevistas',
+      detalhes: 'Exercicios de algoritmos com progresso por niveis e comunidade ativa.',
+      icone: '🧪',
+    },
+    {
+      nome: 'Codewars',
+      url: 'https://www.codewars.com',
+      descricao: '🥋 Progressao estilo jogo',
+      detalhes: 'Sistema de niveis kyu/dan que gamifica o aprendizado de codigo.',
+      icone: '🥋',
+    },
+    {
+      nome: 'CodinGame',
+      url: 'https://www.codingame.com',
+      descricao: '🎮 Programacao em formato de competicao',
+      detalhes:
+        'Voce resolve problemas para controlar personagens e competir contra outros programadores.',
+      icone: '🏗️',
+    },
+    {
+      nome: 'Exercism',
+      url: 'https://exercism.org',
+      descricao: '📚 Exercicios praticos com mentoria',
+      detalhes: 'Sistema de progresso por trilhas, desafios e feedback da comunidade.',
+      icone: '🐍',
+    },
+    {
+      nome: 'Frontend Mentor',
+      url: 'https://www.frontendmentor.io',
+      descricao: '🎨 Desafios reais de front-end',
+      detalhes:
+        'Projetos praticos com niveis de dificuldade e sistema de feedback da comunidade.',
+      icone: '🌐',
+    },
+    {
+      nome: 'CSSBattle',
+      url: 'https://cssbattle.dev',
+      descricao: '🎯 Competicao criativa com CSS',
+      detalhes:
+        'Reproduza layouts usando o menor codigo possivel, com pontuacao baseada em precisao e tamanho.',
+      icone: '🏰',
+    },
+    {
+      nome: 'Kaggle',
+      url: 'https://www.kaggle.com',
+      descricao: '📊 Competicoes de ciencia de dados',
+      detalhes: 'Desafios reais com ranking global e datasets publicos.',
+      icone: '🧑‍💻',
+    },
   ]);
 
   plataformasFiltradas = computed(() => {
@@ -217,6 +302,9 @@ export class SitesAprendizado {
           texto.includes('web')
         );
       }
+      if (filtro === 'ensino-gamificado') {
+        return this.nomesGamificados.has(item.nome.toLowerCase());
+      }
       return (
         texto.includes('devops') ||
         texto.includes('cloud') ||
@@ -234,7 +322,7 @@ export class SitesAprendizado {
     return texto.split(' ').slice(1).join(' ');
   }
 
-  alterarFiltro(filtro: 'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops') {
+  alterarFiltro(filtro: 'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado') {
     this.filtroAtivo.set(filtro);
   }
 

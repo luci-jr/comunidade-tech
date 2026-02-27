@@ -11,6 +11,7 @@ import { CanaisTecnologia } from './componentes/canais-tecnologia/canais-tecnolo
 import { PlataformasEnsinoJogo } from './componentes/plataformas-ensino-jogo/plataformas-ensino-jogo';
 import { Podcasts } from './componentes/podcasts/podcasts';
 import { Repositorios } from './componentes/repositorios/repositorios';
+import { ReferenciasTecnologia } from './componentes/referencias/referencias-tecnologia';
 import { Galeria } from './componentes/paginas/galeria/galeria';
 import { MuralDosDevs } from './componentes/paginas/mural-dos-devs/mural-dos-devs';
 import { ComoComecamos } from './componentes/paginas/como-comecamos/como-comecamos';
@@ -35,7 +36,8 @@ export const routes: Routes = [
     ],
   },
   { path: 'canais-tecnologia', component: CanaisTecnologia },
-  { path: 'plataformas-ensino-jogo', component: PlataformasEnsinoJogo },
+  { path: 'referencias-tecnologia', component: ReferenciasTecnologia },
+  { path: 'plataformas-ensino-jogo', pathMatch: 'full', redirectTo: 'sites-aprendizado' },
   { path: 'sites-aprendizado', component: SitesAprendizado },
   { path: 'podcasts', component: Podcasts },
   { path: 'repositorios', component: Repositorios },

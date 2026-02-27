@@ -14,9 +14,6 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         <p>Filtre por tipo de conteúdo para acelerar sua trilha de estudo.</p>
 
         <nav class="menu-repos">
-          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
-            Todos
-          </button>
           <button [class.ativo]="filtroAtivo() === 'python'" (click)="alterarFiltro('python')">
             Python
           </button>
@@ -28,6 +25,9 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
           </button>
           <button [class.ativo]="filtroAtivo() === 'trilhas'" (click)="alterarFiltro('trilhas')">
             Trilhas
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
+            Todos
           </button>
         </nav>
 

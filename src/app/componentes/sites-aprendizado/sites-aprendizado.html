@@ -4,7 +4,6 @@
     <p>Escolha uma trilha para focar no tipo de estudo que você procura.</p>
 
     <nav class="menu-sites">
-      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
       <button
         [class.ativo]="filtroAtivo() === 'fundamentos'"
         (click)="alterarFiltro('fundamentos')"
@@ -20,6 +19,13 @@
       >
         Cloud e DevOps
       </button>
+      <button
+        [class.ativo]="filtroAtivo() === 'ensino-gamificado'"
+        (click)="alterarFiltro('ensino-gamificado')"
+      >
+        Ensino Gamificado
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
     </nav>
 
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>

@@ -14,9 +14,6 @@ import { Podcast } from '../../models/podcast.model';
         <p>Escolha uma trilha para ouvir conteúdos mais direcionados.</p>
 
         <nav class="menu-podcasts">
-          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
-            Todos
-          </button>
           <button [class.ativo]="filtroAtivo() === 'devops'" (click)="alterarFiltro('devops')">
             DevOps
           </button>
@@ -25,6 +22,9 @@ import { Podcast } from '../../models/podcast.model';
           </button>
           <button [class.ativo]="filtroAtivo() === 'carreira'" (click)="alterarFiltro('carreira')">
             Carreira
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
+            Todos
           </button>
         </nav>
 
