@@ -73,6 +73,14 @@ Para gerar uma versão de produção e realizar o deploy no Firebase:
 npm run build && npx firebase deploy --only hosting
 ```
 
+<h1 align="center">🌐 Acesso Online</h1>
+
+<p align="center">
+  <a href="https://comunidade.tech.lucivaldo.cloud/" target="_blank">
+    https://comunidade.tech.lucivaldo.cloud/
+  </a>
+</p>
+
 <h1 align="center">👨‍💻 Autor</h1>
 
 <p align="center">

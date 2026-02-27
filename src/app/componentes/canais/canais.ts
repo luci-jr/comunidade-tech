@@ -27,6 +27,12 @@ export class Canais {
       icone: '📺',
     },
     {
+      titulo: 'Ensino Gamificado',
+      descricao: 'Aprenda praticando com desafios.',
+      rota: '/plataformas-ensino-jogo',
+      icone: '🎮',
+    },
+    {
       titulo: 'Plataformas de Ensino',
       descricao: 'Onde aprender e evoluir.',
       rota: '/sites-aprendizado',

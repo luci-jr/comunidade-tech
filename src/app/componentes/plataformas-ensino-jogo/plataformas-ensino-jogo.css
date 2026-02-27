@@ -1,0 +1,135 @@
+.container-plataformas-jogo {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-pagina {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header-pagina h1 {
+  font-size: 2.5rem;
+  color: var(--color-text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.grid-plataformas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.card-plataforma {
+  background-color: var(--color-surface);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+  min-height: 320px;
+}
+
+.card-plataforma:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--neon-sepia);
+  border-color: var(--color-accent);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.site-icon {
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+.site-icon.flipped {
+  transform: scaleX(-1);
+}
+
+.card-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.description {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.detalhes {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  margin-top: 10px;
+}
+
+.link-texto {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.footer-controles {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+}
+
+.btn-voltar-estilizado {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-accent);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: bold;
+  font-family: var(--font-montserrat);
+  box-shadow: var(--shadow);
+}
+
+.btn-voltar-estilizado:hover {
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: var(--neon-sepia);
+  transform: scale(1.05);
+}
