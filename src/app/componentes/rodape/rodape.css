@@ -192,6 +192,18 @@
     justify-self: center;
   }
 
+  .rodape-center {
+    order: 1;
+  }
+
+  .rodape-social {
+    order: 2;
+  }
+
+  .rodape-left {
+    order: 3;
+  }
+
   .rodape-social {
     justify-content: center;
     flex-wrap: wrap;
