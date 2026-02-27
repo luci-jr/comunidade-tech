@@ -38,6 +38,12 @@ export class Canais {
       rota: '/podcasts',
       icone: '🎙️',
     },
+    {
+      titulo: 'Repositórios para estudo',
+      descricao: 'Códigos e referências.',
+      rota: '/repositorios',
+      icone: '🐙',
+    },
   ]);
 
   navegar(rota: string) {
