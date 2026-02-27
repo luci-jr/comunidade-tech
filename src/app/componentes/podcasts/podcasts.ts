@@ -31,7 +31,6 @@ import { Podcast } from '../../models/podcast.model';
           </a>
         }
       </div>
-
       <div class="footer-controles">
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </div>
@@ -136,6 +135,12 @@ import { Podcast } from '../../models/podcast.model';
         margin-bottom: 16px;
       }
 
+      .link-texto {
+        font-weight: 600;
+        color: var(--color-primary);
+        font-size: 0.95rem;
+      }
+
       .footer-controles {
         margin-top: 50px;
         width: 100%;
@@ -145,7 +150,7 @@ import { Podcast } from '../../models/podcast.model';
       }
 
       .btn-voltar-estilizado {
-        padding: 15px 40px;
+        padding: 12px 35px;
         font-size: 1.1rem;
         background-color: var(--color-surface);
         color: var(--color-text);
@@ -163,12 +168,6 @@ import { Podcast } from '../../models/podcast.model';
         color: white;
         box-shadow: var(--neon-sepia);
         transform: scale(1.05);
-      }
-
-      .link-texto {
-        font-weight: 600;
-        color: var(--color-primary);
-        font-size: 0.95rem;
       }
     `,
   ],
@@ -244,6 +243,6 @@ export class Podcasts {
     setTimeout(() => {
       this.router.navigate(['/']);
       this.loadingService.hide();
-    }, 2000);
+    }, 800);
   }
 }

@@ -314,6 +314,6 @@ export class SitesAprendizado {
     setTimeout(() => {
       this.router.navigate(['/']);
       this.loadingService.hide();
-    }, 2000);
+    }, 800);
   }
 }

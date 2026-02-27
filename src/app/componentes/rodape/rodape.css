@@ -1,22 +1,110 @@
-.banner-rodape {
+.rodape-premium {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  background-color: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 50px 20px;
+  margin-top: 60px;
+}
+
+.rodape-container {
+  max-width: 100%;
+  width: 95%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "esquerda centro direita";
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  overflow: hidden;
-  padding: 20px 0;
-  background-color: transparent;
+  gap: 30px; /* Reduzido um pouco para dar mais espaço nas bordas */
 }
 
-.banner-rodape img {
-  width: 100%;
-  max-height: 120px; /* Um pouco maior que antes, mas controlado */
-  object-fit: cover; /* Faz a imagem ocupar toda a largura */
-  display: block;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+/* Lado Esquerdo: Copyright */
+.rodape-left {
+  grid-area: esquerda;
+  justify-self: start;
 }
 
-.banner-rodape img:hover {
+.copyright {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Centro: Logo */
+.rodape-center {
+  grid-area: centro;
+  justify-self: center;
+}
+
+.rodape-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+  transition: all 0.3s ease;
+}
+
+.rodape-logo:hover {
+  filter: drop-shadow(0 0 15px rgba(160, 82, 45, 0.8)) drop-shadow(0 0 30px rgba(160, 82, 45, 0.4));
+  transform: scale(1.05);
+}
+
+/* Lado Direito: Social */
+.rodape-social {
+  grid-area: direita;
+  justify-self: end;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.social-link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  /* Efeito neon suave inicial */
+  text-shadow: 0 0 5px rgba(160, 82, 45, 0.2);
+}
+
+.social-link:hover {
   opacity: 1;
+  color: var(--color-text);
+  transform: translateY(-3px);
+  /* Efeito neon forte igual aos cards */
+  text-shadow: 0 0 10px rgba(160, 82, 45, 0.8), 0 0 20px rgba(160, 82, 45, 0.4);
+}
+
+.social-icon {
+  font-size: 1.35rem;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+  filter: drop-shadow(0 0 8px rgba(160, 82, 45, 0.8));
+}
+
+/* Responsividade: Empilhar em telas menores que 1100px */
+@media (max-width: 1100px) {
+  .rodape-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .rodape-left, .rodape-center, .rodape-social {
+    justify-self: center;
+  }
+
+  .rodape-social {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 35px;
+  }
 }

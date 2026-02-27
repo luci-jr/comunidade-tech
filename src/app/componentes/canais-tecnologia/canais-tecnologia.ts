@@ -83,11 +83,10 @@ export class CanaisTecnologia {
   ]);
 
   voltar() {
-    console.log('Botão Voltar clicado em CanaisTecnologia');
     this.loadingService.showReturning();
     setTimeout(() => {
       this.router.navigate(['/']);
       this.loadingService.hide();
-    }, 2000);
+    }, 800);
   }
 }
