@@ -14,6 +14,12 @@ import { filter, map, startWith } from 'rxjs/operators';
 })
 export class App {
   private router = inject(Router);
+  private rotasComLayout = new Set([
+    '/inicio',
+    '/galeria',
+    '/mural-dos-devs',
+    '/como-comecamos',
+  ]);
 
   private rotaAtual = toSignal(
     this.router.events.pipe(
@@ -24,5 +30,5 @@ export class App {
     { initialValue: this.router.url },
   );
 
-  mostrarLayoutHome = computed(() => this.rotaAtual() === '/');
+  mostrarLayoutHome = computed(() => this.rotasComLayout.has(this.rotaAtual()));
 }

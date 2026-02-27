@@ -1,3 +1,16 @@
-<header class="banner">
-  <img src="/assets/banner.png" alt="coworking com alunos">
-</header>
+@if (mostrarBanner()) {
+  <header class="banner">
+    <img src="/assets/banner.png" alt="coworking com alunos">
+  </header>
+}
+
+<nav class="menu-superior" aria-label="Navegação principal">
+  <div class="menu-superior-container">
+    @if (!estaNaPaginaInicial()) {
+      <button type="button" class="menu-item" [class.ativo]="estaAtivo('/inicio')" (click)="navegarPara('/inicio')">Início</button>
+    }
+    <button type="button" class="menu-item" [class.ativo]="estaAtivo('/galeria')" (click)="navegarPara('/galeria')">Galeria</button>
+    <button type="button" class="menu-item" [class.ativo]="estaAtivo('/mural-dos-devs')" (click)="navegarPara('/mural-dos-devs')">Mural dos Devs</button>
+    <button type="button" class="menu-item" [class.ativo]="estaAtivo('/como-comecamos')" (click)="navegarPara('/como-comecamos')">Como começamos</button>
+  </div>
+</nav>

@@ -25,6 +25,37 @@
   justify-self: start;
 }
 
+.views-diarias {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #dbe0ea;
+}
+
+.pixel-label,
+.pixel-valor {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.pixel-label {
+  color: rgba(219, 224, 234, 0.82);
+}
+
+.pixel-valor {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(77, 163, 255, 0.45), 0 0 14px rgba(77, 163, 255, 0.24);
+}
+
+.views-diarias.indisponivel .pixel-valor {
+  color: #ffb3b3;
+  text-shadow: none;
+}
+
 .copyright {
   color: var(--color-muted);
   font-size: 0.95rem;
@@ -102,6 +133,11 @@
 
   .rodape-left, .rodape-center, .rodape-social {
     justify-self: center;
+  }
+
+  .views-diarias {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .rodape-social {

@@ -8,9 +8,17 @@ import { CanaisTecnologia } from './componentes/canais-tecnologia/canais-tecnolo
 import { PlataformasEnsinoJogo } from './componentes/plataformas-ensino-jogo/plataformas-ensino-jogo';
 import { Podcasts } from './componentes/podcasts/podcasts';
 import { Repositorios } from './componentes/repositorios/repositorios';
+import { Galeria } from './componentes/paginas/galeria/galeria';
+import { MuralDosDevs } from './componentes/paginas/mural-dos-devs/mural-dos-devs';
+import { ComoComecamos } from './componentes/paginas/como-comecamos/como-comecamos';
 
 export const routes: Routes = [
-  { path: '', component: Canais },
+  { path: '', pathMatch: 'full', redirectTo: 'inicio' },
+  { path: 'inicio', component: Canais },
+  { path: 'comunidade', pathMatch: 'full', redirectTo: 'inicio' },
+  { path: 'galeria', component: Galeria },
+  { path: 'mural-dos-devs', component: MuralDosDevs },
+  { path: 'como-comecamos', component: ComoComecamos },
   {
     path: 'sistemas-operacionais',
     component: SistemasOperacionais,
@@ -25,4 +33,5 @@ export const routes: Routes = [
   { path: 'sites-aprendizado', component: SitesAprendizado },
   { path: 'podcasts', component: Podcasts },
   { path: 'repositorios', component: Repositorios },
+  { path: '**', redirectTo: 'inicio' },
 ];

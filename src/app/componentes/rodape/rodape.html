@@ -2,6 +2,10 @@
     <div class="rodape-container">
         <!-- Esquerda: Copyright -->
         <div class="rodape-left">
+            <p class="views-diarias" [class.indisponivel]="!contadorDisponivel">
+                <span class="pixel-label">VIEWS DIARIOS:</span>
+                <span class="pixel-valor">{{ contadorDisponivel ? viewsDiarias : 'INDISPONIVEL' }}</span>
+            </p>
             <p class="copyright">&copy; 2026 Comunidade Tech. Todos os direitos reservados.</p>
         </div>
 
