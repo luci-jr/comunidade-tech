@@ -17,7 +17,7 @@ export class Canais {
     {
       titulo: 'Sistemas Operacionais',
       descricao: 'Dicas de SO para devs.',
-      rota: '/sistemas-operacionais',
+      rota: '/sistemas-operacionais/linux',
       icone: '💻',
     },
     {

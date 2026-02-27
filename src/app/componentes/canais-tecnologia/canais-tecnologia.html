@@ -1,29 +1,49 @@
-<div class="container-canais">
+<div class="canais-layout">
+  <aside class="sidebar-canais">
+    <h2>Canais Tech</h2>
+    <p>Escolha uma trilha para filtrar os canais.</p>
+
+    <nav class="menu-canais">
+      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
+      <button [class.ativo]="filtroAtivo() === 'backend'" (click)="alterarFiltro('backend')">
+        Backend
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'devops'" (click)="alterarFiltro('devops')">
+        Infra e DevOps
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'carreira'" (click)="alterarFiltro('carreira')">
+        Carreira
+      </button>
+    </nav>
+
+    <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
+  </aside>
+
+  <main class="conteudo-canais">
     <header class="header-pagina">
-        <h1>🚀 CANAIS DE TECNOLOGIA PARA ACOMPANHAR</h1>
+      <h1>🚀 CANAIS DE TECNOLOGIA PARA ACOMPANHAR</h1>
     </header>
 
     <div class="grid-canais">
-        @for (canal of listaCanais(); track canal.nome) {
-            <a [href]="canal.url" target="_blank" class="card-youtube">
-                <div class="card-header">
-                    <span class="play-icon">▶</span>
-                    <h2>{{ canal.nome }}</h2>
-                    <span class="play-icon play-icon-flipped">▶</span>
-                </div>
-                <div class="card-body">
-                    <p class="description">{{ canal.description }}</p>
-                    <p class="detalhes">{{ canal.detalhes }}</p>
-                </div>
-                <div class="card-footer">
-                    <span class="link-texto">Visitar Canal 🔗</span>
-                </div>
-            </a>
-        }
+      @for (canal of canaisFiltrados(); track canal.nome) {
+        <a [href]="canal.url" target="_blank" class="card-youtube">
+          <div class="card-header">
+            <span class="play-icon">▶</span>
+            <h2>{{ canal.nome }}</h2>
+            <span class="play-icon play-icon-flipped">▶</span>
+          </div>
+          <div class="card-body">
+            <p class="description">
+              <span class="desc-icon">{{ descricaoIcone(canal.description) }}</span>
+              <span>{{ descricaoTexto(canal.description) }}</span>
+            </p>
+            <p class="detalhes">{{ canal.detalhes }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="link-texto">Visitar Canal 🔗</span>
+          </div>
+        </a>
+      }
     </div>
-
-
-    <div class="footer-controles">
-        <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-    </div>
+  </main>
 </div>

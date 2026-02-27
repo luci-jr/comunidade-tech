@@ -1,7 +1,11 @@
 <app-loading></app-loading>
 
-<app-cabecalho></app-cabecalho>
+@if (mostrarLayoutHome()) {
+  <app-cabecalho></app-cabecalho>
+}
 
 <router-outlet></router-outlet>
 
-<app-rodape></app-rodape>
+@if (mostrarLayoutHome()) {
+  <app-rodape></app-rodape>
+}

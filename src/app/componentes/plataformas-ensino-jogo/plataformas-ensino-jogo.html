@@ -1,28 +1,49 @@
-<div class="container-plataformas-jogo">
-  <header class="header-pagina">
-    <h1>🎮 PLATAFORMAS DE ENSINO ESTILO JOGO - PARA APRENDER PRATICANDO</h1>
-  </header>
+<div class="plataformas-layout">
+  <aside class="sidebar-plataformas">
+    <h2>Ensino Gamificado</h2>
+    <p>Escolha uma trilha para encontrar plataformas mais direcionadas.</p>
 
-  <div class="grid-plataformas">
-    @for (item of listaPlataformas(); track item.nome) {
-      <a [href]="item.url" target="_blank" class="card-plataforma">
-        <div class="card-header">
-          <span class="site-icon">{{ item.icone }}</span>
-          <h2>{{ item.nome }}</h2>
-          <span class="site-icon flipped">{{ item.icone }}</span>
-        </div>
-        <div class="card-body">
-          <p class="description">{{ item.descricao }}</p>
-          <p class="detalhes">{{ item.detalhes }}</p>
-        </div>
-        <div class="card-footer">
-          <span class="link-texto">Acessar Plataforma 🔗</span>
-        </div>
-      </a>
-    }
-  </div>
+    <nav class="menu-plataformas">
+      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
+      <button [class.ativo]="filtroAtivo() === 'algoritmos'" (click)="alterarFiltro('algoritmos')">
+        Algoritmos
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'frontend'" (click)="alterarFiltro('frontend')">
+        Front-end
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'ia-dados'" (click)="alterarFiltro('ia-dados')">
+        Dados e IA
+      </button>
+    </nav>
 
-  <div class="footer-controles">
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-  </div>
+  </aside>
+
+  <main class="conteudo-plataformas">
+    <header class="header-pagina">
+      <h1>🎮 PLATAFORMAS DE ENSINO ESTILO JOGO - PARA APRENDER PRATICANDO</h1>
+    </header>
+
+    <div class="grid-plataformas">
+      @for (item of plataformasFiltradas(); track item.nome) {
+        <a [href]="item.url" target="_blank" class="card-plataforma">
+          <div class="card-header">
+            <span class="site-icon">{{ item.icone }}</span>
+            <h2>{{ item.nome }}</h2>
+            <span class="site-icon flipped">{{ item.icone }}</span>
+          </div>
+          <div class="card-body">
+            <p class="description">
+              <span class="desc-icon">{{ descricaoIcone(item.descricao) }}</span>
+              <span>{{ descricaoTexto(item.descricao) }}</span>
+            </p>
+            <p class="detalhes">{{ item.detalhes }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="link-texto">Acessar Plataforma 🔗</span>
+          </div>
+        </a>
+      }
+    </div>
+  </main>
 </div>

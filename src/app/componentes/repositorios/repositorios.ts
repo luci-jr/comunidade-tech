@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../servicos/loading.service';
 import { RepositorioGit } from '../../models/repositorio-git.model';
@@ -8,48 +8,151 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
   standalone: true,
   imports: [],
   template: `
-    <div class="container-repos">
-      <header class="header-pagina">
-        <h1>💻 REPOSITÓRIOS PARA ESTUDO</h1>
-      </header>
+    <div class="repos-layout">
+      <aside class="sidebar-repos">
+        <h2>Repositórios</h2>
+        <p>Filtre por tipo de conteúdo para acelerar sua trilha de estudo.</p>
 
-      <div class="grid-repos">
-        @for (repo of listaRepositorios(); track repo.nome) {
-          <a [href]="repo.url" target="_blank" class="card-repo">
-            <div class="card-header">
-              <span class="lang-tag">{{ repo.linguagem }}</span>
-              <h2>{{ repo.nome }}</h2>
-            </div>
-            <div class="card-body">
-              <p class="description">{{ repo.descricaoCurta }}</p>
-              <p class="detalhes">{{ repo.detalhes }}</p>
-            </div>
-            <div class="card-footer">
-              <span class="link-texto">Ver no GitHub 🐙</span>
-            </div>
-          </a>
-        }
-      </div>
+        <nav class="menu-repos">
+          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
+            Todos
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'python'" (click)="alterarFiltro('python')">
+            Python
+          </button>
+          <button
+            [class.ativo]="filtroAtivo() === 'javascript'"
+            (click)="alterarFiltro('javascript')"
+          >
+            JavaScript
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'trilhas'" (click)="alterarFiltro('trilhas')">
+            Trilhas
+          </button>
+        </nav>
 
-      <div class="footer-controles">
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-      </div>
+      </aside>
+
+      <main class="conteudo-repos">
+        <header class="header-pagina">
+          <h1>💻 REPOSITÓRIOS PARA ESTUDO</h1>
+        </header>
+
+        <div class="grid-repos">
+          @for (repo of reposFiltrados(); track repo.nome) {
+            <a [href]="repo.url" target="_blank" class="card-repo">
+              <div class="card-header">
+                <span class="lang-tag">{{ repo.linguagem }}</span>
+                <h2>{{ repo.nome }}</h2>
+              </div>
+              <div class="card-body">
+                <p class="description">
+                  <span class="desc-icon">{{ descricaoIcone(repo.descricaoCurta) }}</span>
+                  <span>{{ descricaoTexto(repo.descricaoCurta) }}</span>
+                </p>
+                <p class="detalhes">{{ repo.detalhes }}</p>
+              </div>
+              <div class="card-footer">
+                <span class="link-texto">Ver no GitHub 🐙</span>
+              </div>
+            </a>
+          }
+        </div>
+      </main>
     </div>
   `,
   styles: [
     `
-      .container-repos {
-        padding: 60px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
+      .repos-layout {
+        --sidebar-width: 380px;
+        width: 100%;
+        min-height: calc(100vh - 1px);
+      }
+
+      .sidebar-repos {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar-width);
+        background: #1a1930;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
+        padding: 34px 24px;
         display: flex;
         flex-direction: column;
+      }
+
+      .sidebar-repos h2 {
+        color: var(--color-text);
+        margin: 0 0 18px;
+        font-size: 1.8rem;
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        line-height: 1.25;
+        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+      }
+
+      .sidebar-repos p {
+        margin: 0 0 36px;
+        color: #d4d8e3;
+        line-height: 1.65;
+        font-size: 1.16rem;
+        font-weight: 600;
+      }
+
+      .menu-repos {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: auto;
+      }
+
+      .menu-repos button {
+        text-align: left;
+        padding: 14px 15px;
+        border-radius: 12px;
+        color: var(--color-text);
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .menu-repos button.ativo {
+        border-color: var(--color-accent);
+        background: rgba(227, 112, 47, 0.15);
+        box-shadow: var(--neon-sepia);
+      }
+
+      .btn-voltar-estilizado {
+        width: 100%;
+        padding: 13px 18px;
+        font-size: 1rem;
+        background-color: transparent;
+        color: var(--color-text);
+        border: 2px solid var(--color-accent);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .btn-voltar-estilizado:hover {
+        background-color: var(--color-accent);
+        color: white;
+      }
+
+      .conteudo-repos {
+        min-width: 0;
+        margin-left: calc(var(--sidebar-width) + 26px);
+        padding: 34px 24px 60px 0;
       }
 
       .header-pagina {
         width: 100%;
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 46px;
       }
 
       .header-pagina h1 {
@@ -127,6 +230,25 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         color: var(--color-text);
         margin-bottom: 12px;
         font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .desc-icon {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        line-height: 1;
+        flex-shrink: 0;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.04);
       }
 
       .detalhes {
@@ -136,39 +258,30 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         margin-bottom: 16px;
       }
 
-      .footer-controles {
-        margin-top: 50px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 40px;
-      }
-
-      .btn-voltar-estilizado {
-        padding: 12px 35px;
-        font-size: 1.1rem;
-        background-color: var(--color-surface);
-        color: var(--color-text);
-        border: 2px solid var(--color-accent);
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-weight: bold;
-        font-family: var(--font-montserrat);
-        box-shadow: var(--shadow);
-      }
-
-      .btn-voltar-estilizado:hover {
-        background-color: var(--color-accent);
-        color: white;
-        box-shadow: var(--neon-sepia);
-        transform: scale(1.05);
-      }
-
       .link-texto {
         font-weight: 600;
         color: var(--color-primary);
         font-size: 0.95rem;
+      }
+
+      @media (max-width: 900px) {
+        .sidebar-repos {
+          position: static;
+          width: 100%;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: none;
+          padding: 22px 16px;
+        }
+
+        .menu-repos {
+          margin-bottom: 18px;
+        }
+
+        .conteudo-repos {
+          margin-left: 0;
+          padding: 24px 16px 40px;
+        }
       }
     `,
   ],
@@ -176,6 +289,7 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
 export class Repositorios {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  filtroAtivo = signal<'todos' | 'python' | 'javascript' | 'trilhas'>('todos');
 
   listaRepositorios = signal<RepositorioGit[]>([
     {
@@ -221,6 +335,32 @@ export class Repositorios {
       linguagem: 'Mixed',
     },
   ]);
+
+  reposFiltrados = computed(() => {
+    const filtro = this.filtroAtivo();
+    if (filtro === 'todos') return this.listaRepositorios();
+
+    return this.listaRepositorios().filter((repo) => {
+      const linguagem = repo.linguagem.toLowerCase();
+      const texto = `${repo.nome} ${repo.descricaoCurta} ${repo.detalhes}`.toLowerCase();
+
+      if (filtro === 'python') return linguagem.includes('python');
+      if (filtro === 'javascript') return linguagem.includes('javascript');
+      return linguagem.includes('markdown') || linguagem.includes('mixed') || texto.includes('trilha');
+    });
+  });
+
+  descricaoIcone(texto: string): string {
+    return texto.split(' ')[0] ?? '';
+  }
+
+  descricaoTexto(texto: string): string {
+    return texto.split(' ').slice(1).join(' ');
+  }
+
+  alterarFiltro(filtro: 'todos' | 'python' | 'javascript' | 'trilhas') {
+    this.filtroAtivo.set(filtro);
+  }
 
   voltar() {
     this.loadingService.showReturning();

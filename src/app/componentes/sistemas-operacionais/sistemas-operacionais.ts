@@ -1,173 +1,139 @@
-import { Component, signal, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LoadingService } from '../../servicos/loading.service';
-import { SistemaOperacional } from '../../models/sistema-operacional.model';
 
 @Component({
   selector: 'app-so',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
-    <div class="container-so">
-      <header class="header-pagina">
-        <h1>🐧 SISTEMAS OPERACIONAIS & FERRAMENTAS</h1>
-      </header>
+    <div class="so-layout">
+      <aside class="sidebar-so">
+        <h2>Sistemas Operacionais</h2>
+        <p>Escolha uma trilha para ver recursos mais direcionados.</p>
 
-      <div class="grid-so">
-        @for (so of listaSistemas(); track so.nome) {
-          <a [href]="so.url" target="_blank" class="card-so">
-            <div class="card-header">
-              <span class="so-icon">{{ so.icone }}</span>
-              <h2>{{ so.nome }}</h2>
-              <span class="so-icon flipped">{{ so.icone }}</span>
-            </div>
-            <div class="card-body">
-              <p class="description">{{ so.descricaoCurta }}</p>
-              <p class="detalhes">{{ so.detalhes }}</p>
-            </div>
-            <div class="card-footer">
-              <span class="link-texto">Explorar Sistema 🔗</span>
-            </div>
-          </a>
-        }
-      </div>
-      <div class="footer-controles">
+        <nav class="menu-so">
+          <a routerLink="linux" routerLinkActive="ativo">Linux</a>
+          <a routerLink="windows" routerLinkActive="ativo">Windows</a>
+        </nav>
+
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-      </div>
+      </aside>
+
+      <main class="conteudo-so">
+        <router-outlet></router-outlet>
+      </main>
     </div>
   `,
   styles: [
     `
-      .container-so {
-        padding: 60px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .header-pagina {
+      .so-layout {
+        --sidebar-width: 380px;
         width: 100%;
-        text-align: center;
-        margin-bottom: 60px;
+        min-height: calc(100vh - 1px);
       }
 
-      .header-pagina h1 {
-        font-size: 2.5rem;
-        color: var(--color-text);
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      .grid-so {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 30px;
-      }
-
-      .card-so {
-        background-color: var(--color-surface);
-        border-radius: 16px;
-        padding: 24px;
-        text-decoration: none;
-        color: inherit;
+      .sidebar-so {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar-width);
+        background: #1a1930;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
+        padding: 34px 24px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: space-between;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 2px solid transparent;
-        box-shadow: var(--shadow);
-        min-height: 320px;
       }
 
-      .card-so:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--neon-sepia);
+      .sidebar-so h2 {
+        color: var(--color-text);
+        margin: 0 0 18px;
+        font-size: 1.8rem;
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        line-height: 1.25;
+        text-shadow:
+          0 0 6px rgba(77, 163, 255, 0.6),
+          0 0 14px rgba(77, 163, 255, 0.35);
+      }
+
+      .sidebar-so p {
+        margin: 0 0 36px;
+        color: #d4d8e3;
+        line-height: 1.65;
+        font-size: 1.16rem;
+        font-weight: 600;
+      }
+
+      .menu-so {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: auto;
+      }
+
+      .menu-so a {
+        text-decoration: none;
+        padding: 14px 15px;
+        border-radius: 12px;
+        color: var(--color-text);
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 600;
+      }
+
+      .menu-so a:hover {
         border-color: var(--color-accent);
       }
 
-      .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 20px;
-        width: 100%;
-      }
-
-      .so-icon {
-        font-size: 1.5rem;
-        display: inline-block;
-      }
-
-      .so-icon.flipped {
-        transform: scaleX(-1);
-      }
-
-      .card-header h2 {
-        font-size: 1.3rem;
-        margin: 0;
-        color: var(--color-text);
-        font-weight: bold;
-      }
-
-      .card-body {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .description {
-        font-weight: 700;
-        color: var(--color-text);
-        margin-bottom: 12px;
-        font-size: 1rem;
-      }
-
-      .detalhes {
-        color: var(--color-muted);
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-
-      .link-texto {
-        font-weight: 600;
-        color: var(--color-primary);
-        font-size: 0.95rem;
-      }
-
-      .footer-controles {
-        margin-top: 50px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 40px;
+      .menu-so a.ativo {
+        border-color: var(--color-accent);
+        background: rgba(227, 112, 47, 0.15);
+        box-shadow: var(--neon-sepia);
       }
 
       .btn-voltar-estilizado {
-        padding: 12px 35px;
-        font-size: 1.1rem;
-        background-color: var(--color-surface);
+        width: 100%;
+        padding: 13px 18px;
+        font-size: 1rem;
+        background-color: transparent;
         color: var(--color-text);
         border: 2px solid var(--color-accent);
         border-radius: 50px;
         cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.3s ease;
         font-weight: bold;
-        font-family: var(--font-montserrat);
-        box-shadow: var(--shadow);
       }
 
       .btn-voltar-estilizado:hover {
         background-color: var(--color-accent);
         color: white;
-        box-shadow: var(--neon-sepia);
-        transform: scale(1.05);
+      }
+
+      .conteudo-so {
+        min-width: 0;
+        margin-left: calc(var(--sidebar-width) + 26px);
+        padding: 34px 24px 60px 0;
+      }
+
+      @media (max-width: 900px) {
+        .sidebar-so {
+          position: static;
+          width: 100%;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: none;
+          padding: 22px 16px;
+        }
+
+        .menu-so {
+          margin-bottom: 18px;
+        }
+
+        .conteudo-so {
+          margin-left: 0;
+          padding: 24px 16px 40px;
+        }
       }
     `,
   ],
@@ -176,67 +142,7 @@ export class SistemasOperacionais {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
 
-  listaSistemas = signal<SistemaOperacional[]>([
-    {
-      nome: 'DistroWatch',
-      url: 'https://distrowatch.com/?language=PT',
-      icone: '🧭',
-      descricaoCurta: '📊 Portal de informações sobre distribuições Linux e BSD',
-      detalhes:
-        'Permite comparar, ver rankings de popularidade, notícias e detalhes técnicos de centenas de sistemas operacionais open-source.',
-    },
-    {
-      nome: 'Ubuntu (Canonical)',
-      url: 'https://ubuntu.com/',
-      icone: '🟠',
-      descricaoCurta: '📦 Distribuição Linux popular e estável',
-      detalhes:
-        'Foco em facilidade de uso, comunidade grande e suporte corporativo. Ideal tanto para desktop quanto servidores.',
-    },
-    {
-      nome: 'Fedora Project',
-      url: 'https://fedoraproject.org/pt-br/',
-      icone: '🐻',
-      descricaoCurta: '🧪 Linux com tecnologia de ponta',
-      detalhes:
-        'Distribuição patrocinada pela Red Hat, voltada para inovação e testes de novas tecnologias antes de chegarem ao enterprise.',
-    },
-    {
-      nome: 'Pop!_OS (System76)',
-      url: 'https://system76.com/pop/',
-      icone: '🚀',
-      descricaoCurta: '💻 Linux otimizado para produtividade e desenvolvimento',
-      detalhes:
-        'Baseado no Ubuntu, com foco em performance, suporte a hardware moderno e fluxo de trabalho para devs.',
-    },
-    {
-      nome: 'Windows (Microsoft)',
-      url: 'https://www.microsoft.com/pt-br/windows/?r=1',
-      icone: '🪟',
-      descricaoCurta: '💼 Sistema operacional comercial mais usado no mundo',
-      detalhes:
-        'Versátil para uso pessoal, corporativo e gaming, com ampla compatibilidade de software e hardware.',
-    },
-    {
-      nome: 'Raspberry Pi OS',
-      url: 'https://www.raspberrypi.com/',
-      icone: '🍓',
-      descricaoCurta: '🛠️ Soluções para computadores embarcados e educação',
-      detalhes:
-        'Sistema leve e otimizado para Raspberry Pi — ideal para aprendizado, projetos IoT e prototipação.',
-    },
-    {
-      nome: 'BigLinux',
-      url: 'https://www.biglinux.com.br/',
-      icone: '🐧',
-      descricaoCurta: '🇧🇷 Distribuição Linux com foco em usuários brasileiros',
-      detalhes:
-        'Interface amigável e pacotes configurados para facilitar a vida de quem está migrando para Linux.',
-    },
-  ]);
-
   voltar() {
-    console.log('Botão Voltar clicado em SistemasOperacionais');
     this.loadingService.showReturning();
     setTimeout(() => {
       this.router.navigate(['/']);

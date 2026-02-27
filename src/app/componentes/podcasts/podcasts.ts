@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../servicos/loading.service';
 import { Podcast } from '../../models/podcast.model';
@@ -8,48 +8,149 @@ import { Podcast } from '../../models/podcast.model';
   standalone: true,
   imports: [],
   template: `
-    <div class="container-podcasts">
-      <header class="header-pagina">
-        <h1>🎙️ PODCASTS TECH RECOMENDADOS</h1>
-      </header>
+    <div class="podcasts-layout">
+      <aside class="sidebar-podcasts">
+        <h2>Podcasts Tech</h2>
+        <p>Escolha uma trilha para ouvir conteúdos mais direcionados.</p>
 
-      <div class="grid-podcasts">
-        @for (pod of listaPodcasts(); track pod.nome) {
-          <a [href]="pod.url" target="_blank" class="card-podcast">
-            <div class="card-header">
-              <span class="pod-icon">{{ pod.icone }}</span>
-              <h2>{{ pod.nome }}</h2>
-              <span class="pod-icon flipped">{{ pod.icone }}</span>
-            </div>
-            <div class="card-body">
-              <p class="description">{{ pod.descricaoCurta }}</p>
-              <p class="detalhes">{{ pod.detalhes }}</p>
-            </div>
-            <div class="card-footer">
-              <span class="link-texto">Ouvir Agora 🎧</span>
-            </div>
-          </a>
-        }
-      </div>
-      <div class="footer-controles">
+        <nav class="menu-podcasts">
+          <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">
+            Todos
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'devops'" (click)="alterarFiltro('devops')">
+            DevOps
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'dados-ia'" (click)="alterarFiltro('dados-ia')">
+            Dados e IA
+          </button>
+          <button [class.ativo]="filtroAtivo() === 'carreira'" (click)="alterarFiltro('carreira')">
+            Carreira
+          </button>
+        </nav>
+
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-      </div>
+      </aside>
+
+      <main class="conteudo-podcasts">
+        <header class="header-pagina">
+          <h1>🎙️ PODCASTS TECH RECOMENDADOS</h1>
+        </header>
+
+        <div class="grid-podcasts">
+          @for (pod of podcastsFiltrados(); track pod.nome) {
+            <a [href]="pod.url" target="_blank" class="card-podcast">
+              <div class="card-header">
+                <span class="pod-icon">{{ pod.icone }}</span>
+                <h2>{{ pod.nome }}</h2>
+                <span class="pod-icon flipped">{{ pod.icone }}</span>
+              </div>
+              <div class="card-body">
+                <p class="description">
+                  <span class="desc-icon">{{ descricaoIcone(pod.descricaoCurta) }}</span>
+                  <span>{{ descricaoTexto(pod.descricaoCurta) }}</span>
+                </p>
+                <p class="detalhes">{{ pod.detalhes }}</p>
+              </div>
+              <div class="card-footer">
+                <span class="link-texto">Ouvir Agora 🎧</span>
+              </div>
+            </a>
+          }
+        </div>
+      </main>
     </div>
   `,
   styles: [
     `
-      .container-podcasts {
-        padding: 60px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
+      .podcasts-layout {
+        --sidebar-width: 380px;
+        width: 100%;
+        min-height: calc(100vh - 1px);
+      }
+
+      .sidebar-podcasts {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar-width);
+        background: #1a1930;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
+        padding: 34px 24px;
         display: flex;
         flex-direction: column;
+      }
+
+      .sidebar-podcasts h2 {
+        color: var(--color-text);
+        margin: 0 0 18px;
+        font-size: 1.8rem;
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        line-height: 1.25;
+        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+      }
+
+      .sidebar-podcasts p {
+        margin: 0 0 36px;
+        color: #d4d8e3;
+        line-height: 1.65;
+        font-size: 1.16rem;
+        font-weight: 600;
+      }
+
+      .menu-podcasts {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: auto;
+      }
+
+      .menu-podcasts button {
+        text-align: left;
+        padding: 14px 15px;
+        border-radius: 12px;
+        color: var(--color-text);
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .menu-podcasts button.ativo {
+        border-color: var(--color-accent);
+        background: rgba(227, 112, 47, 0.15);
+        box-shadow: var(--neon-sepia);
+      }
+
+      .btn-voltar-estilizado {
+        width: 100%;
+        padding: 13px 18px;
+        font-size: 1rem;
+        background-color: transparent;
+        color: var(--color-text);
+        border: 2px solid var(--color-accent);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .btn-voltar-estilizado:hover {
+        background-color: var(--color-accent);
+        color: white;
+      }
+
+      .conteudo-podcasts {
+        min-width: 0;
+        margin-left: calc(var(--sidebar-width) + 26px);
+        padding: 34px 24px 60px 0;
       }
 
       .header-pagina {
         width: 100%;
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 46px;
       }
 
       .header-pagina h1 {
@@ -99,8 +200,17 @@ import { Podcast } from '../../models/podcast.model';
       }
 
       .pod-icon {
-        font-size: 1.5rem;
-        display: inline-block;
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        line-height: 1;
+        flex-shrink: 0;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.04);
       }
 
       .pod-icon.flipped {
@@ -126,6 +236,25 @@ import { Podcast } from '../../models/podcast.model';
         color: var(--color-text);
         margin-bottom: 12px;
         font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .desc-icon {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        line-height: 1;
+        flex-shrink: 0;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.04);
       }
 
       .detalhes {
@@ -141,33 +270,24 @@ import { Podcast } from '../../models/podcast.model';
         font-size: 0.95rem;
       }
 
-      .footer-controles {
-        margin-top: 50px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 40px;
-      }
+      @media (max-width: 900px) {
+        .sidebar-podcasts {
+          position: static;
+          width: 100%;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: none;
+          padding: 22px 16px;
+        }
 
-      .btn-voltar-estilizado {
-        padding: 12px 35px;
-        font-size: 1.1rem;
-        background-color: var(--color-surface);
-        color: var(--color-text);
-        border: 2px solid var(--color-accent);
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-weight: bold;
-        font-family: var(--font-montserrat);
-        box-shadow: var(--shadow);
-      }
+        .menu-podcasts {
+          margin-bottom: 18px;
+        }
 
-      .btn-voltar-estilizado:hover {
-        background-color: var(--color-accent);
-        color: white;
-        box-shadow: var(--neon-sepia);
-        transform: scale(1.05);
+        .conteudo-podcasts {
+          margin-left: 0;
+          padding: 24px 16px 40px;
+        }
       }
     `,
   ],
@@ -175,6 +295,7 @@ import { Podcast } from '../../models/podcast.model';
 export class Podcasts {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  filtroAtivo = signal<'todos' | 'devops' | 'dados-ia' | 'carreira'>('todos');
 
   listaPodcasts = signal<Podcast[]>([
     {
@@ -237,8 +358,35 @@ export class Podcasts {
     },
   ]);
 
+  podcastsFiltrados = computed(() => {
+    const filtro = this.filtroAtivo();
+    if (filtro === 'todos') return this.listaPodcasts();
+
+    return this.listaPodcasts().filter((pod) => {
+      const texto = `${pod.descricaoCurta} ${pod.detalhes}`.toLowerCase();
+      if (filtro === 'devops') {
+        return texto.includes('devops') || texto.includes('linux') || texto.includes('cloud');
+      }
+      if (filtro === 'dados-ia') {
+        return texto.includes('dados') || texto.includes('ia') || texto.includes('machine learning');
+      }
+      return texto.includes('carreira') || texto.includes('mercado') || texto.includes('vivência');
+    });
+  });
+
+  descricaoIcone(texto: string): string {
+    return texto.split(' ')[0] ?? '';
+  }
+
+  descricaoTexto(texto: string): string {
+    return texto.split(' ').slice(1).join(' ');
+  }
+
+  alterarFiltro(filtro: 'todos' | 'devops' | 'dados-ia' | 'carreira') {
+    this.filtroAtivo.set(filtro);
+  }
+
   voltar() {
-    console.log('Botão Voltar clicado em Podcasts');
     this.loadingService.showReturning();
     setTimeout(() => {
       this.router.navigate(['/']);

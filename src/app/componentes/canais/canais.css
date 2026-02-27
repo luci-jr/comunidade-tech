@@ -60,9 +60,18 @@ section.card-link .info-canal {
 }
 
 .icone-categoria {
-    font-size: 3rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.35rem;
     margin-bottom: 16px;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .texto-h2 {

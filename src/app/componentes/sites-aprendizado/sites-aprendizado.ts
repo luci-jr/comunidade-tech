@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlataformaEnsino } from '../../models/plataforma-ensino.model';
 import { FirestoreService } from '../../servicos/firestore.service';
@@ -8,190 +8,95 @@ import { LoadingService } from '../../servicos/loading.service';
   selector: 'app-sites',
   standalone: true,
   imports: [],
-  template: `
-    <div class="container-plataformas">
-      <header class="header-pagina">
-        <h1>🎓 PLATAFORMAS DE ENSINO RECOMENDADAS</h1>
-        <button (click)="sugerirPlataforma()" class="btn-sugerir">
-          ➕ Sugerir Nova Plataforma
-        </button>
-      </header>
-
-      <div class="grid-plataformas">
-        @for (item of listaPlataformas(); track item.nome) {
-          <a [href]="item.url" target="_blank" class="card-plataforma">
-            <div class="card-header">
-              <span class="site-icon">{{ item.icone }}</span>
-              <h2>{{ item.nome }}</h2>
-              <span class="site-icon flipped">{{ item.icone }}</span>
-            </div>
-            <div class="card-body">
-              <p class="description">{{ item.descricao }}</p>
-              <p class="detalhes">{{ item.detalhes }}</p>
-            </div>
-            <div class="card-footer">
-              <span class="link-texto">Acessar Plataforma 🔗</span>
-            </div>
-          </a>
-        }
-      </div>
-
-      <div class="footer-controles">
-        <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
-      </div>
-    </div>
-  `,
+  templateUrl: './sites-aprendizado.html',
+  styleUrl: './sites-aprendizado.css',
   styles: [
     `
-      .container-plataformas {
-        padding: 60px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
+      .sites-layout {
+        --sidebar-width: 380px;
+        width: 100%;
+        min-height: calc(100vh - 1px);
+      }
+
+      .sidebar-sites {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: var(--sidebar-width);
+        background: #1a1930;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
+        padding: 34px 24px;
         display: flex;
         flex-direction: column;
       }
 
-      .header-pagina {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 60px;
-      }
-
-      .header-pagina h1 {
-        font-size: 2.5rem;
+      .sidebar-sites h2 {
         color: var(--color-text);
-        margin: 0 0 20px 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        margin: 0 0 18px;
+        font-size: 1.8rem;
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        line-height: 1.25;
+        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
       }
 
-      .btn-sugerir {
-        padding: 10px 25px;
-        background: transparent;
-        color: var(--color-accent);
-        border: 2px solid var(--color-accent);
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-family: var(--font-montserrat);
-      }
-
-      .btn-sugerir:hover {
-        background: var(--color-accent);
-        color: #fff;
-        box-shadow: var(--neon-sepia);
-        transform: scale(1.05);
-      }
-
-      .grid-plataformas {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 30px;
-      }
-
-      .card-plataforma {
-        background-color: var(--color-surface);
-        border-radius: 16px;
-        padding: 24px;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: space-between;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 2px solid transparent;
-        box-shadow: var(--shadow);
-        min-height: 320px;
-      }
-
-      .card-plataforma:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--neon-sepia);
-        border-color: var(--color-accent);
-      }
-
-      .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 20px;
-        width: 100%;
-      }
-
-      .site-icon {
-        font-size: 1.2rem;
-        display: inline-block;
-      }
-
-      .site-icon.flipped {
-        transform: scaleX(-1);
-      }
-
-      .card-header h2 {
-        font-size: 1.4rem;
-        margin: 0;
-        color: var(--color-text);
-        font-weight: bold;
-      }
-
-      .card-body {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .description {
-        font-weight: 700;
-        color: var(--color-text);
-        margin-bottom: 12px;
-        font-size: 1.1rem;
-      }
-
-      .detalhes {
-        color: var(--color-muted);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-
-      .footer-controles {
-        margin-top: 50px;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 40px;
-      }
-
-      .btn-voltar-estilizado {
-        padding: 15px 40px;
-        font-size: 1.1rem;
-        background-color: var(--color-surface);
-        color: var(--color-text);
-        border: 2px solid var(--color-accent);
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-weight: bold;
-        font-family: var(--font-montserrat);
-        box-shadow: var(--shadow);
-      }
-
-      .btn-voltar-estilizado:hover {
-        background-color: var(--color-accent);
-        color: white;
-        box-shadow: var(--neon-sepia);
-        transform: scale(1.05);
-      }
-
-      .link-texto {
+      .sidebar-sites p {
+        margin: 0 0 36px;
+        color: #d4d8e3;
+        line-height: 1.65;
+        font-size: 1.16rem;
         font-weight: 600;
-        color: var(--color-primary);
+      }
+
+      .menu-sites {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: auto;
+      }
+
+      .menu-sites button {
+        text-align: left;
+        padding: 14px 15px;
+        border-radius: 12px;
+        color: var(--color-text);
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 600;
         font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .menu-sites button.ativo {
+        border-color: var(--color-accent);
+        background: rgba(227, 112, 47, 0.15);
+        box-shadow: var(--neon-sepia);
+      }
+
+      .conteudo-sites {
+        min-width: 0;
+        margin-left: calc(var(--sidebar-width) + 26px);
+        padding: 34px 24px 60px 0;
+      }
+
+      @media (max-width: 900px) {
+        .sidebar-sites {
+          position: static;
+          width: 100%;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: none;
+          padding: 22px 16px;
+        }
+
+        .menu-sites {
+          margin-bottom: 18px;
+        }
+
+        .conteudo-sites {
+          margin-left: 0;
+          padding: 24px 16px 40px;
+        }
       }
     `,
   ],
@@ -200,6 +105,7 @@ export class SitesAprendizado {
   private firestoreService = inject(FirestoreService);
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  filtroAtivo = signal<'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops'>('todos');
 
   listaPlataformas = signal<PlataformaEnsino[]>([
     {
@@ -289,6 +195,49 @@ export class SitesAprendizado {
     },
   ]);
 
+  plataformasFiltradas = computed(() => {
+    const filtro = this.filtroAtivo();
+    if (filtro === 'todos') return this.listaPlataformas();
+
+    return this.listaPlataformas().filter((item) => {
+      const texto = `${item.nome} ${item.descricao} ${item.detalhes}`.toLowerCase();
+      if (filtro === 'fundamentos') {
+        return (
+          texto.includes('iniciante') ||
+          texto.includes('fundamento') ||
+          texto.includes('lógica') ||
+          texto.includes('certificado')
+        );
+      }
+      if (filtro === 'fullstack') {
+        return (
+          texto.includes('react') ||
+          texto.includes('javascript') ||
+          texto.includes('node') ||
+          texto.includes('web')
+        );
+      }
+      return (
+        texto.includes('devops') ||
+        texto.includes('cloud') ||
+        texto.includes('aws') ||
+        texto.includes('kubernetes')
+      );
+    });
+  });
+
+  descricaoIcone(texto: string): string {
+    return texto.split(' ')[0] ?? '';
+  }
+
+  descricaoTexto(texto: string): string {
+    return texto.split(' ').slice(1).join(' ');
+  }
+
+  alterarFiltro(filtro: 'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops') {
+    this.filtroAtivo.set(filtro);
+  }
+
   async sugerirPlataforma() {
     const nome = window.prompt('Qual o nome da plataforma?');
     const url = window.prompt('Qual a URL da plataforma?');
@@ -309,7 +258,6 @@ export class SitesAprendizado {
   }
 
   voltar() {
-    console.log('Botão Voltar clicado em SitesAprendizado');
     this.loadingService.showReturning();
     setTimeout(() => {
       this.router.navigate(['/']);
