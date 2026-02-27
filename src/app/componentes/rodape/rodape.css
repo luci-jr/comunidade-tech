@@ -25,42 +25,26 @@
   justify-self: start;
 }
 
-.views-diarias {
-  margin: 0 0 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #dbe0ea;
-}
-
-.pixel-label,
-.pixel-valor {
-  font-family: 'Press Start 2P', 'Courier New', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-
-.pixel-label {
-  color: rgba(219, 224, 234, 0.82);
-}
-
-.pixel-valor {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(77, 163, 255, 0.45), 0 0 14px rgba(77, 163, 255, 0.24);
-}
-
-.views-diarias.indisponivel .pixel-valor {
-  color: #ffb3b3;
-  text-shadow: none;
-}
-
 .copyright {
   color: var(--color-muted);
-  font-size: 0.95rem;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
   margin: 0;
   white-space: nowrap;
+  text-shadow:
+    0 0 6px rgba(77, 163, 255, 0.35),
+    0 0 14px rgba(77, 163, 255, 0.18);
+  transition: transform 0.25s ease, text-shadow 0.25s ease, color 0.25s ease;
+}
+
+.copyright:hover {
+  color: #e5eaf5;
+  transform: translateY(-1px);
+  text-shadow:
+    0 0 8px rgba(77, 163, 255, 0.75),
+    0 0 18px rgba(77, 163, 255, 0.45),
+    0 0 28px rgba(77, 163, 255, 0.2);
 }
 
 /* Centro: Logo */
@@ -92,34 +76,107 @@
 }
 
 .social-link {
-  color: var(--color-text);
+  color: #d8dbe3;
   text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
+  min-height: 20px;
+  padding: 7px 10px;
+  border: 1px solid rgba(160, 82, 45, 0.55);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   transition: all 0.3s ease;
-  opacity: 0.8;
-  /* Efeito neon suave inicial */
-  text-shadow: 0 0 5px rgba(160, 82, 45, 0.2);
+  opacity: 0.95;
+  text-shadow: none;
 }
 
 .social-link:hover {
   opacity: 1;
-  color: var(--color-text);
-  transform: translateY(-3px);
-  /* Efeito neon forte igual aos cards */
-  text-shadow: 0 0 10px rgba(160, 82, 45, 0.8), 0 0 20px rgba(160, 82, 45, 0.4);
+  transform: translateY(-2px);
 }
 
 .social-icon {
-  font-size: 1.35rem;
-  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transform: translateY(-2px);
+  transition: filter 0.25s ease, color 0.25s ease;
 }
 
-.social-link:hover .social-icon {
-  filter: drop-shadow(0 0 8px rgba(160, 82, 45, 0.8));
+.social-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.social-text {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.social-linkedin {
+  color: #0a66c2;
+}
+
+.social-github {
+  color: #8b5cf6;
+}
+
+.social-whatsapp {
+  color: #25d366;
+}
+
+.social-linkedin:hover {
+  text-shadow: 0 0 8px rgba(10, 102, 194, 0.95), 0 0 18px rgba(10, 102, 194, 0.55);
+}
+
+.social-github:hover {
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.95), 0 0 18px rgba(139, 92, 246, 0.55);
+}
+
+.social-whatsapp:hover {
+  text-shadow: 0 0 8px rgba(37, 211, 102, 0.95), 0 0 18px rgba(37, 211, 102, 0.55);
+}
+
+.social-linkedin:hover .social-icon {
+  filter: drop-shadow(0 0 8px rgba(10, 102, 194, 0.95));
+}
+
+.social-github:hover .social-icon {
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.95));
+}
+
+.social-whatsapp:hover .social-icon {
+  filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.95));
+}
+
+.social-linkedin:hover {
+  border-color: rgba(10, 102, 194, 0.9);
+  box-shadow: 0 0 10px rgba(10, 102, 194, 0.4), inset 0 0 0 1px rgba(10, 102, 194, 0.25);
+}
+
+.social-github:hover {
+  border-color: rgba(139, 92, 246, 0.9);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4), inset 0 0 0 1px rgba(139, 92, 246, 0.25);
+}
+
+.social-whatsapp:hover {
+  border-color: rgba(37, 211, 102, 0.9);
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.4), inset 0 0 0 1px rgba(37, 211, 102, 0.25);
 }
 
 /* Responsividade: Empilhar em telas menores que 1100px */
@@ -135,14 +192,13 @@
     justify-self: center;
   }
 
-  .views-diarias {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
   .rodape-social {
     justify-content: center;
     flex-wrap: wrap;
     gap: 35px;
+  }
+
+  .social-text {
+    font-size: 0.58rem;
   }
 }
