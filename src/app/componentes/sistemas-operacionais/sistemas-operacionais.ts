@@ -14,7 +14,10 @@ import { LoadingService } from '../../servicos/loading.service';
 
         <nav class="menu-so">
           <a routerLink="linux" routerLinkActive="ativo">Linux</a>
+          <a routerLink="macos" routerLinkActive="ativo">MacOS</a>
           <a routerLink="windows" routerLinkActive="ativo">Windows</a>
+          <a routerLink="freebsd" routerLinkActive="ativo">FreeBSD</a>
+          <a routerLink="raspberry" routerLinkActive="ativo">Raspberry Pi</a>
         </nav>
 
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>

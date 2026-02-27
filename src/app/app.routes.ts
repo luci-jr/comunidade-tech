@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
 import { Canais } from './componentes/canais/canais';
 import { SistemasOperacionais } from './componentes/sistemas-operacionais/sistemas-operacionais';
+import { SistemasOperacionaisFreebsd } from './componentes/sistemas-operacionais-freebsd/sistemas-operacionais-freebsd';
 import { SistemasOperacionaisLinux } from './componentes/sistemas-operacionais-linux/sistemas-operacionais-linux';
+import { SistemasOperacionaisMacos } from './componentes/sistemas-operacionais-macos/sistemas-operacionais-macos';
+import { SistemasOperacionaisRaspberry } from './componentes/sistemas-operacionais-raspberry/sistemas-operacionais-raspberry';
 import { SistemasOperacionaisWindows } from './componentes/sistemas-operacionais-windows/sistemas-operacionais-windows';
 import { SitesAprendizado } from './componentes/sites-aprendizado/sites-aprendizado';
 import { CanaisTecnologia } from './componentes/canais-tecnologia/canais-tecnologia';
@@ -25,6 +28,9 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'linux' },
       { path: 'linux', component: SistemasOperacionaisLinux },
+      { path: 'freebsd', component: SistemasOperacionaisFreebsd },
+      { path: 'raspberry', component: SistemasOperacionaisRaspberry },
+      { path: 'macos', component: SistemasOperacionaisMacos },
       { path: 'windows', component: SistemasOperacionaisWindows },
     ],
   },

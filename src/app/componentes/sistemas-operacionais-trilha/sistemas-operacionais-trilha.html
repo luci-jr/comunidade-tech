@@ -1,0 +1,24 @@
+<section class="secao-so">
+  <header class="header-pagina">
+    <h1><span class="icone-titulo">{{ iconeTitulo }}</span> {{ titulo }}</h1>
+    <p>{{ descricao }}</p>
+  </header>
+
+  <div class="grid-so">
+    @for (so of recursos; track so.nome) {
+      <a [href]="so.url" target="_blank" rel="noopener noreferrer" class="card-so">
+        <div class="card-header">
+          <span class="so-icon">{{ so.icone }}</span>
+          <h2>{{ so.nome }}</h2>
+        </div>
+        <div class="card-body">
+          <p class="description">{{ so.descricaoCurta }}</p>
+          <p class="detalhes">{{ so.detalhes }}</p>
+        </div>
+        <div class="card-footer">
+          <span class="link-texto">Explorar recurso 🔗</span>
+        </div>
+      </a>
+    }
+  </div>
+</section>
