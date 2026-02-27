@@ -33,7 +33,7 @@ import { Podcast } from '../../models/podcast.model';
 
       <main class="conteudo-podcasts">
         <header class="header-pagina">
-          <h1>🎙️ PODCASTS TECH RECOMENDADOS</h1>
+          <h1>🎙️ PODCASTS TECH RECOMENDADOS 🎙️</h1>
         </header>
 
         <div class="grid-podcasts">
@@ -86,7 +86,9 @@ import { Podcast } from '../../models/podcast.model';
         font-size: 1.8rem;
         font-family: 'Press Start 2P', var(--font-montserrat);
         line-height: 1.25;
-        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+        text-shadow:
+          0 0 6px rgba(77, 163, 255, 0.6),
+          0 0 14px rgba(77, 163, 255, 0.35);
       }
 
       .sidebar-podcasts p {
@@ -368,7 +370,9 @@ export class Podcasts {
         return texto.includes('devops') || texto.includes('linux') || texto.includes('cloud');
       }
       if (filtro === 'dados-ia') {
-        return texto.includes('dados') || texto.includes('ia') || texto.includes('machine learning');
+        return (
+          texto.includes('dados') || texto.includes('ia') || texto.includes('machine learning')
+        );
       }
       return texto.includes('carreira') || texto.includes('mercado') || texto.includes('vivência');
     });

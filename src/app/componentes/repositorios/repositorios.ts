@@ -36,7 +36,7 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
 
       <main class="conteudo-repos">
         <header class="header-pagina">
-          <h1>💻 REPOSITÓRIOS PARA ESTUDO</h1>
+          <h1>💻 REPOSITÓRIOS PARA ESTUDO 💻</h1>
         </header>
 
         <div class="grid-repos">
@@ -88,7 +88,9 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         font-size: 1.8rem;
         font-family: 'Press Start 2P', var(--font-montserrat);
         line-height: 1.25;
-        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+        text-shadow:
+          0 0 6px rgba(77, 163, 255, 0.6),
+          0 0 14px rgba(77, 163, 255, 0.35);
       }
 
       .sidebar-repos p {
@@ -346,7 +348,9 @@ export class Repositorios {
 
       if (filtro === 'python') return linguagem.includes('python');
       if (filtro === 'javascript') return linguagem.includes('javascript');
-      return linguagem.includes('markdown') || linguagem.includes('mixed') || texto.includes('trilha');
+      return (
+        linguagem.includes('markdown') || linguagem.includes('mixed') || texto.includes('trilha')
+      );
     });
   });
 

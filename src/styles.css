@@ -35,8 +35,56 @@ html, body {
 body {
   margin: 0;
   font-family: var(--font-montserrat);
-  background: var(--color-bg);
+  background:
+    linear-gradient(rgba(7, 10, 18, 0.86), rgba(7, 10, 18, 0.86)),
+    url('/assets/background_01.jpg') center center / cover no-repeat fixed;
   color: var(--color-text);
+}
+
+/* Variação visual do background para sidebars */
+[class^='sidebar-'],
+[class*=' sidebar-'] {
+  background:
+    linear-gradient(rgba(22, 24, 44, 0.9), rgba(18, 20, 38, 0.9)),
+    url('/assets/background_01.jpg') center center / cover no-repeat !important;
+}
+
+/* Padrao de centralizacao para titulos das secoes */
+.header-pagina,
+.header-pagina h1,
+.header-pagina p {
+  text-align: center;
+}
+
+.header-pagina p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sem contorno nos icones do titulo dos cards */
+.card-header .site-icon,
+.card-header .pod-icon,
+.card-header .so-icon,
+.card-header .play-icon,
+.info-canal .icone-categoria {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Hover neon suave para botoes das sidebars em todas as secoes */
+[class^='menu-'] button,
+[class*=' menu-'] button {
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease,
+    background-color 0.2s ease;
+}
+
+[class^='menu-'] button:hover,
+[class*=' menu-'] button:hover {
+  border-color: rgba(160, 82, 45, 0.85) !important;
+  box-shadow: 0 0 10px rgba(160, 82, 45, 0.28), 0 0 20px rgba(160, 82, 45, 0.16) !important;
+  background: rgba(160, 82, 45, 0.14) !important;
+  transform: translateX(2px);
 }
 
 /* Imagens nunca estouram */

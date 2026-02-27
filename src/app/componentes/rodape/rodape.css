@@ -2,8 +2,10 @@
   width: 100%;
   background-color: #0a0a0a;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 50px 20px;
-  margin-top: 60px;
+  padding: 14px 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 60;
 }
 
 .rodape-container {
@@ -14,7 +16,7 @@
   grid-template-areas: "esquerda centro direita";
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 30px; /* Reduzido um pouco para dar mais espaço nas bordas */
+  gap: 18px;
 }
 
 /* Lado Esquerdo: Copyright */
@@ -37,7 +39,7 @@
 }
 
 .rodape-logo {
-  height: 60px;
+  height: 46px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
@@ -54,7 +56,7 @@
   grid-area: direita;
   justify-self: end;
   display: flex;
-  gap: 30px;
+  gap: 22px;
   align-items: center;
 }
 
