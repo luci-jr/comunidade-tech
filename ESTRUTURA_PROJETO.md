@@ -1,128 +1,225 @@
-# Estrutura do Projeto (Comunidade Tech)
+# Estrutura detalhada do projeto
 
-Este guia organiza o projeto por responsabilidade, para facilitar apresentacao e manutencao.
+Este documento descreve a organização do código por responsabilidade para facilitar manutenção, onboarding e apresentação técnica.
 
-## 1) Layout global da aplicacao
+## 1. Arquitetura geral
 
-- Arquivo principal: `src/app/app.ts`
-- Template principal: `src/app/app.html`
-- Rotas: `src/app/app.routes.ts`
-
-### Como funciona
-
-- `app.html` monta a pagina com:
+- Aplicação SPA em Angular com componentes standalone.
+- Composição principal:
   - `app-loading`
-  - `app-cabecalho` (somente nas rotas principais definidas em `app.ts`)
-  - `router-outlet` (conteudo de cada rota)
-  - `app-rodape` (somente nas rotas principais)
-- Rotas principais de layout com cabecalho/rodape:
-  - `/inicio`
-  - `/galeria`
-  - `/mural-dos-devs`
-  - `/como-comecamos`
+  - `app-cabecalho` (rotas principais)
+  - `router-outlet`
+  - `app-rodape` (rotas principais)
 
-## 2) Cabecalho + barra de menu
+Arquivos centrais:
 
-- Componente: `src/app/componentes/cabecalho/cabecalho.ts`
-- Template: `src/app/componentes/cabecalho/cabecalho.html`
-- Estilos: `src/app/componentes/cabecalho/cabecalho.css`
+- `src/app/app.ts`
+- `src/app/app.html`
+- `src/app/app.css`
+- `src/app/app.routes.ts`
 
-### Responsabilidade
+## 2. Rotas e navegação
 
-- Exibir banner (somente em `/inicio`).
-- Exibir menu superior com abas:
-  - Galeria
-  - Mural dos Devs
-  - Como comecamos
-  - Inicio (aparece fora da pagina inicial para retorno rapido)
-- Destacar aba ativa.
+### Rotas institucionais (com cabeçalho/rodapé)
 
-## 3) Rodape
+- `/inicio`
+- `/galeria`
+- `/mural-dos-devs`
+- `/como-comecamos`
 
-- Componente: `src/app/componentes/rodape/rodape.ts`
-- Template: `src/app/componentes/rodape/rodape.html`
-- Estilos: `src/app/componentes/rodape/rodape.css`
+### Rotas de conteúdo
 
-### Responsabilidade
+- `/sistemas-operacionais`
+  - `/linux`
+  - `/macos`
+  - `/windows`
+  - `/freebsd`
+  - `/raspberry`
+- `/sites-aprendizado`
+- `/referencias-tecnologia`
+- `/canais-tecnologia`
+- `/repositorios`
+- `/podcasts`
 
-- Exibir copyright.
-- Exibir logo central (clicavel para `/inicio`).
-- Exibir redes sociais:
-  - LinkedIn
-  - GitHub
-  - WhatsApp
-- Estilo neon/pixel e responsividade com ordem mobile:
-  - logo
-  - redes sociais
-  - copyright
+### Compatibilidade
 
-## 4) Paginas institucionais (menu superior)
+- `/` redireciona para `/inicio`
+- `/comunidade` redireciona para `/inicio`
+- `/plataformas-ensino-jogo` redireciona para `/sites-aprendizado`
+- fallback `**` redireciona para `/inicio`
 
-- Inicio: `src/app/componentes/canais/*`
-- Galeria: `src/app/componentes/paginas/galeria/*`
-- Mural dos Devs: `src/app/componentes/paginas/mural-dos-devs/*`
-- Como comecamos: `src/app/componentes/paginas/como-comecamos/*`
+## 3. Layout e componentes de base
 
-## 5) Modulos de conteudo (cards)
+## 3.1 Cabeçalho
 
-Cada modulo concentra o conteudo em arrays/listas no arquivo `.ts` do componente.
+Arquivos:
 
-- Sistemas Operacionais:
-  - Container/menu lateral: `src/app/componentes/sistemas-operacionais/sistemas-operacionais.ts`
-  - Trilhas:
-    - Linux: `src/app/componentes/sistemas-operacionais-linux/sistemas-operacionais-linux.ts`
-    - MacOS: `src/app/componentes/sistemas-operacionais-macos/sistemas-operacionais-macos.ts`
-    - Windows: `src/app/componentes/sistemas-operacionais-windows/sistemas-operacionais-windows.ts`
-    - FreeBSD: `src/app/componentes/sistemas-operacionais-freebsd/sistemas-operacionais-freebsd.ts`
-    - Raspberry Pi: `src/app/componentes/sistemas-operacionais-raspberry/sistemas-operacionais-raspberry.ts`
-  - Componente compartilhado de trilha (layout unificado):
-    - `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.ts`
-    - `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.html`
-    - `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.css`
+- `src/app/componentes/cabecalho/cabecalho.ts`
+- `src/app/componentes/cabecalho/cabecalho.html`
+- `src/app/componentes/cabecalho/cabecalho.css`
 
-- Canais de tecnologia:
-  - `src/app/componentes/canais-tecnologia/canais-tecnologia.ts`
+Responsabilidades:
 
-- Ensino gamificado:
-  - `src/app/componentes/plataformas-ensino-jogo/plataformas-ensino-jogo.ts`
+- Exibir banner apenas em `/inicio`
+- Barra superior com abas institucionais
+- Destaque de aba ativa via rota atual
 
-- Plataformas de ensino:
-  - `src/app/componentes/sites-aprendizado/sites-aprendizado.ts`
+## 3.2 Rodapé
 
-- Podcasts:
-  - `src/app/componentes/podcasts/podcasts.ts`
+Arquivos:
 
-- Repositorios:
-  - `src/app/componentes/repositorios/repositorios.ts`
+- `src/app/componentes/rodape/rodape.ts`
+- `src/app/componentes/rodape/rodape.html`
+- `src/app/componentes/rodape/rodape.css`
 
-## 6) Modelos (tipagem dos cards e dados)
+Responsabilidades:
+
+- Copyright
+- Logo com link para `/inicio`
+- Links sociais (LinkedIn, GitHub, WhatsApp)
+- Comportamento responsivo com ordem específica no mobile
+
+## 3.3 Loading
+
+Arquivo:
+
+- `src/app/componentes/loading/loading.component.ts`
+
+## 4. Página inicial (cards principais)
+
+Arquivos:
+
+- `src/app/componentes/canais/canais.ts`
+- `src/app/componentes/canais/canais.html`
+- `src/app/componentes/canais/canais.css`
+
+Responsabilidade:
+
+- Renderizar cards de entrada da plataforma
+- Navegar para módulos temáticos
+
+## 5. Módulos de conteúdo
+
+## 5.1 Sistemas Operacionais
+
+Container e menu lateral:
+
+- `src/app/componentes/sistemas-operacionais/sistemas-operacionais.ts`
+
+Trilhas:
+
+- `src/app/componentes/sistemas-operacionais-linux/sistemas-operacionais-linux.ts`
+- `src/app/componentes/sistemas-operacionais-macos/sistemas-operacionais-macos.ts`
+- `src/app/componentes/sistemas-operacionais-windows/sistemas-operacionais-windows.ts`
+- `src/app/componentes/sistemas-operacionais-freebsd/sistemas-operacionais-freebsd.ts`
+- `src/app/componentes/sistemas-operacionais-raspberry/sistemas-operacionais-raspberry.ts`
+
+Componente compartilhado de trilha (layout único):
+
+- `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.ts`
+- `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.html`
+- `src/app/componentes/sistemas-operacionais-trilha/sistemas-operacionais-trilha.css`
+
+## 5.2 Plataformas de Ensino
+
+Arquivos:
+
+- `src/app/componentes/sites-aprendizado/sites-aprendizado.ts`
+- `src/app/componentes/sites-aprendizado/sites-aprendizado.html`
+- `src/app/componentes/sites-aprendizado/sites-aprendizado.css`
+
+Responsabilidades:
+
+- Curadoria de plataformas de aprendizado
+- Filtros:
+  - Fundamentos
+  - Full Stack
+  - Cloud e DevOps
+  - Ensino Gamificado
+  - Todos
+- Formulário de sugestão integrado ao Firestore
+
+## 5.3 Frameworks e Tecnologias
+
+Arquivos:
+
+- `src/app/componentes/referencias/referencias-tecnologia.ts`
+- `src/app/componentes/referencias/referencias-tecnologia.html`
+- `src/app/componentes/referencias/referencias-tecnologia.css`
+
+Responsabilidades:
+
+- Curadoria de ferramentas/tecnologias por trilha:
+  - Backend
+  - Frontend
+  - Mobile
+  - DevOps
+  - Todos
+
+## 5.4 Canais de Tecnologia
+
+Arquivos:
+
+- `src/app/componentes/canais-tecnologia/canais-tecnologia.ts`
+- `src/app/componentes/canais-tecnologia/canais-tecnologia.html`
+- `src/app/componentes/canais-tecnologia/canais-tecnologia.css`
+
+## 5.5 Repositórios
+
+Arquivo:
+
+- `src/app/componentes/repositorios/repositorios.ts`
+
+## 5.6 Podcasts
+
+Arquivo:
+
+- `src/app/componentes/podcasts/podcasts.ts`
+
+## 6. Páginas institucionais
+
+- `src/app/componentes/paginas/galeria/*`
+- `src/app/componentes/paginas/mural-dos-devs/*`
+- `src/app/componentes/paginas/como-comecamos/*`
+
+## 7. Models
 
 - `src/app/models/categoria.model.ts`
-- `src/app/models/sistema-operacional.model.ts`
+- `src/app/models/canal.model.ts`
 - `src/app/models/canal-yt.model.ts`
 - `src/app/models/plataforma-ensino.model.ts`
 - `src/app/models/podcast.model.ts`
 - `src/app/models/repositorio-git.model.ts`
+- `src/app/models/sistema-operacional.model.ts`
 
-## 7) Servicos
+## 8. Serviços
 
-- Firestore: `src/app/servicos/firestore.service.ts`
-  - uso atual focado em sugestoes.
-- Loading: `src/app/servicos/loading.service.ts`
-  - controla tela de carregamento/transicoes.
+- `src/app/servicos/loading.service.ts`
+  - Controle de estados/fluxo visual de loading
+- `src/app/servicos/firestore.service.ts`
+  - Operações no Firestore para sugestões de plataformas
 
-## 8) Assets visuais
+## 9. Assets e estilos globais
 
-- Banner: `public/assets/banner.png`
-- Logo rodape: `public/assets/Comunidade Tech.png`
-- Background global: `public/assets/background_01.jpg`
+Assets:
 
-## 9) Regra pratica para explicar o projeto
+- `public/assets/banner.png`
+- `public/assets/Comunidade Tech.png`
+- `public/assets/background_01.jpg`
+- `public/assets/screenshots/dashboard.png`
 
-Quando apresentar:
+Estilos globais:
 
-1. Comece pelo fluxo global: `app.ts`, `app.html`, `app.routes.ts`.
-2. Explique layout fixo: cabecalho + conteudo + rodape.
-3. Mostre paginas institucionais do menu superior.
-4. Mostre modulos de cards e onde o conteudo de cada trilha vive (arquivos `.ts`).
-5. Finalize com modelos, servicos e assets.
+- `src/styles.css`
+
+## 10. Como explicar o projeto em apresentação
+
+Ordem recomendada:
+
+1. Contexto e objetivo da plataforma
+2. Stack e arquitetura Angular standalone
+3. Fluxo de rotas e layout base (`app.ts`, `app.html`, `app.routes.ts`)
+4. Página inicial e cards de entrada
+5. Módulos de conteúdo (SO, plataformas, frameworks, canais, repositórios, podcasts)
+6. Serviços (loading + Firestore)
+7. Responsividade, identidade visual e deploy
