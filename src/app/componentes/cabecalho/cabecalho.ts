@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../servicos/auth.service';
+import { LoginModalService } from '../../servicos/login-modal.service';
 
 @Component({
   selector: 'app-cabecalho',
@@ -13,6 +14,7 @@ import { AuthService } from '../../servicos/auth.service';
 export class Cabecalho {
   private router = inject(Router);
   private authService = inject(AuthService);
+  private modalService = inject(LoginModalService);
   usuario$ = this.authService.user$;
 
   async logout() {
@@ -25,6 +27,10 @@ export class Cabecalho {
   }
 
   navegarPara(rota: string): void {
+    if (rota === '/login') {
+      this.modalService.abrir();
+      return;
+    }
     this.router.navigate([rota]);
   }
 

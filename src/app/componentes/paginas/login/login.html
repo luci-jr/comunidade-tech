@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container" (click)="$event.target === container && fecharModal()" #container>
   <div class="login-card">
     <header class="login-header">
       <h1>CONECTAR_USUARIO</h1>
@@ -27,10 +27,10 @@
     </form>
 
     <div class="footer-links">
-      <a href="/login">Criar Conta</a>
-      <a href="#">Esqueceu a senha?</a>
+      <a href="/login" (click)="$event.preventDefault()">Criar Conta</a>
+      <a href="#" (click)="$event.preventDefault()">Esqueceu a senha?</a>
       <br>
-      <a href="/inicio">[ Voltar ]</a>
+      <a href="javascript:void(0)" (click)="fecharModal()">[ Voltar ]</a>
     </div>
   </div>
 </div>

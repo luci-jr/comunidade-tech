@@ -11,7 +11,8 @@
     }
     <button type="button" class="menu-item" [class.ativo]="estaAtivo('/galeria')" (click)="navegarPara('/galeria')">Galeria</button>
     <button type="button" class="menu-item" [class.ativo]="estaAtivo('/mural-dos-devs')" (click)="navegarPara('/mural-dos-devs')">Mural dos Devs</button>
-    <button type="button" class="menu-item" [class.ativo]="estaAtivo('/como-comecamos')" (click)="navegarPara('/como-comecamos')">Como começamos</button>
+    <button type="button" class="menu-item" [class.ativo]="estaAtivo('/trajetoria')"
+      (click)="navegarPara('/trajetoria')">Trajetória</button>
     @if (usuario$ | async; as user) {
     <div class="usuario-menu">
       <span class="menu-item pixel-text nome-usuario">{{ user.displayName || 'PERFIL' }}</span>

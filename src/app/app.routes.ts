@@ -14,8 +14,7 @@ import { Repositorios } from './componentes/repositorios/repositorios';
 import { ReferenciasTecnologia } from './componentes/referencias/referencias-tecnologia';
 import { Galeria } from './componentes/paginas/galeria/galeria';
 import { MuralDosDevs } from './componentes/paginas/mural-dos-devs/mural-dos-devs';
-import { ComoComecamos } from './componentes/paginas/como-comecamos/como-comecamos';
-import { Login } from './componentes/paginas/login/login';
+import { Trajetoria } from './componentes/paginas/trajetoria/trajetoria';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
@@ -23,8 +22,7 @@ export const routes: Routes = [
   { path: 'comunidade', pathMatch: 'full', redirectTo: 'inicio' },
   { path: 'galeria', component: Galeria },
   { path: 'mural-dos-devs', component: MuralDosDevs },
-  { path: 'como-comecamos', component: ComoComecamos },
-  { path: 'login', component: Login },
+  { path: 'trajetoria', component: Trajetoria },
   {
     path: 'sistemas-operacionais',
     component: SistemasOperacionais,
