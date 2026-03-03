@@ -25,8 +25,8 @@
 
 .menu-superior-container {
   min-height: 58px;
-  width: min(1200px, 96%);
-  margin: 0 auto;
+  width: 100%;
+  padding: 0 60px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -39,8 +39,7 @@
   border: 0;
   background: transparent;
   color: #d7dbe4;
-  font-family: var(--font-montserrat);
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   font-weight: 500;
   padding: 10px 12px;
   border-radius: 10px;
@@ -64,6 +63,39 @@
   color: #ffffff;
   border-color: rgba(160, 82, 45, 0.88);
   box-shadow: 0 0 12px rgba(160, 82, 45, 0.45), inset 0 0 12px rgba(160, 82, 45, 0.24);
+}
+
+.pixel-text {
+  font-family: var(--font-pixel) !important;
+  font-size: 0.85rem !important;
+  color: var(--color-primary) !important;
+}
+
+.usuario-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nome-usuario {
+  cursor: default;
+  color: #fff !important;
+}
+
+.btn-logout {
+  color: #ff4d4d !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px !important;
+  text-transform: uppercase;
+}
+
+.btn-logout:hover {
+  text-decoration: underline;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 768px) {

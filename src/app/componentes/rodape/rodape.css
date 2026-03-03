@@ -27,7 +27,6 @@
 
 .copyright {
   color: var(--color-muted);
-  font-family: 'Press Start 2P', 'Courier New', monospace;
   font-size: 0.56rem;
   letter-spacing: 0.06em;
   margin: 0;
@@ -118,7 +117,6 @@
 }
 
 .social-text {
-  font-family: 'Press Start 2P', 'Courier New', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

@@ -12,5 +12,14 @@
     <button type="button" class="menu-item" [class.ativo]="estaAtivo('/galeria')" (click)="navegarPara('/galeria')">Galeria</button>
     <button type="button" class="menu-item" [class.ativo]="estaAtivo('/mural-dos-devs')" (click)="navegarPara('/mural-dos-devs')">Mural dos Devs</button>
     <button type="button" class="menu-item" [class.ativo]="estaAtivo('/como-comecamos')" (click)="navegarPara('/como-comecamos')">Como começamos</button>
+    @if (usuario$ | async; as user) {
+    <div class="usuario-menu">
+      <span class="menu-item pixel-text nome-usuario">{{ user.displayName || 'PERFIL' }}</span>
+      <button type="button" class="menu-item pixel-text btn-logout" (click)="logout()">[ SAIR ]</button>
+    </div>
+    } @else {
+    <button type="button" class="menu-item pixel-text" [class.ativo]="estaAtivo('/login')"
+      (click)="navegarPara('/login')">ENTRAR</button>
+    }
   </div>
 </nav>

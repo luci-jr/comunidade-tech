@@ -1,0 +1,36 @@
+<div class="login-container">
+  <div class="login-card">
+    <header class="login-header">
+      <h1>CONECTAR_USUARIO</h1>
+      <p>Acesse o sistema da Comunidade Tech</p>
+    </header>
+
+    <form>
+      <div class="form-group">
+        <label for="email">E-MAIL:</label>
+        <input type="email" id="email" placeholder="USER@EMAIL.COM" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">SENHA:</label>
+        <input type="password" id="password" placeholder="********" required>
+      </div>
+
+      <div class="actions-container">
+        <button type="submit" class="pixel-btn btn-primary">ENTRAR</button>
+        
+        <button type="button" (click)="loginGoogle()" class="pixel-btn btn-google">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+          GOOGLE LOGIN
+        </button>
+      </div>
+    </form>
+
+    <div class="footer-links">
+      <a href="/login">Criar Conta</a>
+      <a href="#">Esqueceu a senha?</a>
+      <br>
+      <a href="/inicio">[ Voltar ]</a>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,10 @@
-body, html {
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Press+Start+2P&display=swap');
 
 /* ===== Design System (Global) ===== */
 :root {
   /* Tipografia */
   --font-montserrat: 'Montserrat', sans-serif;
+  --font-pixel: 'Press Start 2P', system-ui;
 
   /* Cores (Soft Dark Theme) */
   --color-bg: #121212;        /* fundo escuro */
@@ -19,6 +17,8 @@ body, html {
 
   /* UI */
   --radius: 16px;
+  --pixel-shadow: 4px 4px 0px 0px rgba(0,0,0,0.8);
+  --pixel-border: 4px solid #000;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --neon-sepia: 0 0 15px rgba(160, 82, 45, 0.6), 0 0 30px rgba(160, 82, 45, 0.4);
 }
@@ -28,13 +28,14 @@ body, html {
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
+*, body, p, span, li, input, select, textarea, a, h1, h2, h3, h4, h5, h6, button, div, section, article, nav, header, footer {
+  margin: 0;
+  font-family: var(--font-pixel), cursive !important;
+  line-height: 1.6;
+  font-size: 0.85rem;
 }
 
 body {
-  margin: 0;
-  font-family: var(--font-montserrat);
   background:
     linear-gradient(rgba(7, 10, 18, 0.86), rgba(7, 10, 18, 0.86)),
     url('/assets/background_01.jpg') center center / cover no-repeat fixed;

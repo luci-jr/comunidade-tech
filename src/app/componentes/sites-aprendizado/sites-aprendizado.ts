@@ -34,9 +34,10 @@ import { LoadingService } from '../../servicos/loading.service';
         color: var(--color-text);
         margin: 0 0 18px;
         font-size: 1.8rem;
-        font-family: 'Press Start 2P', var(--font-montserrat);
         line-height: 1.25;
-        text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+        text-shadow:
+          0 0 6px rgba(77, 163, 255, 0.6),
+          0 0 14px rgba(77, 163, 255, 0.35);
       }
 
       .sidebar-sites p {
@@ -105,7 +106,9 @@ export class SitesAprendizado {
   private firestoreService = inject(FirestoreService);
   private loadingService = inject(LoadingService);
   private router = inject(Router);
-  filtroAtivo = signal<'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado'>('todos');
+  filtroAtivo = signal<
+    'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado'
+  >('todos');
   private nomesGamificados = new Set([
     'codecombat',
     'checkio',
@@ -259,8 +262,7 @@ export class SitesAprendizado {
       nome: 'Frontend Mentor',
       url: 'https://www.frontendmentor.io',
       descricao: '🎨 Desafios reais de front-end',
-      detalhes:
-        'Projetos praticos com niveis de dificuldade e sistema de feedback da comunidade.',
+      detalhes: 'Projetos praticos com niveis de dificuldade e sistema de feedback da comunidade.',
       icone: '🌐',
     },
     {
@@ -322,7 +324,9 @@ export class SitesAprendizado {
     return texto.split(' ').slice(1).join(' ');
   }
 
-  alterarFiltro(filtro: 'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado') {
+  alterarFiltro(
+    filtro: 'todos' | 'fundamentos' | 'fullstack' | 'cloud-devops' | 'ensino-gamificado',
+  ) {
     this.filtroAtivo.set(filtro);
   }
 

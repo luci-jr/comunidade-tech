@@ -18,19 +18,19 @@
 
 .sidebar-sites h2 {
   color: var(--color-text);
-  margin: 0 0 18px;
-  font-size: 1.8rem;
-  font-family: 'Press Start 2P', var(--font-montserrat);
-  line-height: 1.25;
-  text-shadow: 0 0 6px rgba(77, 163, 255, 0.6), 0 0 14px rgba(77, 163, 255, 0.35);
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  font-family: var(--font-pixel);
+  line-height: 1.6;
+  text-shadow: 0 0 6px rgba(77, 163, 255, 0.6);
 }
 
 .sidebar-sites p {
   margin: 0 0 36px;
   color: #d4d8e3;
-  line-height: 1.65;
-  font-size: 1.16rem;
-  font-weight: 600;
+  line-height: 1.8;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .menu-sites {
@@ -48,8 +48,8 @@
   border: 1px solid transparent;
   background: rgba(255, 255, 255, 0.02);
   transition: all 0.2s ease;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 0.85rem;
   cursor: pointer;
 }
 
@@ -66,14 +66,14 @@
 .btn-voltar-estilizado {
   width: 100%;
   padding: 13px 18px;
-  font-size: 1rem;
+  font-size: 0.85rem;
   background-color: transparent;
   color: var(--color-text);
   border: 2px solid var(--color-accent);
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .btn-voltar-estilizado:hover {
@@ -94,7 +94,7 @@
 }
 
 .header-pagina h1 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: var(--color-text);
   margin: 0 0 20px;
   text-transform: uppercase;
@@ -107,10 +107,10 @@
   color: var(--color-accent);
   border: 2px solid var(--color-accent);
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s;
-  font-family: var(--font-montserrat);
+  font-size: 0.8rem;
 }
 
 .btn-sugerir:hover {
@@ -177,10 +177,10 @@
 }
 
 .card-header h2 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   margin: 0;
   color: var(--color-text);
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .card-body {
@@ -191,10 +191,10 @@
 }
 
 .description {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-text);
   margin-bottom: 12px;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -218,15 +218,15 @@
 
 .detalhes {
   color: var(--color-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.8;
   margin-bottom: 16px;
 }
 
 .link-texto {
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-primary);
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 900px) {

@@ -7,8 +7,8 @@
 }
 
 .titulo-dashboard {
-    font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: clamp(1.2rem, 2.1vw, 2rem);
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
     font-weight: 400;
     color: var(--color-text);
     margin-bottom: 20px;
@@ -89,20 +89,21 @@ section.card-link .info-canal {
 }
 
 .texto-h2 {
-    font-family: var(--font-montserrat);
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-family: var(--font-pixel);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 12px;
     color: var(--color-text);
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.4;
+    text-transform: uppercase;
 }
 
 .texto-h3 {
-    font-family: var(--font-montserrat);
-    font-size: 1.12rem;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
     font-weight: 400;
     color: var(--color-muted);
     text-align: center;
-    line-height: 1.35;
+    line-height: 1.5;
 }

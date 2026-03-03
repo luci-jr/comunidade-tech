@@ -1,13 +1,28 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../servicos/auth.service';
 
 @Component({
   selector: 'app-cabecalho',
+  standalone: true,
+  imports: [CommonModule, AsyncPipe],
   templateUrl: './cabecalho.html',
-  styleUrl: './cabecalho.css'
+  styleUrl: './cabecalho.css',
 })
 export class Cabecalho {
   private router = inject(Router);
+  private authService = inject(AuthService);
+  usuario$ = this.authService.user$;
+
+  async logout() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/inicio']);
+    } catch (error) {
+      console.error('Erro ao sair:', error);
+    }
+  }
 
   navegarPara(rota: string): void {
     this.router.navigate([rota]);
