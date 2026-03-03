@@ -6,15 +6,20 @@ import { LoadingService } from '../../servicos/loading.service';
   standalone: true,
   template: `
     @if (loadingService.isLoading()) {
-      <div class="loading-overlay">
+      <div class="loading-overlay" role="status" aria-live="polite" aria-label="Carregando conteúdo">
         <div class="loading-content">
           <div class="pixel-box">
+            <div class="pixel-header">
+              <span class="pixel-led"></span>
+              <span>PAINEL RETRO</span>
+              <span class="pixel-led"></span>
+            </div>
             <div class="game-title">LOADING...</div>
             <div class="progress-bar">
               <div class="progress-fill"></div>
             </div>
             <div class="loading-msg">{{ loadingService.message() }}</div>
-            <div style="font-size: 0.5rem; color: #333; margin-top: 10px;">Build: v2.0.4</div>
+            <div class="build-tag">Build: v2.0.4</div>
           </div>
         </div>
       </div>
@@ -28,12 +33,15 @@ import { LoadingService } from '../../servicos/loading.service';
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(18, 18, 18, 0.98);
+        background: rgba(6, 8, 14, 0.36);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Press Start 2P', cursive, Arial; /* Fonte gamer retro */
+        padding: 20px;
+        font-family: 'Press Start 2P', cursive, Arial;
       }
 
       .loading-content {
@@ -41,41 +49,74 @@ import { LoadingService } from '../../servicos/loading.service';
       }
 
       .pixel-box {
-        border: 4px solid var(--color-accent);
-        padding: 40px;
-        background: #000;
-        box-shadow: 0 0 20px var(--color-accent);
+        border: 3px solid rgba(160, 82, 45, 0.95);
+        border-radius: 4px;
+        padding: 18px 22px 20px;
+        background:
+          linear-gradient(180deg, rgba(17, 21, 31, 0.94), rgba(8, 10, 16, 0.96));
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+          0 0 16px rgba(160, 82, 45, 0.45),
+          0 10px 40px rgba(0, 0, 0, 0.5);
         position: relative;
+        min-width: min(92vw, 420px);
+      }
+
+      .pixel-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 0.52rem;
+        color: rgba(224, 224, 224, 0.76);
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+
+      .pixel-led {
+        width: 8px;
+        height: 8px;
+        background: #a0522d;
+        box-shadow: 0 0 8px rgba(160, 82, 45, 0.7);
       }
 
       .game-title {
         color: #fff;
-        font-size: 2rem;
-        margin-bottom: 30px;
-        letter-spacing: 5px;
+        font-size: clamp(1.1rem, 3.8vw, 1.7rem);
+        margin-bottom: 16px;
+        letter-spacing: 0.22em;
         animation: blink 0.8s infinite;
       }
 
       .progress-bar {
-        width: 300px;
-        height: 20px;
-        border: 2px solid #fff;
-        margin: 20px auto;
+        width: min(100%, 320px);
+        height: 18px;
+        border: 2px solid rgba(208, 214, 228, 0.9);
+        margin: 14px auto 0;
         padding: 2px;
+        background: rgba(8, 10, 16, 0.8);
       }
 
       .progress-fill {
         height: 100%;
-        background: var(--color-primary);
+        background: linear-gradient(90deg, #1b7fe3, #4da3ff);
         width: 0%;
         animation: fillProgress 0.8s linear forwards;
       }
 
       .loading-msg {
         color: var(--color-muted);
-        font-size: 0.8rem;
-        margin-top: 20px;
+        font-size: 0.74rem;
+        margin-top: 16px;
         text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .build-tag {
+        font-size: 0.52rem;
+        color: rgba(176, 176, 176, 0.85);
+        margin-top: 10px;
+        letter-spacing: 0.06em;
       }
 
       @keyframes blink {

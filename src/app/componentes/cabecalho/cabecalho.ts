@@ -38,10 +38,6 @@ export class Cabecalho {
     return this.normalizarRotaAtual() === rota;
   }
 
-  mostrarBanner(): boolean {
-    return this.normalizarRotaAtual() === '/inicio';
-  }
-
   estaNaPaginaInicial(): boolean {
     return this.normalizarRotaAtual() === '/inicio';
   }

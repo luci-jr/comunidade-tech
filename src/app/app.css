@@ -2,9 +2,45 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  isolation: isolate;
+}
+
+:host::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(10, 8, 7, 0.82), rgba(10, 8, 7, 0.82));
+}
+
+:host::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/assets/banner.png') center center / contain no-repeat;
+  opacity: 0.22;
+  filter: saturate(0.6) contrast(0.9);
 }
 
 .app-conteudo {
   flex: 1;
   width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+app-cabecalho,
+app-rodape,
+app-login {
+  position: relative;
+  z-index: 1;
+}
+
+app-loading {
+  position: relative;
+  z-index: 10000;
 }

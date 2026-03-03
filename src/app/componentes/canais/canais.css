@@ -8,7 +8,7 @@
 
 .titulo-dashboard {
     font-family: var(--font-pixel);
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 400;
     color: var(--color-text);
     margin-bottom: 20px;
@@ -21,6 +21,19 @@
       0 0 34px rgba(77, 163, 255, 0.25);
     text-align: center;
     transition: transform 0.25s ease, text-shadow 0.25s ease;
+}
+
+.subtitulo-dashboard {
+    font-family: var(--font-pixel);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(224, 224, 224, 0.86);
+    margin-top: -4px;
+    margin-bottom: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(77, 163, 255, 0.3);
 }
 
 .titulo-dashboard-link {
