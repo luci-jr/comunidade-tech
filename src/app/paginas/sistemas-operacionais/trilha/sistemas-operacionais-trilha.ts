@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SistemaOperacional } from '../../models/sistema-operacional.model';
+import { SistemaOperacional } from '../../../models/sistema-operacional.model';
 
 @Component({
   selector: 'app-sistemas-operacionais-trilha',

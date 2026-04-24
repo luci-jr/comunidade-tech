@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SistemaOperacional } from '../../models/sistema-operacional.model';
-import { SistemasOperacionaisTrilha } from '../sistemas-operacionais-trilha/sistemas-operacionais-trilha';
+import { SistemaOperacional } from '../../../models/sistema-operacional.model';
+import { SistemasOperacionaisTrilha } from '../trilha/sistemas-operacionais-trilha';
 
 @Component({
   selector: 'app-sistemas-operacionais-freebsd',

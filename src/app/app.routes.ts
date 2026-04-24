@@ -1,20 +1,20 @@
 import { Routes } from '@angular/router';
-import { Canais } from './componentes/canais/canais';
-import { SistemasOperacionais } from './componentes/sistemas-operacionais/sistemas-operacionais';
-import { SistemasOperacionaisFreebsd } from './componentes/sistemas-operacionais-freebsd/sistemas-operacionais-freebsd';
-import { SistemasOperacionaisLinux } from './componentes/sistemas-operacionais-linux/sistemas-operacionais-linux';
-import { SistemasOperacionaisMacos } from './componentes/sistemas-operacionais-macos/sistemas-operacionais-macos';
-import { SistemasOperacionaisRaspberry } from './componentes/sistemas-operacionais-raspberry/sistemas-operacionais-raspberry';
-import { SistemasOperacionaisWindows } from './componentes/sistemas-operacionais-windows/sistemas-operacionais-windows';
-import { SitesAprendizado } from './componentes/sites-aprendizado/sites-aprendizado';
-import { CanaisTecnologia } from './componentes/canais-tecnologia/canais-tecnologia';
-import { PlataformasEnsinoJogo } from './componentes/plataformas-ensino-jogo/plataformas-ensino-jogo';
-import { Podcasts } from './componentes/podcasts/podcasts';
-import { Repositorios } from './componentes/repositorios/repositorios';
-import { ReferenciasTecnologia } from './componentes/referencias/referencias-tecnologia';
-import { Galeria } from './componentes/paginas/galeria/galeria';
-import { MuralDosDevs } from './componentes/paginas/mural-dos-devs/mural-dos-devs';
-import { Trajetoria } from './componentes/paginas/trajetoria/trajetoria';
+import { Canais } from './paginas/inicio/canais';
+import { SistemasOperacionais } from './paginas/sistemas-operacionais/sistemas-operacionais';
+import { SistemasOperacionaisFreebsd } from './paginas/sistemas-operacionais/freebsd/sistemas-operacionais-freebsd';
+import { SistemasOperacionaisLinux } from './paginas/sistemas-operacionais/linux/sistemas-operacionais-linux';
+import { SistemasOperacionaisMacos } from './paginas/sistemas-operacionais/macos/sistemas-operacionais-macos';
+import { SistemasOperacionaisRaspberry } from './paginas/sistemas-operacionais/raspberry/sistemas-operacionais-raspberry';
+import { SistemasOperacionaisWindows } from './paginas/sistemas-operacionais/windows/sistemas-operacionais-windows';
+import { SitesAprendizado } from './paginas/sites-aprendizado/sites-aprendizado';
+import { CanaisTecnologia } from './paginas/canais-tecnologia/canais-tecnologia';
+import { PlataformasEnsinoJogo } from './paginas/plataformas-ensino-jogo/plataformas-ensino-jogo';
+import { Podcasts } from './paginas/podcasts/podcasts';
+import { Repositorios } from './paginas/repositorios/repositorios';
+import { ReferenciasTecnologia } from './paginas/referencias/referencias-tecnologia';
+import { Galeria } from './paginas/galeria/galeria';
+import { MuralDosDevs } from './paginas/mural-dos-devs/mural-dos-devs';
+import { Trajetoria } from './paginas/trajetoria/trajetoria';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },

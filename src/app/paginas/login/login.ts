@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { AuthService } from '../../../servicos/auth.service';
-import { LoginModalService } from '../../../servicos/login-modal.service';
+import { AuthService } from '../../servicos/auth.service';
+import { LoginModalService } from '../../servicos/login-modal.service';
 
 @Component({
   selector: 'app-login',
