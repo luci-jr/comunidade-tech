@@ -60,7 +60,7 @@ Em vez de buscar conteúdo solto em vários lugares, a plataforma reúne:
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/Loljr1987/comunidade-tech.git
+git clone https://github.com/luci-jr/comunidade-tech.git
 cd comunidade-tech
 ```
 
@@ -111,5 +111,5 @@ Veja a documentação técnica completa:
 ## 👨‍💻 Autor
 
 - LinkedIn: https://www.linkedin.com/in/lucivaldojr/
-- GitHub: https://github.com/Loljr1987
+- GitHub: https://github.com/luci-jr
 - WhatsApp: https://wa.me/5591982687350
