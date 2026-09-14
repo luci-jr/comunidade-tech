@@ -33,22 +33,27 @@
 }
 
 .card-so {
-  background-color: var(--color-surface);
+  background: rgba(18, 22, 38, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
-  padding: 18px;
+  padding: 20px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border: 1px solid transparent;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   text-align: center;
 }
 
 .card-so:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  background: rgba(26, 32, 54, 0.85);
   border-color: var(--color-accent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), var(--neon-sepia);
 }
 
 .card-header {

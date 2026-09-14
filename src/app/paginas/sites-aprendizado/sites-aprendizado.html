@@ -34,7 +34,7 @@
   <main class="conteudo-sites">
     <header class="header-pagina">
       <h1>🎓 PLATAFORMAS DE ENSINO RECOMENDADAS</h1>
-      <button (click)="sugerirPlataforma()" class="btn-sugerir">➕ Sugerir Nova Plataforma</button>
+      <button (click)="abrirModalSugestao()" class="btn-sugerir">➕ Sugerir Nova Plataforma</button>
     </header>
 
     <div class="grid-plataformas">
@@ -60,3 +60,55 @@
     </div>
   </main>
 </div>
+
+@if (modalAberto()) {
+  <div class="modal-backdrop" (click)="$event.target === backdrop && fecharModalSugestao()" #backdrop>
+    <div class="modal-card">
+      <header class="modal-header">
+        <h2>SUGERIR_PLATAFORMA</h2>
+        <p>Indique uma fonte de estudo para a Comunidade Tech</p>
+      </header>
+
+      <form (submit)="submeterSugestao(); $event.preventDefault()">
+        <div class="form-group">
+          <label for="sug-nome">NOME DA PLATAFORMA:</label>
+          <input
+            type="text"
+            id="sug-nome"
+            placeholder="Ex: Frontend Masters"
+            [value]="nomeSugestao()"
+            (input)="nomeSugestao.set($any($event.target).value)"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="sug-url">URL OFICIAL (COM HTTPS://):</label>
+          <input
+            type="url"
+            id="sug-url"
+            placeholder="https://..."
+            [value]="urlSugestao()"
+            (input)="urlSugestao.set($any($event.target).value)"
+            required
+          />
+        </div>
+
+        @if (feedback()) {
+          <div class="feedback-msg" [class.erro]="!feedback()?.sucesso">
+            {{ feedback()?.texto }}
+          </div>
+        }
+
+        <div class="modal-actions">
+          <button type="submit" class="pixel-btn btn-primary" [disabled]="enviando()">
+            {{ enviando() ? 'ENVIANDO...' : 'ENVIAR SUGESTÃO' }}
+          </button>
+          <button type="button" class="btn-cancelar" (click)="fecharModalSugestao()">
+            [ Cancelar ]
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

@@ -3,7 +3,19 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /sugestoes/{docId} {
-      allow read, write: if true;
+      // Leitura pública das sugestões da comunidade
+      allow read: if true;
+
+      // Criação restrita com validação estrita de campos
+      allow create: if request.resource.data.nome is string
+                    && request.resource.data.nome.size() > 0
+                    && request.resource.data.nome.size() <= 100
+                    && request.resource.data.url is string
+                    && request.resource.data.url.size() > 0
+                    && request.resource.data.url.size() <= 300;
+
+      // Bloqueio de alteração e exclusão anônima
+      allow update, delete: if false;
     }
 
     match /{document=**} {

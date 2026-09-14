@@ -4,6 +4,9 @@
   flex-direction: column;
   position: relative;
   isolation: isolate;
+  background-color: #070a12;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 :host::before {
@@ -12,7 +15,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(rgba(10, 8, 7, 0.82), rgba(10, 8, 7, 0.82));
+  background: linear-gradient(rgba(8, 10, 18, 0.72), rgba(8, 10, 18, 0.82));
 }
 
 :host::after {
@@ -21,9 +24,9 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: url('/assets/banner.png') center center / contain no-repeat;
-  opacity: 0.22;
-  filter: saturate(0.6) contrast(0.9);
+  background: url('/assets/banner.png') center center / cover no-repeat;
+  opacity: 0.40;
+  filter: saturate(0.95) contrast(1.05);
 }
 
 .app-conteudo {

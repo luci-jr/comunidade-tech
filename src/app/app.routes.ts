@@ -1,45 +1,108 @@
 import { Routes } from '@angular/router';
-import { Canais } from './paginas/inicio/canais';
-import { SistemasOperacionais } from './paginas/sistemas-operacionais/sistemas-operacionais';
-import { SistemasOperacionaisFreebsd } from './paginas/sistemas-operacionais/freebsd/sistemas-operacionais-freebsd';
-import { SistemasOperacionaisLinux } from './paginas/sistemas-operacionais/linux/sistemas-operacionais-linux';
-import { SistemasOperacionaisMacos } from './paginas/sistemas-operacionais/macos/sistemas-operacionais-macos';
-import { SistemasOperacionaisRaspberry } from './paginas/sistemas-operacionais/raspberry/sistemas-operacionais-raspberry';
-import { SistemasOperacionaisWindows } from './paginas/sistemas-operacionais/windows/sistemas-operacionais-windows';
-import { SitesAprendizado } from './paginas/sites-aprendizado/sites-aprendizado';
-import { CanaisTecnologia } from './paginas/canais-tecnologia/canais-tecnologia';
-import { PlataformasEnsinoJogo } from './paginas/plataformas-ensino-jogo/plataformas-ensino-jogo';
-import { Podcasts } from './paginas/podcasts/podcasts';
-import { Repositorios } from './paginas/repositorios/repositorios';
-import { ReferenciasTecnologia } from './paginas/referencias/referencias-tecnologia';
-import { Galeria } from './paginas/galeria/galeria';
-import { MuralDosDevs } from './paginas/mural-dos-devs/mural-dos-devs';
-import { Trajetoria } from './paginas/trajetoria/trajetoria';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
-  { path: 'inicio', component: Canais },
+  {
+    path: 'inicio',
+    loadComponent: () =>
+      import('./paginas/inicio/canais').then((m) => m.Canais),
+  },
   { path: 'comunidade', pathMatch: 'full', redirectTo: 'inicio' },
-  { path: 'galeria', component: Galeria },
-  { path: 'mural-dos-devs', component: MuralDosDevs },
-  { path: 'trajetoria', component: Trajetoria },
+  {
+    path: 'galeria',
+    loadComponent: () =>
+      import('./paginas/galeria/galeria').then((m) => m.Galeria),
+  },
+  {
+    path: 'mural-dos-devs',
+    loadComponent: () =>
+      import('./paginas/mural-dos-devs/mural-dos-devs').then((m) => m.MuralDosDevs),
+  },
+  {
+    path: 'trajetoria',
+    loadComponent: () =>
+      import('./paginas/trajetoria/trajetoria').then((m) => m.Trajetoria),
+  },
   {
     path: 'sistemas-operacionais',
-    component: SistemasOperacionais,
+    loadComponent: () =>
+      import('./paginas/sistemas-operacionais/sistemas-operacionais').then(
+        (m) => m.SistemasOperacionais
+      ),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'linux' },
-      { path: 'linux', component: SistemasOperacionaisLinux },
-      { path: 'freebsd', component: SistemasOperacionaisFreebsd },
-      { path: 'raspberry', component: SistemasOperacionaisRaspberry },
-      { path: 'macos', component: SistemasOperacionaisMacos },
-      { path: 'windows', component: SistemasOperacionaisWindows },
+      {
+        path: 'linux',
+        loadComponent: () =>
+          import(
+            './paginas/sistemas-operacionais/linux/sistemas-operacionais-linux'
+          ).then((m) => m.SistemasOperacionaisLinux),
+      },
+      {
+        path: 'freebsd',
+        loadComponent: () =>
+          import(
+            './paginas/sistemas-operacionais/freebsd/sistemas-operacionais-freebsd'
+          ).then((m) => m.SistemasOperacionaisFreebsd),
+      },
+      {
+        path: 'raspberry',
+        loadComponent: () =>
+          import(
+            './paginas/sistemas-operacionais/raspberry/sistemas-operacionais-raspberry'
+          ).then((m) => m.SistemasOperacionaisRaspberry),
+      },
+      {
+        path: 'macos',
+        loadComponent: () =>
+          import(
+            './paginas/sistemas-operacionais/macos/sistemas-operacionais-macos'
+          ).then((m) => m.SistemasOperacionaisMacos),
+      },
+      {
+        path: 'windows',
+        loadComponent: () =>
+          import(
+            './paginas/sistemas-operacionais/windows/sistemas-operacionais-windows'
+          ).then((m) => m.SistemasOperacionaisWindows),
+      },
     ],
   },
-  { path: 'canais-tecnologia', component: CanaisTecnologia },
-  { path: 'referencias-tecnologia', component: ReferenciasTecnologia },
-  { path: 'plataformas-ensino-jogo', pathMatch: 'full', redirectTo: 'sites-aprendizado' },
-  { path: 'sites-aprendizado', component: SitesAprendizado },
-  { path: 'podcasts', component: Podcasts },
-  { path: 'repositorios', component: Repositorios },
+  {
+    path: 'canais-tecnologia',
+    loadComponent: () =>
+      import('./paginas/canais-tecnologia/canais-tecnologia').then(
+        (m) => m.CanaisTecnologia
+      ),
+  },
+  {
+    path: 'referencias-tecnologia',
+    loadComponent: () =>
+      import('./paginas/referencias/referencias-tecnologia').then(
+        (m) => m.ReferenciasTecnologia
+      ),
+  },
+  {
+    path: 'plataformas-ensino-jogo',
+    pathMatch: 'full',
+    redirectTo: 'sites-aprendizado',
+  },
+  {
+    path: 'sites-aprendizado',
+    loadComponent: () =>
+      import('./paginas/sites-aprendizado/sites-aprendizado').then(
+        (m) => m.SitesAprendizado
+      ),
+  },
+  {
+    path: 'podcasts',
+    loadComponent: () =>
+      import('./paginas/podcasts/podcasts').then((m) => m.Podcasts),
+  },
+  {
+    path: 'repositorios',
+    loadComponent: () =>
+      import('./paginas/repositorios/repositorios').then((m) => m.Repositorios),
+  },
   { path: '**', redirectTo: 'inicio' },
 ];

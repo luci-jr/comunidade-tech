@@ -72,7 +72,9 @@ import { Podcast } from '../../models/podcast.model';
         position: fixed;
         inset: 0 auto 0 0;
         width: var(--sidebar-width);
-        background: #1a1930;
+        background: rgba(14, 18, 32, 0.78);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
         padding: 34px 24px;
@@ -170,7 +172,9 @@ import { Podcast } from '../../models/podcast.model';
       }
 
       .card-podcast {
-        background-color: var(--color-surface);
+        background: rgba(18, 22, 38, 0.74);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
         border-radius: 16px;
         padding: 24px;
         text-decoration: none;
@@ -181,14 +185,15 @@ import { Podcast } from '../../models/podcast.model';
         text-align: center;
         justify-content: space-between;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 2px solid transparent;
-        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
         min-height: 320px;
       }
 
       .card-podcast:hover {
         transform: translateY(-8px);
-        box-shadow: var(--neon-sepia);
+        background: rgba(26, 33, 56, 0.88);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), var(--neon-sepia);
         border-color: var(--color-accent);
       }
 

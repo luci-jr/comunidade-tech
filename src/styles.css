@@ -23,31 +23,98 @@
   --neon-sepia: 0 0 15px rgba(160, 82, 45, 0.6), 0 0 30px rgba(160, 82, 45, 0.4);
 }
 
-/* Reset básico */
-* {
+/* Reset básico & Prevenção de Overflow */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-*, body, p, span, li, input, select, textarea, a, h1, h2, h3, h4, h5, h6, button, div, section, article, nav, header, footer {
+html {
+  background-color: #070a12;
   margin: 0;
-  font-family: var(--font-pixel), cursive !important;
-  line-height: 1.6;
-  font-size: 0.85rem;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
-  background:
-    linear-gradient(rgba(7, 10, 18, 0.86), rgba(7, 10, 18, 0.86)),
-    url('/assets/background_01.jpg') center center / cover no-repeat fixed;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
+  font-family: var(--font-montserrat);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  background-color: #070a12;
+  background-image:
+    linear-gradient(rgba(7, 10, 18, 0.88), rgba(7, 10, 18, 0.88)),
+    url('/assets/background_01.jpg');
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
   color: var(--color-text);
+  min-height: 100vh;
 }
 
-/* Variação visual do background para sidebars */
+/* Tipografia Pixel para Títulos, Menus e Elementos Retrô */
+h1, h2, h3, h4, h5, h6, button, .pixel-text, .pixel-btn {
+  font-family: var(--font-pixel), cursive;
+}
+
+/* ===== Efeito Glassmorphism Global para Cards ===== */
+.card-link,
+.card-so,
+.card-plataforma,
+.card-referencia,
+.card-youtube,
+.card-repo,
+.card-podcast,
+.mural-card,
+.card-pilar,
+.galeria-card {
+  background: rgba(18, 22, 38, 0.74) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38) !important;
+}
+
+.card-link:hover,
+.card-so:hover,
+.card-plataforma:hover,
+.card-referencia:hover,
+.card-youtube:hover,
+.card-repo:hover,
+.card-podcast:hover,
+.mural-card:hover,
+.card-pilar:hover,
+.galeria-card:hover {
+  background: rgba(26, 33, 56, 0.88) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), var(--neon-sepia) !important;
+}
+
+/* ===== Efeito Glassmorphism Global para Sidebars ===== */
 [class^='sidebar-'],
 [class*=' sidebar-'] {
-  background:
-    linear-gradient(rgba(22, 24, 44, 0.9), rgba(18, 20, 38, 0.9)),
-    url('/assets/background_01.jpg') center center / cover no-repeat !important;
+  background: rgba(14, 18, 32, 0.78) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ===== Efeito Glassmorphism para os Containers e Blocos Institucionais ===== */
+.galeria-container,
+.mural-container,
+.trajetoria-container,
+.trajetoria-bloco {
+  background: rgba(14, 18, 32, 0.82) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(160, 82, 45, 0.35) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45) !important;
 }
 
 /* Padrao de centralizacao para titulos das secoes */

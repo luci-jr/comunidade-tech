@@ -8,10 +8,12 @@
 
 .titulo-dashboard {
     font-family: var(--font-pixel);
-    font-size: 2.5rem;
+    font-size: clamp(1.2rem, 5.5vw, 2.5rem);
     font-weight: 400;
     color: var(--color-text);
     margin-bottom: 20px;
+    padding: 0 16px;
+    max-width: 100%;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     line-height: 1.4;
@@ -25,11 +27,13 @@
 
 .subtitulo-dashboard {
     font-family: var(--font-pixel);
-    font-size: 1.05rem;
+    font-size: clamp(0.68rem, 2.8vw, 1.05rem);
     font-weight: 400;
     color: rgba(224, 224, 224, 0.86);
     margin-top: -4px;
     margin-bottom: 20px;
+    padding: 0 16px;
+    max-width: 100%;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;
@@ -58,24 +62,27 @@
 section.card-link {
     width: 280px; /* Largura fixa para manter o design */
     min-height: 220px;
-    background-color: var(--color-surface);
+    background: rgba(18, 22, 38, 0.74);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 16px;
     position: relative;
     overflow: hidden;
     padding: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 section.card-link:hover {
     transform: translateY(-8px);
-    box-shadow: var(--neon-sepia);
+    background: rgba(26, 33, 56, 0.88);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), var(--neon-sepia);
     border-color: var(--color-accent);
 }
 
