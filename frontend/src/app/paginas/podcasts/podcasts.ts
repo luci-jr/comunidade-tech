@@ -8,8 +8,24 @@ import { Podcast } from '../../models/podcast.model';
   standalone: true,
   imports: [],
   template: `
-    <div class="podcasts-layout">
-      <aside class="sidebar-podcasts">
+    <div class="podcasts-layout" [class.sidebar-fechada]="sidebarRecolhida()">
+      <aside class="sidebar-podcasts" [class.recolhida]="sidebarRecolhida()" aria-label="Menu de Podcasts">
+        <div class="sidebar-top-bar">
+          <button 
+            type="button" 
+            class="btn-toggle-hamburguer" 
+            (click)="alternarSidebar()"
+            title="Recolher menu lateral"
+            aria-label="Recolher menu lateral">
+            <div class="hamburguer-retro">
+              <span class="linha"></span>
+              <span class="linha"></span>
+              <span class="linha"></span>
+            </div>
+          </button>
+          <span class="badge-painel">PAINEL</span>
+        </div>
+
         <h2>Podcasts Tech</h2>
         <p>Escolha uma trilha para ouvir conteúdos mais direcionados.</p>
 
@@ -31,7 +47,25 @@ import { Podcast } from '../../models/podcast.model';
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </aside>
 
-      <main class="conteudo-podcasts">
+      <main class="conteudo-podcasts" [class.expandido]="sidebarRecolhida()">
+        @if (sidebarRecolhida()) {
+          <div class="topbar-conteudo">
+            <button 
+              type="button" 
+              class="btn-toggle-hamburguer" 
+              (click)="alternarSidebar()"
+              title="Expandir menu lateral"
+              aria-label="Abrir menu de podcasts">
+              <div class="hamburguer-retro">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+              </div>
+            </button>
+            <span class="badge-modulo">PODCASTS TECH</span>
+          </div>
+        }
+
         <header class="header-pagina">
           <h1>🎙️ PODCASTS TECH RECOMENDADOS 🎙️</h1>
         </header>
@@ -72,14 +106,24 @@ import { Podcast } from '../../models/podcast.model';
         position: fixed;
         inset: 0 auto 0 0;
         width: var(--sidebar-width);
-        background: rgba(14, 18, 32, 0.78);
+        background: rgba(14, 18, 32, 0.88);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
-        padding: 34px 24px;
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.45);
+        padding: 28px 24px;
         display: flex;
         flex-direction: column;
+        z-index: 90;
+        transition:
+          transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.35s ease;
+      }
+
+      .sidebar-podcasts.recolhida {
+        transform: translateX(-100%);
+        pointer-events: none;
+        opacity: 0;
       }
 
       .sidebar-podcasts h2 {
@@ -149,6 +193,17 @@ import { Podcast } from '../../models/podcast.model';
         min-width: 0;
         margin-left: calc(var(--sidebar-width) + 26px);
         padding: 34px 24px 60px 0;
+        max-width: 1720px;
+        transition:
+          margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.35s ease;
+      }
+
+      .conteudo-podcasts.expandido {
+        margin-left: 0;
+        padding: 34px clamp(20px, 3.5vw, 60px) 60px;
+        max-width: 1720px;
+        margin-inline: auto;
       }
 
       .header-pagina {
@@ -166,12 +221,17 @@ import { Podcast } from '../../models/podcast.model';
       }
 
       .grid-podcasts {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 26px;
+        width: 100%;
       }
 
       .card-podcast {
+        flex: 1 1 310px;
+        max-width: 380px;
+        min-width: 270px;
         background: rgba(18, 22, 38, 0.74);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
@@ -303,6 +363,11 @@ export class Podcasts {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
   filtroAtivo = signal<'todos' | 'devops' | 'dados-ia' | 'carreira'>('todos');
+  sidebarRecolhida = signal<boolean>(false);
+
+  alternarSidebar() {
+    this.sidebarRecolhida.update((v) => !v);
+  }
 
   listaPodcasts = signal<Podcast[]>([
     {
