@@ -8,28 +8,13 @@ import { LoadingService } from '../../servicos/loading.service';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="so-layout" [class.sidebar-fechada]="sidebarRecolhida()">
-      <!-- Botão Flutuante (3 traços neon) com animação retrô suave de entrada e saída -->
-      <button 
-        type="button" 
-        class="btn-flutuante-abrir"
-        [class.visivel]="sidebarRecolhida()"
-        (click)="alternarSidebar()"
-        title="Expandir menu de trilhas"
-        aria-label="Expandir menu de trilhas">
-        <div class="hamburguer-retro">
-          <span class="linha"></span>
-          <span class="linha"></span>
-          <span class="linha"></span>
-        </div>
-      </button>
-
+      <!-- Barra Lateral Fixa -->
       <aside class="sidebar-so" [class.recolhida]="sidebarRecolhida()" aria-label="Menu lateral de Sistemas Operacionais">
-        <div class="sidebar-header">
-          <h2>Sistemas Operacionais</h2>
-          <!-- Botão nos 3 traços neon substitui completamente o ícone antigo de triângulo -->
+        <!-- Topo da Sidebar com o botão dos 3 traços perfeitamente emoldurado e alinhado -->
+        <div class="sidebar-top-bar">
           <button 
             type="button" 
-            class="btn-toggle-sidebar" 
+            class="btn-toggle-hamburguer" 
             (click)="alternarSidebar()"
             title="Recolher menu lateral"
             aria-label="Recolher menu lateral">
@@ -39,8 +24,10 @@ import { LoadingService } from '../../servicos/loading.service';
               <span class="linha"></span>
             </div>
           </button>
+          <span class="badge-painel">PAINEL</span>
         </div>
 
+        <h2>Sistemas Operacionais</h2>
         <p>Escolha uma trilha para ver recursos mais direcionados.</p>
 
         <nav class="menu-so">
@@ -64,7 +51,27 @@ import { LoadingService } from '../../servicos/loading.service';
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </aside>
 
+      <!-- Área de Conteúdo Principal -->
       <main class="conteudo-so" [class.expandido]="sidebarRecolhida()">
+        <!-- Toolbar emoldurada que surge suavemente quando a sidebar está recolhida -->
+        @if (sidebarRecolhida()) {
+          <div class="topbar-conteudo-so">
+            <button 
+              type="button" 
+              class="btn-toggle-hamburguer" 
+              (click)="alternarSidebar()"
+              title="Expandir menu lateral de trilhas"
+              aria-label="Abrir menu de trilhas">
+              <div class="hamburguer-retro">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+              </div>
+            </button>
+            <span class="badge-trilhas">TRILHAS DE SISTEMAS OPERACIONAIS</span>
+          </div>
+        }
+
         <router-outlet></router-outlet>
       </main>
     </div>
@@ -80,7 +87,7 @@ import { LoadingService } from '../../servicos/loading.service';
       }
 
       /* ========================================================
-         BOTÃO DOS 3 TRAÇOS RETRÔ (Design Unificado e Minimalista)
+         BOTÃO DOS 3 TRAÇOS RETRÔ (Design Harmonioso e Minimalista)
          ======================================================== */
       .hamburguer-retro {
         display: flex;
@@ -100,129 +107,55 @@ import { LoadingService } from '../../servicos/loading.service';
           0 0 6px rgba(77, 163, 255, 0.85),
           0 0 10px rgba(77, 163, 255, 0.45);
         transition:
-          background-color 0.25s ease,
-          box-shadow 0.25s ease,
-          transform 0.25s ease;
+          background-color 0.2s ease,
+          box-shadow 0.2s ease;
       }
 
-      /* 1. Botão de 3 traços no cabeçalho da Sidebar */
-      .btn-toggle-sidebar {
+      .btn-toggle-hamburguer {
         flex-shrink: 0;
-        width: 52px;
-        height: 40px;
-        border-radius: 9999px;
-        background: rgba(14, 18, 32, 0.92);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(77, 163, 255, 0.5);
+        width: 48px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(77, 163, 255, 0.4);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0;
-        box-shadow: 0 0 12px rgba(77, 163, 255, 0.25);
-        transition: all 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+        box-shadow: 0 0 10px rgba(77, 163, 255, 0.2);
+        transition: all 0.25s ease;
       }
 
-      .btn-toggle-sidebar:hover {
+      .btn-toggle-hamburguer:hover {
+        background: rgba(77, 163, 255, 0.18);
         border-color: #4DA3FF;
-        transform: scale(1.08);
-        box-shadow: 0 0 20px rgba(77, 163, 255, 0.6);
+        transform: scale(1.05);
+        box-shadow: 0 0 16px rgba(77, 163, 255, 0.55);
       }
 
-      .btn-toggle-sidebar:hover .hamburguer-retro .linha {
+      .btn-toggle-hamburguer:hover .hamburguer-retro .linha {
         background: #ffffff;
         box-shadow:
           0 0 8px #ffffff,
-          0 0 14px #4DA3FF,
-          0 0 22px #4DA3FF;
-      }
-
-      /* 2. Botão Flutuante (quando recolhida) com animação retrô suave */
-      .btn-flutuante-abrir {
-        position: fixed;
-        top: 86px;
-        left: 20px;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 52px;
-        height: 40px;
-        background: rgba(14, 18, 32, 0.92);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(77, 163, 255, 0.5);
-        border-radius: 9999px;
-        cursor: pointer;
-        padding: 0;
-
-        /* Transição Suave Retrô de Entrada e Saída */
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateX(-35px) scale(0.7);
-        transition:
-          opacity 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
-          transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
-          visibility 0.4s ease,
-          border-color 0.25s ease,
-          box-shadow 0.25s ease;
-      }
-
-      /* Estado Visível com pulso neon contínuo */
-      .btn-flutuante-abrir.visivel {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateX(0) scale(1);
-        animation: retroPulse 3.5s infinite ease-in-out;
-      }
-
-      .btn-flutuante-abrir:hover {
-        border-color: #4DA3FF;
-        transform: translateX(0) scale(1.08);
-        box-shadow:
-          0 6px 26px rgba(77, 163, 255, 0.6),
-          0 0 20px rgba(77, 163, 255, 0.4);
-      }
-
-      .btn-flutuante-abrir:hover .hamburguer-retro .linha {
-        background: #ffffff;
-        box-shadow:
-          0 0 8px #ffffff,
-          0 0 14px #4DA3FF,
-          0 0 22px #4DA3FF;
-      }
-
-      /* Pulso Neon Retrô Suave */
-      @keyframes retroPulse {
-        0%,
-        100% {
-          box-shadow:
-            0 4px 20px rgba(0, 0, 0, 0.5),
-            0 0 12px rgba(77, 163, 255, 0.35);
-        }
-        50% {
-          box-shadow:
-            0 4px 24px rgba(0, 0, 0, 0.65),
-            0 0 22px rgba(77, 163, 255, 0.65);
-        }
+          0 0 14px #4DA3FF;
       }
 
       /* ========================================================
-         SIDEBAR & LAYOUT
+         SIDEBAR (Menu Lateral)
          ======================================================== */
       .sidebar-so {
         position: fixed;
         inset: 0 auto 0 0;
         width: var(--sidebar-width);
-        background: rgba(14, 18, 32, 0.85);
+        background: rgba(14, 18, 32, 0.88);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
-        padding: 34px 24px;
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.45);
+        padding: 28px 24px;
         display: flex;
         flex-direction: column;
         z-index: 90;
@@ -237,17 +170,26 @@ import { LoadingService } from '../../servicos/loading.service';
         opacity: 0;
       }
 
-      .sidebar-header {
+      /* Barra de Topo Interna da Sidebar */
+      .sidebar-top-bar {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 16px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
-      .sidebar-header h2 {
+      .badge-painel {
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        font-size: 0.65rem;
+        color: #7e8b9b;
+        letter-spacing: 1px;
+      }
+
+      .sidebar-so h2 {
         color: var(--color-text);
-        margin: 0;
+        margin: 0 0 14px;
         font-size: 1.6rem;
         font-family: 'Press Start 2P', var(--font-montserrat);
         line-height: 1.3;
@@ -257,7 +199,7 @@ import { LoadingService } from '../../servicos/loading.service';
       }
 
       .sidebar-so p {
-        margin: 0 0 32px;
+        margin: 0 0 28px;
         color: #d4d8e3;
         line-height: 1.6;
         font-size: 1.05rem;
@@ -320,7 +262,9 @@ import { LoadingService } from '../../servicos/loading.service';
         color: white;
       }
 
-      /* Conteúdo Principal */
+      /* ========================================================
+         CONTEÚDO PRINCIPAL & TOOLBAR QUANDO RECOLHIDA
+         ======================================================== */
       .conteudo-so {
         min-width: 0;
         margin-left: calc(var(--sidebar-width) + 26px);
@@ -338,13 +282,43 @@ import { LoadingService } from '../../servicos/loading.service';
         margin-inline: auto;
       }
 
+      /* Barra de Topo na Área de Conteúdo (surge suavemente quando a sidebar recolhe) */
+      .topbar-conteudo-so {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding: 8px 18px 8px 10px;
+        background: rgba(14, 18, 32, 0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(77, 163, 255, 0.35);
+        border-radius: 14px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 12px rgba(77, 163, 255, 0.2);
+        animation: deslizarTopBar 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .badge-trilhas {
+        font-family: 'Press Start 2P', var(--font-montserrat);
+        font-size: 0.68rem;
+        color: #4DA3FF;
+        letter-spacing: 1px;
+        text-shadow: 0 0 8px rgba(77, 163, 255, 0.4);
+      }
+
+      @keyframes deslizarTopBar {
+        from {
+          opacity: 0;
+          transform: translateY(-14px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
       /* Responsividade para Telas Menores (<= 900px) */
       @media (max-width: 900px) {
-        .btn-flutuante-abrir {
-          top: 76px;
-          left: 16px;
-        }
-
         .sidebar-so {
           position: static;
           width: 100%;
@@ -373,6 +347,12 @@ import { LoadingService } from '../../servicos/loading.service';
         .conteudo-so.expandido {
           padding-left: 16px;
           padding-right: 16px;
+        }
+
+        .topbar-conteudo-so {
+          width: 100%;
+          justify-content: flex-start;
+          border-radius: 12px;
         }
       }
     `,
