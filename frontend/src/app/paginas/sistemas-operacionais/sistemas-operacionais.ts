@@ -8,18 +8,20 @@ import { LoadingService } from '../../servicos/loading.service';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="so-layout" [class.sidebar-fechada]="sidebarRecolhida()">
-      <!-- Botão Flutuante para reabrir a barra lateral quando recolhida -->
-      @if (sidebarRecolhida()) {
-        <button 
-          type="button" 
-          class="btn-flutuante-abrir" 
-          (click)="alternarSidebar()"
-          title="Expandir menu de trilhas (Sistemas Operacionais)"
-          aria-label="Expandir menu lateral">
-          <span class="icone">☰</span>
-          <span class="texto">Trilhas</span>
-        </button>
-      }
+      <!-- Botão Flutuante (Somente os 3 traços retrô) com animação suave de entrada/saída -->
+      <button 
+        type="button" 
+        class="btn-flutuante-abrir"
+        [class.visivel]="sidebarRecolhida()"
+        (click)="alternarSidebar()"
+        title="Expandir menu de trilhas"
+        aria-label="Expandir menu lateral">
+        <div class="hamburguer-retro">
+          <span class="linha"></span>
+          <span class="linha"></span>
+          <span class="linha"></span>
+        </div>
+      </button>
 
       <aside class="sidebar-so" [class.recolhida]="sidebarRecolhida()" aria-label="Menu lateral de Sistemas Operacionais">
         <div class="sidebar-header">
@@ -72,7 +74,7 @@ import { LoadingService } from '../../servicos/loading.service';
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Botão flutuante para reabrir a sidebar quando recolhida */
+      /* Botão Flutuante (Pílula Retrô com 3 traços neon) */
       .btn-flutuante-abrir {
         position: fixed;
         top: 86px;
@@ -80,41 +82,92 @@ import { LoadingService } from '../../servicos/loading.service';
         z-index: 100;
         display: flex;
         align-items: center;
-        gap: 10px;
+        justify-content: center;
+        width: 52px;
+        height: 40px;
         background: rgba(14, 18, 32, 0.92);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        color: var(--color-primary, #4DA3FF);
-        border: 1px solid rgba(77, 163, 255, 0.45);
-        border-radius: 30px;
-        padding: 10px 18px;
-        font-family: 'Press Start 2P', var(--font-montserrat);
-        font-size: 0.72rem;
+        border: 1.5px solid rgba(77, 163, 255, 0.5);
+        border-radius: 9999px;
         cursor: pointer;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(77, 163, 255, 0.3);
-        transition: all 0.25s ease;
-        animation: deslizarEntrada 0.25s ease-out;
+        padding: 0;
+
+        /* Transição Suave Retrô de Entrada e Saída */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-28px) scale(0.85);
+        transition:
+          opacity 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+          transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+          visibility 0.35s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
       }
 
+      /* Estado Visível com pulso neon */
+      .btn-flutuante-abrir.visivel {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0) scale(1);
+        animation: retroPulse 3.5s infinite ease-in-out;
+      }
+
+      /* Os 3 Traços Retrô com Brilho Neon */
+      .hamburguer-retro {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 20px;
+        height: 13px;
+      }
+
+      .hamburguer-retro .linha {
+        display: block;
+        width: 100%;
+        height: 2.5px;
+        background: #4DA3FF;
+        border-radius: 2px;
+        box-shadow:
+          0 0 6px rgba(77, 163, 255, 0.85),
+          0 0 10px rgba(77, 163, 255, 0.45);
+        transition:
+          background-color 0.25s ease,
+          box-shadow 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      /* Efeito de Hover estilo Arcade */
       .btn-flutuante-abrir:hover {
-        background: rgba(77, 163, 255, 0.2);
-        border-color: var(--color-primary, #4DA3FF);
-        transform: scale(1.05);
-        box-shadow: 0 6px 26px rgba(77, 163, 255, 0.5);
+        border-color: #4DA3FF;
+        transform: translateX(0) scale(1.08);
+        box-shadow:
+          0 6px 26px rgba(77, 163, 255, 0.6),
+          0 0 20px rgba(77, 163, 255, 0.4);
       }
 
-      .btn-flutuante-abrir .icone {
-        font-size: 1rem;
+      .btn-flutuante-abrir:hover .hamburguer-retro .linha {
+        background: #ffffff;
+        box-shadow:
+          0 0 8px #ffffff,
+          0 0 14px #4DA3FF,
+          0 0 22px #4DA3FF;
       }
 
-      @keyframes deslizarEntrada {
-        from {
-          opacity: 0;
-          transform: translateX(-20px);
+      /* Pulso Neon Suave */
+      @keyframes retroPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 4px 20px rgba(0, 0, 0, 0.5),
+            0 0 12px rgba(77, 163, 255, 0.35);
         }
-        to {
-          opacity: 1;
-          transform: translateX(0);
+        50% {
+          box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.65),
+            0 0 22px rgba(77, 163, 255, 0.65);
         }
       }
 
@@ -132,7 +185,9 @@ import { LoadingService } from '../../servicos/loading.service';
         display: flex;
         flex-direction: column;
         z-index: 90;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        transition:
+          transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.35s ease;
       }
 
       .sidebar-so.recolhida {
@@ -254,7 +309,9 @@ import { LoadingService } from '../../servicos/loading.service';
         min-width: 0;
         margin-left: calc(var(--sidebar-width) + 26px);
         padding: 34px 24px 60px 0;
-        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+        transition:
+          margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.35s ease;
       }
 
       .conteudo-so.expandido {
