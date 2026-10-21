@@ -1,14 +1,21 @@
 .secao-so {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
+  width: 100%;
+}
+
+.header-pagina {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .header-pagina h1 {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--color-text);
-  font-size: 2.25rem;
-  line-height: 1.2;
+  font-size: 2.35rem;
+  line-height: 1.25;
   text-shadow:
     0 0 6px rgba(77, 163, 255, 0.75),
     0 0 18px rgba(77, 163, 255, 0.45),
@@ -17,21 +24,25 @@
 
 .icone-titulo {
   font-size: 1.35em;
+  margin-right: 8px;
 }
 
 .header-pagina p {
   margin: 0;
-  color: var(--color-muted);
-  font-size: 1.18rem;
-  line-height: 1.55;
+  color: #d4d8e3;
+  font-size: 1.15rem;
+  line-height: 1.6;
 }
 
-/* --- GAMIFICAÇÃO & BARRA DE PROGRESSO RETRÔ --- */
+/* ========================================================
+   GAMIFICAÇÃO & BARRA DE PROGRESSO RETRÔ
+   ======================================================== */
 .gamificacao-box {
+  width: 100%;
   background: rgba(18, 24, 44, 0.85);
   border: 1px solid rgba(77, 163, 255, 0.3);
-  border-radius: 12px;
-  padding: 18px 22px;
+  border-radius: 14px;
+  padding: 18px 24px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: all 0.3s ease;
 }
@@ -39,37 +50,41 @@
 .gamificacao-box.completo {
   border-color: #22c55e;
   background: rgba(20, 36, 30, 0.9);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.35);
 }
 
 .gamificacao-topo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-family: var(--font-pixel);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .progresso-label {
   color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .progresso-label strong {
   color: #7dd3fc;
-  margin-left: 6px;
 }
 
 .progresso-porcentagem {
   color: #22c55e;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   text-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
 }
 
 .progresso-barra-trilha {
   width: 100%;
   height: 10px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -85,55 +100,70 @@
 
 .progresso-fill-trilha.brilho-maximo {
   background: #22c55e;
-  box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.85);
 }
 
 .badge-conquista {
   margin-top: 14px;
-  padding: 8px 14px;
+  padding: 10px 16px;
   background: rgba(34, 197, 94, 0.18);
   border: 1px solid #22c55e;
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   color: #86efac;
   text-align: center;
+  line-height: 1.5;
 }
 
-/* --- GRID DE CARDS --- */
+/* ========================================================
+   GRID DE CARDS (DISTRIBUIÇÃO HARMONIOSA & RESPONSIVA)
+   ======================================================== */
 .grid-so {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .card-so {
-  background: rgba(18, 22, 38, 0.72);
+  flex: 1 1 290px;
+  max-width: 360px;
+  min-width: 270px;
+  background: rgba(18, 22, 38, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
-  padding: 20px;
+  padding: 22px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
   text-align: center;
 }
 
 .card-so:hover {
   transform: translateY(-5px);
-  background: rgba(26, 32, 54, 0.85);
+  background: rgba(26, 32, 54, 0.88);
   border-color: var(--color-accent);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), var(--neon-sepia);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    var(--neon-sepia);
 }
 
 .card-so.card-concluido {
   border-color: rgba(34, 197, 94, 0.5);
-  background: rgba(16, 28, 26, 0.8);
+  background: rgba(16, 28, 26, 0.82);
 }
 
 .card-so.card-concluido:hover {
@@ -149,8 +179,8 @@
 }
 
 .so-icon {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -164,30 +194,33 @@
 
 .card-header h2 {
   margin: 0;
-  font-size: 1.28rem;
+  font-size: 1.25rem;
+  font-family: var(--font-pixel);
+  line-height: 1.35;
 }
 
 .description {
   margin: 0 0 6px;
   color: var(--color-text);
   font-weight: 700;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
 }
 
 .detalhes {
   margin: 0;
   color: var(--color-muted);
   line-height: 1.55;
-  font-size: 1.02rem;
+  font-size: 0.98rem;
 }
 
 .card-footer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -195,6 +228,14 @@
   color: var(--color-primary);
   font-weight: 600;
   font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.link-texto:hover {
+  color: #fff;
 }
 
 .btn-check-estudo {
@@ -204,7 +245,7 @@
   color: #cbd5e1;
   font-family: var(--font-pixel);
   font-size: 0.62rem;
-  padding: 8px 12px;
+  padding: 9px 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -213,6 +254,7 @@
 .btn-check-estudo:hover {
   border-color: #22c55e;
   color: #86efac;
+  background: rgba(34, 197, 94, 0.12);
 }
 
 .btn-check-estudo.checked {
@@ -220,4 +262,26 @@
   border-color: #22c55e;
   color: #86efac;
   box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+/* ========================================================
+   RESPONSIVIDADE (MOBILE & TABLET)
+   ======================================================== */
+@media (max-width: 680px) {
+  .header-pagina h1 {
+    font-size: 1.85rem;
+  }
+
+  .header-pagina p {
+    font-size: 1.05rem;
+  }
+
+  .card-so {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .gamificacao-box {
+    padding: 14px 18px;
+  }
 }

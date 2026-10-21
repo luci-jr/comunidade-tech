@@ -267,8 +267,9 @@ import { LoadingService } from '../../servicos/loading.service';
          ======================================================== */
       .conteudo-so {
         min-width: 0;
-        margin-left: calc(var(--sidebar-width) + 26px);
-        padding: 34px 24px 60px 0;
+        margin-left: calc(var(--sidebar-width) + 28px);
+        padding: 34px 28px 60px 0;
+        max-width: 1720px;
         transition:
           margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
           padding 0.35s ease;
@@ -276,9 +277,8 @@ import { LoadingService } from '../../servicos/loading.service';
 
       .conteudo-so.expandido {
         margin-left: 0;
-        padding-left: 36px;
-        padding-right: 36px;
-        max-width: 1280px;
+        padding: 34px clamp(20px, 3.5vw, 60px) 60px;
+        max-width: 1720px;
         margin-inline: auto;
       }
 
