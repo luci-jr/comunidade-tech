@@ -2,20 +2,34 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Sugestões de plataformas de estudo
     match /sugestoes/{docId} {
-      // Leitura pública das sugestões da comunidade
       allow read: if true;
-
-      // Criação restrita com validação estrita de campos
       allow create: if request.resource.data.nome is string
                     && request.resource.data.nome.size() > 0
                     && request.resource.data.nome.size() <= 100
                     && request.resource.data.url is string
                     && request.resource.data.url.size() > 0
                     && request.resource.data.url.size() <= 300;
-
-      // Bloqueio de alteração e exclusão anônima
       allow update, delete: if false;
+    }
+
+    // Mural dos Devs (Recados e conquistas da comunidade)
+    match /mural/{docId} {
+      allow read: if true;
+      
+      // Permitir postagem apenas de usuários autenticados
+      allow create: if request.auth != null
+                    && request.resource.data.mensagem is string
+                    && request.resource.data.mensagem.size() > 0
+                    && request.resource.data.mensagem.size() <= 350
+                    && request.resource.data.autorUid == request.auth.uid;
+
+      // Permitir incremento de curtidas por qualquer visitante
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['curtidas']);
+
+      // Apenas o próprio autor pode deletar seu recado
+      allow delete: if request.auth != null && request.auth.uid == resource.data.autorUid;
     }
 
     match /{document=**} {

@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: comunidade_tech_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: comunidade_tech
+      POSTGRES_USER: comunidade
+      POSTGRES_PASSWORD: comunidade_secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U comunidade -d comunidade_tech"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer:latest
+    container_name: comunidade_tech_adminer
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+    depends_on:
+      - db
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: comunidade_tech_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: comunidade_tech
+      DB_USER: comunidade
+      DB_PASSWORD: comunidade_secret
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: comunidade_tech_frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "4200:4200"
+
+volumes:
+  postgres_data:
+    driver: local

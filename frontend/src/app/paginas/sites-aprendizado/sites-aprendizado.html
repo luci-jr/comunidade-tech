@@ -1,0 +1,120 @@
+<div class="sites-layout">
+  <aside class="sidebar-sites">
+    <h2>Plataformas de Ensino</h2>
+    <p>Escolha uma trilha para focar no tipo de estudo que você procura.</p>
+
+    <nav class="menu-sites">
+      <button
+        [class.ativo]="filtroAtivo() === 'fundamentos'"
+        (click)="alterarFiltro('fundamentos')"
+      >
+        Fundamentos
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'fullstack'" (click)="alterarFiltro('fullstack')">
+        Full Stack
+      </button>
+      <button
+        [class.ativo]="filtroAtivo() === 'cloud-devops'"
+        (click)="alterarFiltro('cloud-devops')"
+      >
+        Cloud e DevOps
+      </button>
+      <button
+        [class.ativo]="filtroAtivo() === 'ensino-gamificado'"
+        (click)="alterarFiltro('ensino-gamificado')"
+      >
+        Ensino Gamificado
+      </button>
+      <button
+        [class.ativo]="filtroAtivo() === 'sugestoes'"
+        (click)="alterarFiltro('sugestoes')"
+      >
+        🌟 Indicações da Galera
+      </button>
+      <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
+    </nav>
+
+    <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
+  </aside>
+
+  <main class="conteudo-sites">
+    <header class="header-pagina">
+      <h1>🎓 PLATAFORMAS DE ENSINO RECOMENDADAS</h1>
+      <button (click)="abrirModalSugestao()" class="btn-sugerir">➕ Sugerir Nova Plataforma</button>
+    </header>
+
+    <div class="grid-plataformas">
+      @for (item of plataformasFiltradas(); track item.nome) {
+        <a [href]="item.url" target="_blank" class="card-plataforma">
+          <div class="card-header">
+            <span class="site-icon">{{ item.icone }}</span>
+            <h2>{{ item.nome }}</h2>
+            <span class="site-icon flipped">{{ item.icone }}</span>
+          </div>
+          <div class="card-body">
+            <p class="description">
+              <span class="desc-icon">{{ descricaoIcone(item.descricao) }}</span>
+              <span>{{ descricaoTexto(item.descricao) }}</span>
+            </p>
+            <p class="detalhes">{{ item.detalhes }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="link-texto">Acessar Plataforma 🔗</span>
+          </div>
+        </a>
+      }
+    </div>
+  </main>
+</div>
+
+@if (modalAberto()) {
+  <div class="modal-backdrop" (click)="$event.target === backdrop && fecharModalSugestao()" #backdrop>
+    <div class="modal-card">
+      <header class="modal-header">
+        <h2>SUGERIR_PLATAFORMA</h2>
+        <p>Indique uma fonte de estudo para a Comunidade Tech</p>
+      </header>
+
+      <form (submit)="submeterSugestao(); $event.preventDefault()">
+        <div class="form-group">
+          <label for="sug-nome">NOME DA PLATAFORMA:</label>
+          <input
+            type="text"
+            id="sug-nome"
+            placeholder="Ex: Frontend Masters"
+            [value]="nomeSugestao()"
+            (input)="nomeSugestao.set($any($event.target).value)"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="sug-url">URL OFICIAL (COM HTTPS://):</label>
+          <input
+            type="url"
+            id="sug-url"
+            placeholder="https://..."
+            [value]="urlSugestao()"
+            (input)="urlSugestao.set($any($event.target).value)"
+            required
+          />
+        </div>
+
+        @if (feedback()) {
+          <div class="feedback-msg" [class.erro]="!feedback()?.sucesso">
+            {{ feedback()?.texto }}
+          </div>
+        }
+
+        <div class="modal-actions">
+          <button type="submit" class="pixel-btn btn-primary" [disabled]="enviando()">
+            {{ enviando() ? 'ENVIANDO...' : 'ENVIAR SUGESTÃO' }}
+          </button>
+          <button type="button" class="btn-cancelar" (click)="fecharModalSugestao()">
+            [ Cancelar ]
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

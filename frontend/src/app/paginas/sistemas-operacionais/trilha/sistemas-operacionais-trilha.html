@@ -1,0 +1,70 @@
+<section class="secao-so">
+  <header class="header-pagina">
+    <h1><span class="icone-titulo">{{ iconeTitulo }}</span> {{ titulo }}</h1>
+    <p>{{ descricao }}</p>
+  </header>
+
+  <!-- BARRA DE PROGRESSO RETRÔ & GAMIFICAÇÃO -->
+  <div class="gamificacao-box" [class.completo]="porcentagem() === 100">
+    <div class="gamificacao-topo">
+      <span class="progresso-label">
+        🎮 SEU PROGRESSO NA TRILHA:
+        <strong>{{ totalConcluidos() }} / {{ totalRecursos() }} TÓPICOS</strong>
+      </span>
+      <span class="progresso-porcentagem">{{ porcentagem() }}%</span>
+    </div>
+
+    <div class="progresso-barra-trilha">
+      <div
+        class="progresso-fill-trilha"
+        [style.width.%]="porcentagem()"
+        [class.brilho-maximo]="porcentagem() === 100"
+      ></div>
+    </div>
+
+    @if (porcentagem() === 100) {
+      <div class="badge-conquista animate-pop">
+        🏆 <strong>PARABÉNS, DEV!</strong> Você dominou todos os tópicos desta trilha! (+100 XP)
+      </div>
+    }
+  </div>
+
+  <div class="grid-so">
+    @for (so of recursos; track so.nome) {
+      <a
+        [href]="so.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card-so"
+        [class.card-concluido]="isConcluido(so.nome)"
+      >
+        <div class="card-header">
+          <span class="so-icon">{{ so.icone }}</span>
+          <h2>{{ so.nome }}</h2>
+        </div>
+
+        <div class="card-body">
+          <p class="description">{{ so.descricaoCurta }}</p>
+          <p class="detalhes">{{ so.detalhes }}</p>
+        </div>
+
+        <div class="card-footer">
+          <span class="link-texto">Explorar recurso 🔗</span>
+
+          <button
+            type="button"
+            class="btn-check-estudo"
+            [class.checked]="isConcluido(so.nome)"
+            (click)="toggleConcluido(so.nome, $event)"
+          >
+            @if (isConcluido(so.nome)) {
+              ✓ Concluído (+10 XP)
+            } @else {
+              ○ Marcar como estudado
+            }
+          </button>
+        </div>
+      </a>
+    }
+  </div>
+</section>

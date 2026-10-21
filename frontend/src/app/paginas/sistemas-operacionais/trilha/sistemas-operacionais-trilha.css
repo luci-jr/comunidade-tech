@@ -1,0 +1,223 @@
+.secao-so {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header-pagina h1 {
+  margin: 0 0 18px;
+  color: var(--color-text);
+  font-size: 2.25rem;
+  line-height: 1.2;
+  text-shadow:
+    0 0 6px rgba(77, 163, 255, 0.75),
+    0 0 18px rgba(77, 163, 255, 0.45),
+    0 0 30px rgba(77, 163, 255, 0.3);
+}
+
+.icone-titulo {
+  font-size: 1.35em;
+}
+
+.header-pagina p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.18rem;
+  line-height: 1.55;
+}
+
+/* --- GAMIFICAÇÃO & BARRA DE PROGRESSO RETRÔ --- */
+.gamificacao-box {
+  background: rgba(18, 24, 44, 0.85);
+  border: 1px solid rgba(77, 163, 255, 0.3);
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.gamificacao-box.completo {
+  border-color: #22c55e;
+  background: rgba(20, 36, 30, 0.9);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.gamificacao-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+}
+
+.progresso-label {
+  color: #94a3b8;
+}
+
+.progresso-label strong {
+  color: #7dd3fc;
+  margin-left: 6px;
+}
+
+.progresso-porcentagem {
+  color: #22c55e;
+  font-size: 0.85rem;
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+.progresso-barra-trilha {
+  width: 100%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progresso-fill-trilha {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #22c55e);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.progresso-fill-trilha.brilho-maximo {
+  background: #22c55e;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+}
+
+.badge-conquista {
+  margin-top: 14px;
+  padding: 8px 14px;
+  background: rgba(34, 197, 94, 0.18);
+  border: 1px solid #22c55e;
+  border-radius: 6px;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #86efac;
+  text-align: center;
+}
+
+/* --- GRID DE CARDS --- */
+.grid-so {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card-so {
+  background: rgba(18, 22, 38, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  text-align: center;
+}
+
+.card-so:hover {
+  transform: translateY(-5px);
+  background: rgba(26, 32, 54, 0.85);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), var(--neon-sepia);
+}
+
+.card-so.card-concluido {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(16, 28, 26, 0.8);
+}
+
+.card-so.card-concluido:hover {
+  border-color: #22c55e;
+  box-shadow: 0 10px 28px rgba(34, 197, 94, 0.35);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.so-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.28rem;
+}
+
+.description {
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.detalhes {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.55;
+  font-size: 1.02rem;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.link-texto {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-check-estudo {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-check-estudo:hover {
+  border-color: #22c55e;
+  color: #86efac;
+}
+
+.btn-check-estudo.checked {
+  background: rgba(34, 197, 94, 0.22);
+  border-color: #22c55e;
+  color: #86efac;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}

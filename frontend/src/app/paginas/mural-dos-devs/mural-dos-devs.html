@@ -1,0 +1,152 @@
+<section class="pagina-aba mural-container">
+  <header class="mural-header">
+    <span class="badge-tag">RECADOS & CONQUISTAS</span>
+    <h1>MURAL DOS DEVS</h1>
+    <p class="subtitulo">
+      Pílulas de conselho prático, aprendizados e conquistas de quem está construindo a carreira em tecnologia.
+    </p>
+  </header>
+
+  <!-- SEÇÃO DE PUBLICAÇÃO / LOGIN -->
+  @if (usuario(); as user) {
+    <div class="mural-form-box">
+      <div class="form-header">
+        <div class="form-user-info">
+          @if (user.photoURL) {
+            <img [src]="user.photoURL" [alt]="user.displayName || 'Avatar'" class="form-avatar" />
+          } @else {
+            <div class="form-avatar-fallback">👾</div>
+          }
+          <div>
+            <span class="form-user-name">{{ user.displayName || 'Dev Autenticado' }}</span>
+            <span class="form-user-status">● Conectado</span>
+          </div>
+        </div>
+        <span class="terminal-tag">NOVO_RECADO.sh</span>
+      </div>
+
+      <div class="form-body">
+        <div class="form-categorias">
+          <label>Categoria:</label>
+          <div class="categoria-chips">
+            @for (cat of ['#MINDSET', '#FUNDAMENTOS', '#PORTFÓLIO', '#GIT', '#CARREIRA', '#DICA', '#CONQUISTA']; track cat) {
+              <button
+                type="button"
+                class="chip-btn"
+                [class.ativo]="categoriaSelecionada() === cat"
+                (click)="categoriaSelecionada.set($any(cat))"
+              >
+                {{ cat }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <textarea
+          class="mural-textarea"
+          placeholder="Compartilhe um aprendizado, conselho ou conquista com a comunidade (máx. 350 caracteres)..."
+          maxlength="350"
+          [value]="novaMensagemTexto()"
+          (input)="novaMensagemTexto.set($any($event.target).value)"
+          rows="3"
+        ></textarea>
+
+        <div class="form-footer">
+          <span class="char-count" [class.limite]="novaMensagemTexto().length > 320">
+            {{ novaMensagemTexto().length }} / 350 caracteres
+          </span>
+
+          <button
+            type="button"
+            class="pixel-btn btn-publicar"
+            [disabled]="enviando() || novaMensagemTexto().trim().length < 5"
+            (click)="publicarRecado()"
+          >
+            @if (enviando()) {
+              ENVIANDO...
+            } @else {
+              PUBLICAR RECADO 🚀
+            }
+          </button>
+        </div>
+
+        @if (feedbackMsg()) {
+          <div class="feedback-banner" [class.erro]="feedbackMsg()?.tipo === 'erro'">
+            {{ feedbackMsg()?.texto }}
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="mural-login-banner">
+      <div class="login-banner-content">
+        <span class="login-banner-icon">💬</span>
+        <div>
+          <h3>FAÇA PARTE DO MURAL</h3>
+          <p>Conecte-se com sua conta Google para deixar recados, trocar experiências e registrar conquistas!</p>
+        </div>
+      </div>
+      <button type="button" class="pixel-btn btn-login-google" (click)="fazerLogin()">
+        CONECTAR COM GOOGLE
+      </button>
+    </div>
+  }
+
+  <!-- FILTROS DE CATEGORIA -->
+  <div class="filtros-container">
+    <span class="filtro-label">Filtrar por:</span>
+    <div class="filtro-pills">
+      @for (cat of categoriasDisponiveis; track cat) {
+        <button
+          type="button"
+          class="filtro-pill"
+          [class.ativo]="filtroSelecionado() === cat"
+          (click)="filtroSelecionado.set(cat)"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- GRID DE RECADOS -->
+  <div class="mural-grid">
+    @for (card of mensagensExibidas(); track (card.id || card.mensagem)) {
+      <article class="mural-card">
+        <div class="card-topo">
+          <span class="tag-categoria">{{ card.categoria }}</span>
+          <span class="tempo">{{ card.dataCriacao | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <p class="mensagem">
+          "{{ card.mensagem }}"
+        </p>
+
+        <div class="card-footer-mural">
+          <div class="card-autor">
+            @if (card.autorFoto) {
+              <img [src]="card.autorFoto" [alt]="card.autorNome" class="autor-img" />
+            } @else {
+              <span class="autor-avatar">👾</span>
+            }
+            <span class="autor-nome">{{ card.autorNome }}</span>
+          </div>
+
+          <button type="button" class="btn-curtir" (click)="curtir(card)">
+            ❤️ <span class="curtidas-count">{{ card.curtidas || 0 }}</span>
+          </button>
+        </div>
+      </article>
+    }
+  </div>
+
+  <!-- CTA COMUNIDADE -->
+  <section class="mural-cta">
+    <h3>📢 QUER TROCAR UMA IDEIA EM TEMPO REAL?</h3>
+    <p>Participe dos canais oficiais da Comunidade Tech no Discord e WhatsApp!</p>
+    <div class="cta-botoes">
+      <a href="https://chat.whatsapp.com/B9BGGB7Z0UcDZaUa0SKznW" target="_blank" rel="noopener" class="pixel-btn btn-whats">Grupo no WhatsApp</a>
+      <a href="https://discord.gg/7PREG5zDF" target="_blank" rel="noopener" class="pixel-btn btn-discord">Servidor no Discord</a>
+    </div>
+  </section>
+</section>
