@@ -1,5 +1,21 @@
-<div class="referencias-layout">
-  <aside class="sidebar-referencias">
+<div class="referencias-layout" [class.sidebar-fechada]="sidebarRecolhida()">
+  <aside class="sidebar-referencias" [class.recolhida]="sidebarRecolhida()" aria-label="Menu de Frameworks">
+    <div class="sidebar-top-bar">
+      <button 
+        type="button" 
+        class="btn-toggle-hamburguer" 
+        (click)="alternarSidebar()"
+        title="Recolher menu lateral"
+        aria-label="Recolher menu lateral">
+        <div class="hamburguer-retro">
+          <span class="linha"></span>
+          <span class="linha"></span>
+          <span class="linha"></span>
+        </div>
+      </button>
+      <span class="badge-painel">PAINEL</span>
+    </div>
+
     <h2>Frameworks</h2>
     <p>Escolha uma trilha para acessar ferramentas e tecnologias usadas no mercado.</p>
 
@@ -22,7 +38,25 @@
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
   </aside>
 
-  <main class="conteudo-referencias">
+  <main class="conteudo-referencias" [class.expandido]="sidebarRecolhida()">
+    @if (sidebarRecolhida()) {
+      <div class="topbar-conteudo">
+        <button 
+          type="button" 
+          class="btn-toggle-hamburguer" 
+          (click)="alternarSidebar()"
+          title="Expandir menu lateral"
+          aria-label="Abrir menu de frameworks">
+          <div class="hamburguer-retro">
+            <span class="linha"></span>
+            <span class="linha"></span>
+            <span class="linha"></span>
+          </div>
+        </button>
+        <span class="badge-modulo">FRAMEWORKS & TECNOLOGIAS</span>
+      </div>
+    }
+
     <header class="header-pagina">
       <h1>📚 FRAMEWORKS</h1>
       <p>Ferramentas e tecnologias para backend, frontend, mobile e devops.</p>

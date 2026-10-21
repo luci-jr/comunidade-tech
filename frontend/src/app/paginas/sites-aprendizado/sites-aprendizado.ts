@@ -17,6 +17,12 @@ export class SitesAprendizado {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
 
+  sidebarRecolhida = signal<boolean>(false);
+
+  alternarSidebar() {
+    this.sidebarRecolhida.update((v) => !v);
+  }
+
   // Sugestões recebidas do Firestore em tempo real
   readonly sugestoesComunidade = toSignal(this.firestoreService.listarSugestoes(), {
     initialValue: [],

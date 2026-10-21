@@ -14,6 +14,12 @@ export class ReferenciasTecnologia {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
 
+  sidebarRecolhida = signal<boolean>(false);
+
+  alternarSidebar() {
+    this.sidebarRecolhida.update((v) => !v);
+  }
+
   filtroAtivo = signal<'todos' | 'backend' | 'frontend' | 'mobile' | 'devops'>('todos');
 
   listaReferencias = signal<PlataformaEnsino[]>([

@@ -1,5 +1,21 @@
-<div class="sites-layout">
-  <aside class="sidebar-sites">
+<div class="sites-layout" [class.sidebar-fechada]="sidebarRecolhida()">
+  <aside class="sidebar-sites" [class.recolhida]="sidebarRecolhida()" aria-label="Menu de Plataformas de Ensino">
+    <div class="sidebar-top-bar">
+      <button 
+        type="button" 
+        class="btn-toggle-hamburguer" 
+        (click)="alternarSidebar()"
+        title="Recolher menu lateral"
+        aria-label="Recolher menu lateral">
+        <div class="hamburguer-retro">
+          <span class="linha"></span>
+          <span class="linha"></span>
+          <span class="linha"></span>
+        </div>
+      </button>
+      <span class="badge-painel">PAINEL</span>
+    </div>
+
     <h2>Plataformas de Ensino</h2>
     <p>Escolha uma trilha para focar no tipo de estudo que você procura.</p>
 
@@ -37,7 +53,25 @@
     <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
   </aside>
 
-  <main class="conteudo-sites">
+  <main class="conteudo-sites" [class.expandido]="sidebarRecolhida()">
+    @if (sidebarRecolhida()) {
+      <div class="topbar-conteudo">
+        <button 
+          type="button" 
+          class="btn-toggle-hamburguer" 
+          (click)="alternarSidebar()"
+          title="Expandir menu lateral"
+          aria-label="Abrir menu de plataformas">
+          <div class="hamburguer-retro">
+            <span class="linha"></span>
+            <span class="linha"></span>
+            <span class="linha"></span>
+          </div>
+        </button>
+        <span class="badge-modulo">PLATAFORMAS DE ENSINO</span>
+      </div>
+    }
+
     <header class="header-pagina">
       <h1>🎓 PLATAFORMAS DE ENSINO RECOMENDADAS</h1>
       <button (click)="abrirModalSugestao()" class="btn-sugerir">➕ Sugerir Nova Plataforma</button>

@@ -168,3 +168,111 @@ img {
   margin: 0 auto;
   padding: 16px;
 }
+
+/* ========================================================
+   ECOSSISTEMA NEXUS — CONTROLE GLOBAL DE SIDEBARS RETRÔ
+   ======================================================== */
+.hamburguer-retro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  height: 13px;
+}
+
+.hamburguer-retro .linha {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: #4DA3FF;
+  border-radius: 2px;
+  box-shadow:
+    0 0 6px rgba(77, 163, 255, 0.85),
+    0 0 10px rgba(77, 163, 255, 0.45);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-toggle-hamburguer {
+  flex-shrink: 0;
+  width: 48px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(77, 163, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(77, 163, 255, 0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-toggle-hamburguer:hover {
+  background: rgba(77, 163, 255, 0.18);
+  border-color: #4DA3FF;
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(77, 163, 255, 0.55);
+}
+
+.btn-toggle-hamburguer:hover .hamburguer-retro .linha {
+  background: #ffffff;
+  box-shadow:
+    0 0 8px #ffffff,
+    0 0 14px #4DA3FF;
+}
+
+.sidebar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.badge-painel {
+  font-family: 'Press Start 2P', var(--font-montserrat);
+  font-size: 0.65rem;
+  color: #7e8b9b;
+  letter-spacing: 1px;
+}
+
+.topbar-conteudo {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 26px;
+  padding: 8px 18px 8px 10px;
+  background: rgba(14, 18, 32, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(77, 163, 255, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 12px rgba(77, 163, 255, 0.2);
+  animation: deslizarTopBarGlobal 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.badge-modulo {
+  font-family: 'Press Start 2P', var(--font-montserrat);
+  font-size: 0.68rem;
+  color: #4DA3FF;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(77, 163, 255, 0.4);
+}
+
+@keyframes deslizarTopBarGlobal {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

@@ -8,8 +8,24 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
   standalone: true,
   imports: [],
   template: `
-    <div class="repos-layout">
-      <aside class="sidebar-repos">
+    <div class="repos-layout" [class.sidebar-fechada]="sidebarRecolhida()">
+      <aside class="sidebar-repos" [class.recolhida]="sidebarRecolhida()" aria-label="Menu de Repositórios">
+        <div class="sidebar-top-bar">
+          <button 
+            type="button" 
+            class="btn-toggle-hamburguer" 
+            (click)="alternarSidebar()"
+            title="Recolher menu lateral"
+            aria-label="Recolher menu lateral">
+            <div class="hamburguer-retro">
+              <span class="linha"></span>
+              <span class="linha"></span>
+              <span class="linha"></span>
+            </div>
+          </button>
+          <span class="badge-painel">PAINEL</span>
+        </div>
+
         <h2>Repositórios</h2>
         <p>Filtre por tipo de conteúdo para acelerar sua trilha de estudo.</p>
 
@@ -34,7 +50,25 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </aside>
 
-      <main class="conteudo-repos">
+      <main class="conteudo-repos" [class.expandido]="sidebarRecolhida()">
+        @if (sidebarRecolhida()) {
+          <div class="topbar-conteudo">
+            <button 
+              type="button" 
+              class="btn-toggle-hamburguer" 
+              (click)="alternarSidebar()"
+              title="Expandir menu lateral"
+              aria-label="Abrir menu de repositórios">
+              <div class="hamburguer-retro">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+              </div>
+            </button>
+            <span class="badge-modulo">REPOSITÓRIOS PARA ESTUDO</span>
+          </div>
+        }
+
         <header class="header-pagina">
           <h1>💻 REPOSITÓRIOS PARA ESTUDO 💻</h1>
         </header>
@@ -74,14 +108,24 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         position: fixed;
         inset: 0 auto 0 0;
         width: var(--sidebar-width);
-        background: rgba(14, 18, 32, 0.78);
+        background: rgba(14, 18, 32, 0.88);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.4);
-        padding: 34px 24px;
+        box-shadow: 8px 0 28px rgba(0, 0, 0, 0.45);
+        padding: 28px 24px;
         display: flex;
         flex-direction: column;
+        z-index: 90;
+        transition:
+          transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.35s ease;
+      }
+
+      .sidebar-repos.recolhida {
+        transform: translateX(-100%);
+        pointer-events: none;
+        opacity: 0;
       }
 
       .sidebar-repos h2 {
@@ -151,6 +195,17 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
         min-width: 0;
         margin-left: calc(var(--sidebar-width) + 26px);
         padding: 34px 24px 60px 0;
+        max-width: 1720px;
+        transition:
+          margin-left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.35s ease;
+      }
+
+      .conteudo-repos.expandido {
+        margin-left: 0;
+        padding: 34px clamp(20px, 3.5vw, 60px) 60px;
+        max-width: 1720px;
+        margin-inline: auto;
       }
 
       .header-pagina {
@@ -168,12 +223,17 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
       }
 
       .grid-repos {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 26px;
+        width: 100%;
       }
 
       .card-repo {
+        flex: 1 1 310px;
+        max-width: 380px;
+        min-width: 270px;
         background: rgba(18, 22, 38, 0.74);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
@@ -297,6 +357,11 @@ export class Repositorios {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
   filtroAtivo = signal<'todos' | 'python' | 'javascript' | 'trilhas'>('todos');
+  sidebarRecolhida = signal<boolean>(false);
+
+  alternarSidebar() {
+    this.sidebarRecolhida.update((v) => !v);
+  }
 
   listaRepositorios = signal<RepositorioGit[]>([
     {
