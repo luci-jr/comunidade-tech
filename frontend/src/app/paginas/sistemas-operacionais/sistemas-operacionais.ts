@@ -36,8 +36,6 @@ import { LoadingService } from '../../servicos/loading.service';
             </svg>
             <span>Voltar</span>
           </button>
-
-          <span class="badge-painel">PAINEL</span>
         </div>
 
         <h2>Sistemas Operacionais</h2>
@@ -64,9 +62,9 @@ import { LoadingService } from '../../servicos/loading.service';
 
       <!-- Área de Conteúdo Principal -->
       <main class="conteudo-so" [class.expandido]="sidebarRecolhida()">
-        <!-- Toolbar emoldurada que surge suavemente quando a sidebar está recolhida -->
+        <!-- Toolbar com botões que surge suavemente quando a sidebar está recolhida -->
         @if (sidebarRecolhida()) {
-          <div class="topbar-conteudo-so">
+          <div class="topbar-conteudo">
             <button 
               type="button" 
               class="btn-toggle-hamburguer" 
@@ -91,8 +89,6 @@ import { LoadingService } from '../../servicos/loading.service';
               </svg>
               <span>Voltar</span>
             </button>
-
-            <span class="badge-trilhas">TRILHAS DE SISTEMAS OPERACIONAIS</span>
           </div>
         }
 
@@ -212,42 +208,6 @@ import { LoadingService } from '../../servicos/loading.service';
         padding: 34px clamp(20px, 3.5vw, 60px) 60px;
         max-width: 1720px;
         margin-inline: auto;
-      }
-
-      /* Barra de Topo na Área de Conteúdo (surge suavemente quando a sidebar recolhe) */
-      .topbar-conteudo-so {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-        padding: 8px 14px;
-        background: rgba(14, 18, 32, 0.9);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1px solid rgba(160, 82, 45, 0.88);
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 12px rgba(160, 82, 45, 0.35);
-        animation: deslizarTopBar 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      .badge-trilhas {
-        height: 38px;
-        background: rgba(160, 82, 45, 0.2);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(160, 82, 45, 0.88);
-        border-radius: 10px;
-        box-shadow: 0 0 12px rgba(160, 82, 45, 0.45), inset 0 0 12px rgba(160, 82, 45, 0.24);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 16px;
-        color: var(--color-primary);
-        font-family: var(--font-pixel), 'Press Start 2P', cursive;
-        font-size: 0.65rem;
-        letter-spacing: 1.2px;
-        text-shadow: 0 0 6px rgba(77, 163, 255, 0.5);
-        white-space: nowrap;
       }
 
       @keyframes deslizarTopBar {

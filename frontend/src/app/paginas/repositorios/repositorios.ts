@@ -35,8 +35,6 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
             </svg>
             <span>Voltar</span>
           </button>
-
-          <span class="badge-painel">PAINEL</span>
         </div>
 
         <h2>Repositórios</h2>
@@ -88,8 +86,6 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
               </svg>
               <span>Voltar</span>
             </button>
-
-            <span class="badge-modulo">REPOSITÓRIOS PARA ESTUDO</span>
           </div>
         }
 

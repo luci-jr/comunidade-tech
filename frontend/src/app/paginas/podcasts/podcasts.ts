@@ -35,8 +35,6 @@ import { Podcast } from '../../models/podcast.model';
             </svg>
             <span>Voltar</span>
           </button>
-
-          <span class="badge-painel">PAINEL</span>
         </div>
 
         <h2>Podcasts Tech</h2>
@@ -85,8 +83,6 @@ import { Podcast } from '../../models/podcast.model';
               </svg>
               <span>Voltar</span>
             </button>
-
-            <span class="badge-modulo">PODCASTS TECH</span>
           </div>
         }
 
