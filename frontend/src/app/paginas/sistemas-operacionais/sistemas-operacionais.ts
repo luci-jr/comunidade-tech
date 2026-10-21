@@ -8,14 +8,14 @@ import { LoadingService } from '../../servicos/loading.service';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="so-layout" [class.sidebar-fechada]="sidebarRecolhida()">
-      <!-- Botão Flutuante (Somente os 3 traços retrô) com animação suave de entrada/saída -->
+      <!-- Botão Flutuante (3 traços neon) com animação retrô suave de entrada e saída -->
       <button 
         type="button" 
         class="btn-flutuante-abrir"
         [class.visivel]="sidebarRecolhida()"
         (click)="alternarSidebar()"
         title="Expandir menu de trilhas"
-        aria-label="Expandir menu lateral">
+        aria-label="Expandir menu de trilhas">
         <div class="hamburguer-retro">
           <span class="linha"></span>
           <span class="linha"></span>
@@ -26,13 +26,18 @@ import { LoadingService } from '../../servicos/loading.service';
       <aside class="sidebar-so" [class.recolhida]="sidebarRecolhida()" aria-label="Menu lateral de Sistemas Operacionais">
         <div class="sidebar-header">
           <h2>Sistemas Operacionais</h2>
+          <!-- Botão nos 3 traços neon substitui completamente o ícone antigo de triângulo -->
           <button 
             type="button" 
-            class="btn-recolher" 
+            class="btn-toggle-sidebar" 
             (click)="alternarSidebar()"
             title="Recolher menu lateral"
             aria-label="Recolher menu lateral">
-            ◀
+            <div class="hamburguer-retro">
+              <span class="linha"></span>
+              <span class="linha"></span>
+              <span class="linha"></span>
+            </div>
           </button>
         </div>
 
@@ -71,51 +76,12 @@ import { LoadingService } from '../../servicos/loading.service';
         width: 100%;
         min-height: calc(100vh - 1px);
         position: relative;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Botão Flutuante (Pílula Retrô com 3 traços neon) */
-      .btn-flutuante-abrir {
-        position: fixed;
-        top: 86px;
-        left: 20px;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 52px;
-        height: 40px;
-        background: rgba(14, 18, 32, 0.92);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(77, 163, 255, 0.5);
-        border-radius: 9999px;
-        cursor: pointer;
-        padding: 0;
-
-        /* Transição Suave Retrô de Entrada e Saída */
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateX(-28px) scale(0.85);
-        transition:
-          opacity 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
-          transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
-          visibility 0.35s ease,
-          border-color 0.25s ease,
-          box-shadow 0.25s ease;
-      }
-
-      /* Estado Visível com pulso neon */
-      .btn-flutuante-abrir.visivel {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateX(0) scale(1);
-        animation: retroPulse 3.5s infinite ease-in-out;
-      }
-
-      /* Os 3 Traços Retrô com Brilho Neon */
+      /* ========================================================
+         BOTÃO DOS 3 TRAÇOS RETRÔ (Design Unificado e Minimalista)
+         ======================================================== */
       .hamburguer-retro {
         display: flex;
         flex-direction: column;
@@ -139,7 +105,80 @@ import { LoadingService } from '../../servicos/loading.service';
           transform 0.25s ease;
       }
 
-      /* Efeito de Hover estilo Arcade */
+      /* 1. Botão de 3 traços no cabeçalho da Sidebar */
+      .btn-toggle-sidebar {
+        flex-shrink: 0;
+        width: 52px;
+        height: 40px;
+        border-radius: 9999px;
+        background: rgba(14, 18, 32, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1.5px solid rgba(77, 163, 255, 0.5);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        box-shadow: 0 0 12px rgba(77, 163, 255, 0.25);
+        transition: all 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+      }
+
+      .btn-toggle-sidebar:hover {
+        border-color: #4DA3FF;
+        transform: scale(1.08);
+        box-shadow: 0 0 20px rgba(77, 163, 255, 0.6);
+      }
+
+      .btn-toggle-sidebar:hover .hamburguer-retro .linha {
+        background: #ffffff;
+        box-shadow:
+          0 0 8px #ffffff,
+          0 0 14px #4DA3FF,
+          0 0 22px #4DA3FF;
+      }
+
+      /* 2. Botão Flutuante (quando recolhida) com animação retrô suave */
+      .btn-flutuante-abrir {
+        position: fixed;
+        top: 86px;
+        left: 20px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 40px;
+        background: rgba(14, 18, 32, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1.5px solid rgba(77, 163, 255, 0.5);
+        border-radius: 9999px;
+        cursor: pointer;
+        padding: 0;
+
+        /* Transição Suave Retrô de Entrada e Saída */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-35px) scale(0.7);
+        transition:
+          opacity 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+          transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+          visibility 0.4s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      /* Estado Visível com pulso neon contínuo */
+      .btn-flutuante-abrir.visivel {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0) scale(1);
+        animation: retroPulse 3.5s infinite ease-in-out;
+      }
+
       .btn-flutuante-abrir:hover {
         border-color: #4DA3FF;
         transform: translateX(0) scale(1.08);
@@ -156,7 +195,7 @@ import { LoadingService } from '../../servicos/loading.service';
           0 0 22px #4DA3FF;
       }
 
-      /* Pulso Neon Suave */
+      /* Pulso Neon Retrô Suave */
       @keyframes retroPulse {
         0%,
         100% {
@@ -171,7 +210,9 @@ import { LoadingService } from '../../servicos/loading.service';
         }
       }
 
-      /* Sidebar */
+      /* ========================================================
+         SIDEBAR & LAYOUT
+         ======================================================== */
       .sidebar-so {
         position: fixed;
         inset: 0 auto 0 0;
@@ -196,10 +237,9 @@ import { LoadingService } from '../../servicos/loading.service';
         opacity: 0;
       }
 
-      /* Header da Sidebar com botão recolher */
       .sidebar-header {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 16px;
@@ -214,30 +254,6 @@ import { LoadingService } from '../../servicos/loading.service';
         text-shadow:
           0 0 6px rgba(77, 163, 255, 0.6),
           0 0 14px rgba(77, 163, 255, 0.35);
-      }
-
-      .btn-recolher {
-        flex-shrink: 0;
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        color: #d4d8e3;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        transition: all 0.2s ease;
-      }
-
-      .btn-recolher:hover {
-        background: rgba(227, 112, 47, 0.25);
-        border-color: var(--color-accent, #e3702f);
-        color: white;
-        transform: scale(1.08);
-        box-shadow: 0 0 10px rgba(227, 112, 47, 0.4);
       }
 
       .sidebar-so p {
