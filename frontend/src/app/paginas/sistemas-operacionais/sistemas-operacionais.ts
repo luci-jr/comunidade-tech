@@ -224,29 +224,28 @@ import { LoadingService } from '../../servicos/loading.service';
         background: rgba(14, 18, 32, 0.9);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(77, 163, 255, 0.45);
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(77, 163, 255, 0.25);
+        border: 1px solid var(--color-accent);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), var(--neon-sepia);
         animation: deslizarTopBar 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       .badge-trilhas {
         height: 38px;
-        background: rgba(14, 22, 42, 0.75);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1.5px solid rgba(77, 163, 255, 0.45);
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(77, 163, 255, 0.18), inset 0 0 6px rgba(77, 163, 255, 0.1);
+        background: rgba(227, 112, 47, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--color-accent);
+        border-radius: 12px;
+        box-shadow: var(--neon-sepia);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0 14px;
-        color: #00f0ff;
+        padding: 0 16px;
+        color: var(--color-text);
         font-family: 'Press Start 2P', monospace;
         font-size: 0.65rem;
         letter-spacing: 1.2px;
-        text-shadow: 0 0 6px rgba(0, 240, 255, 0.65);
         white-space: nowrap;
       }
 
