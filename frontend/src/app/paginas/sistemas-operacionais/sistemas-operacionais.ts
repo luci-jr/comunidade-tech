@@ -31,7 +31,10 @@ import { LoadingService } from '../../servicos/loading.service';
             (click)="voltar()"
             title="Voltar para a página inicial"
             aria-label="Voltar para a página inicial">
-            ← Voltar
+            <svg class="seta-retro" width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M6 3L1 8l5 5V9h9V7H6V3z"/>
+            </svg>
+            <span>Voltar</span>
           </button>
 
           <span class="badge-painel">PAINEL</span>
@@ -83,7 +86,10 @@ import { LoadingService } from '../../servicos/loading.service';
               (click)="voltar()"
               title="Voltar para a página inicial"
               aria-label="Voltar para a página inicial">
-              ← Voltar
+              <svg class="seta-retro" width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M6 3L1 8l5 5V9h9V7H6V3z"/>
+              </svg>
+              <span>Voltar</span>
             </button>
 
             <span class="badge-trilhas">TRILHAS DE SISTEMAS OPERACIONAIS</span>
@@ -214,31 +220,33 @@ import { LoadingService } from '../../servicos/loading.service';
         align-items: center;
         gap: 12px;
         margin-bottom: 24px;
-        padding: 8px 16px;
+        padding: 8px 14px;
         background: rgba(14, 18, 32, 0.9);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        border: 2px solid rgba(77, 163, 255, 0.45);
+        border: 1.5px solid rgba(77, 163, 255, 0.45);
         border-radius: 10px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(77, 163, 255, 0.25);
         animation: deslizarTopBar 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       .badge-trilhas {
+        height: 38px;
+        background: rgba(14, 22, 42, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1.5px solid rgba(77, 163, 255, 0.45);
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(77, 163, 255, 0.18), inset 0 0 6px rgba(77, 163, 255, 0.1);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        height: 38px;
         padding: 0 14px;
-        font-family: 'Press Start 2P', var(--font-pixel), cursive;
-        font-size: 0.65rem;
         color: #00f0ff;
-        letter-spacing: 1.5px;
-        background: rgba(14, 24, 48, 0.85);
-        border: 2px solid rgba(77, 163, 255, 0.55);
-        border-radius: 6px;
-        text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-        box-shadow: 0 0 10px rgba(77, 163, 255, 0.3), inset 0 0 6px rgba(77, 163, 255, 0.2);
+        font-family: 'Press Start 2P', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 1.2px;
+        text-shadow: 0 0 6px rgba(0, 240, 255, 0.65);
         white-space: nowrap;
       }
 

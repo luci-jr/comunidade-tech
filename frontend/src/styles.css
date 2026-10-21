@@ -172,12 +172,55 @@ img {
 /* ========================================================
    ECOSSISTEMA NEXUS — CONTROLE GLOBAL DE SIDEBARS RETRÔ
    ======================================================== */
+.sidebar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+/* Base idêntica para os 3 elementos retrô: mesmo fundo, mesma borda, mesmo raio e mesmo brilho */
+.btn-toggle-hamburguer,
+.btn-voltar-topbar,
+.badge-painel {
+  height: 38px;
+  background: rgba(14, 22, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(77, 163, 255, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(77, 163, 255, 0.18), inset 0 0 6px rgba(77, 163, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f0ff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.65);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* 1. Botão Hamburguer */
+.btn-toggle-hamburguer {
+  width: 44px;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
 .hamburguer-retro {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 18px;
-  height: 14px;
+  height: 13px;
 }
 
 .hamburguer-retro .linha {
@@ -186,133 +229,86 @@ img {
   height: 2.5px;
   background: #00f0ff;
   border-radius: 1px;
-  box-shadow:
-    0 0 6px rgba(0, 240, 255, 0.9),
-    0 0 10px rgba(77, 163, 255, 0.6);
-  transition:
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.9);
+  transition: all 0.2s ease;
 }
 
-.btn-toggle-hamburguer {
-  flex-shrink: 0;
-  width: 44px;
-  height: 38px;
-  border-radius: 6px;
-  background: rgba(10, 14, 26, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid #4DA3FF;
+/* 2. Botão Voltar */
+.btn-voltar-topbar {
+  flex: 1;
+  max-width: 160px;
+  padding: 0 12px;
+  gap: 6px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  box-shadow: 0 0 10px rgba(77, 163, 255, 0.35), inset 0 0 6px rgba(77, 163, 255, 0.2);
-  transition: all 0.25s ease;
+  text-decoration: none;
 }
 
-.btn-toggle-hamburguer:hover {
+.btn-voltar-topbar .seta-retro {
+  font-size: 0.75rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* 3. Badge Painel */
+.badge-painel {
+  padding: 0 12px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Efeito de hover harmonioso e compartilhado (sem cores sólidas discrepantes) */
+.btn-toggle-hamburguer:hover,
+.btn-voltar-topbar:hover {
   background: rgba(77, 163, 255, 0.22);
   border-color: #00f0ff;
-  transform: scale(1.05);
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.65), inset 0 0 8px rgba(0, 240, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.6), inset 0 0 8px rgba(0, 240, 255, 0.25);
+  text-shadow: 0 0 8px #ffffff;
+  transform: translateY(-1px);
 }
 
 .btn-toggle-hamburguer:hover .hamburguer-retro .linha {
   background: #ffffff;
-  box-shadow:
-    0 0 8px #ffffff,
-    0 0 14px #00f0ff;
+  box-shadow: 0 0 8px #ffffff, 0 0 12px #00f0ff;
 }
 
-.sidebar-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  width: 100%;
+.btn-voltar-topbar:hover .seta-retro {
+  transform: translateX(-3px);
 }
 
-.btn-voltar-topbar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 38px;
-  padding: 0 14px;
-  background: rgba(227, 112, 47, 0.12);
-  border: 2px solid #E3702F;
-  border-radius: 6px;
-  color: #ffffff;
-  font-family: 'Press Start 2P', var(--font-pixel), cursive;
-  font-size: 0.62rem;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 8px rgba(227, 112, 47, 0.35);
-  white-space: nowrap;
-}
-
-.btn-voltar-topbar:hover {
-  background: #E3702F;
-  border-color: #ff914d;
-  color: #ffffff;
-  transform: scale(1.04);
-  box-shadow: 0 0 16px rgba(227, 112, 47, 0.7);
-}
-
-.badge-painel {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  padding: 0 12px;
-  font-family: 'Press Start 2P', var(--font-pixel), cursive;
-  font-size: 0.62rem;
-  letter-spacing: 1.5px;
-  color: #00f0ff;
-  background: rgba(14, 24, 48, 0.85);
-  border: 2px solid rgba(77, 163, 255, 0.55);
-  border-radius: 6px;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-  box-shadow: 0 0 10px rgba(77, 163, 255, 0.3), inset 0 0 6px rgba(77, 163, 255, 0.2);
-  white-space: nowrap;
-}
-
+/* Toolbar que surge quando a sidebar é recolhida */
 .topbar-conteudo {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 26px;
-  padding: 8px 16px;
+  padding: 8px 14px;
   background: rgba(14, 18, 32, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 2px solid rgba(77, 163, 255, 0.45);
+  border: 1.5px solid rgba(77, 163, 255, 0.45);
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(77, 163, 255, 0.25);
   animation: deslizarTopBarGlobal 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .badge-modulo {
+  height: 38px;
+  background: rgba(14, 22, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(77, 163, 255, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(77, 163, 255, 0.18), inset 0 0 6px rgba(77, 163, 255, 0.1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
   padding: 0 14px;
-  font-family: 'Press Start 2P', var(--font-pixel), cursive;
-  font-size: 0.65rem;
   color: #00f0ff;
-  letter-spacing: 1.5px;
-  background: rgba(14, 24, 48, 0.85);
-  border: 2px solid rgba(77, 163, 255, 0.55);
-  border-radius: 6px;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-  box-shadow: 0 0 10px rgba(77, 163, 255, 0.3), inset 0 0 6px rgba(77, 163, 255, 0.2);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1.2px;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.65);
   white-space: nowrap;
 }
 

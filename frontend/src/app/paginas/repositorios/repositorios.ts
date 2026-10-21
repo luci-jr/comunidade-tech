@@ -30,7 +30,10 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
             (click)="voltar()"
             title="Voltar para a página inicial"
             aria-label="Voltar para a página inicial">
-            ← Voltar
+            <svg class="seta-retro" width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M6 3L1 8l5 5V9h9V7H6V3z"/>
+            </svg>
+            <span>Voltar</span>
           </button>
 
           <span class="badge-painel">PAINEL</span>
@@ -80,7 +83,10 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
               (click)="voltar()"
               title="Voltar para a página inicial"
               aria-label="Voltar para a página inicial">
-              ← Voltar
+              <svg class="seta-retro" width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M6 3L1 8l5 5V9h9V7H6V3z"/>
+              </svg>
+              <span>Voltar</span>
             </button>
 
             <span class="badge-modulo">REPOSITÓRIOS PARA ESTUDO</span>
