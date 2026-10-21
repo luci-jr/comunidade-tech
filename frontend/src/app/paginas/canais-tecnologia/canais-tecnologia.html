@@ -13,6 +13,16 @@
           <span class="linha"></span>
         </div>
       </button>
+
+      <button 
+        type="button" 
+        class="btn-voltar-topbar" 
+        (click)="voltar()"
+        title="Voltar para a página inicial"
+        aria-label="Voltar para a página inicial">
+        ← Voltar
+      </button>
+
       <span class="badge-painel">PAINEL</span>
     </div>
 
@@ -31,8 +41,6 @@
       </button>
       <button [class.ativo]="filtroAtivo() === 'todos'" (click)="alterarFiltro('todos')">Todos</button>
     </nav>
-
-    <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
   </aside>
 
   <main class="conteudo-canais" [class.expandido]="sidebarRecolhida()">
@@ -50,6 +58,16 @@
             <span class="linha"></span>
           </div>
         </button>
+
+        <button 
+          type="button" 
+          class="btn-voltar-topbar" 
+          (click)="voltar()"
+          title="Voltar para a página inicial"
+          aria-label="Voltar para a página inicial">
+          ← Voltar
+        </button>
+
         <span class="badge-modulo">CANAIS DE TECNOLOGIA</span>
       </div>
     }

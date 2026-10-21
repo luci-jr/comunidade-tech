@@ -23,6 +23,16 @@ import { Podcast } from '../../models/podcast.model';
               <span class="linha"></span>
             </div>
           </button>
+
+          <button 
+            type="button" 
+            class="btn-voltar-topbar" 
+            (click)="voltar()"
+            title="Voltar para a página inicial"
+            aria-label="Voltar para a página inicial">
+            ← Voltar
+          </button>
+
           <span class="badge-painel">PAINEL</span>
         </div>
 
@@ -43,8 +53,6 @@ import { Podcast } from '../../models/podcast.model';
             Todos
           </button>
         </nav>
-
-        <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </aside>
 
       <main class="conteudo-podcasts" [class.expandido]="sidebarRecolhida()">
@@ -62,6 +70,16 @@ import { Podcast } from '../../models/podcast.model';
                 <span class="linha"></span>
               </div>
             </button>
+
+            <button 
+              type="button" 
+              class="btn-voltar-topbar" 
+              (click)="voltar()"
+              title="Voltar para a página inicial"
+              aria-label="Voltar para a página inicial">
+              ← Voltar
+            </button>
+
             <span class="badge-modulo">PODCASTS TECH</span>
           </div>
         }

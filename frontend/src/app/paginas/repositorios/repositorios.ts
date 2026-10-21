@@ -23,6 +23,16 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
               <span class="linha"></span>
             </div>
           </button>
+
+          <button 
+            type="button" 
+            class="btn-voltar-topbar" 
+            (click)="voltar()"
+            title="Voltar para a página inicial"
+            aria-label="Voltar para a página inicial">
+            ← Voltar
+          </button>
+
           <span class="badge-painel">PAINEL</span>
         </div>
 
@@ -46,8 +56,6 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
             Todos
           </button>
         </nav>
-
-        <button (click)="voltar()" class="btn-voltar-estilizado">⬅ Voltar</button>
       </aside>
 
       <main class="conteudo-repos" [class.expandido]="sidebarRecolhida()">
@@ -65,6 +73,16 @@ import { RepositorioGit } from '../../models/repositorio-git.model';
                 <span class="linha"></span>
               </div>
             </button>
+
+            <button 
+              type="button" 
+              class="btn-voltar-topbar" 
+              (click)="voltar()"
+              title="Voltar para a página inicial"
+              aria-label="Voltar para a página inicial">
+              ← Voltar
+            </button>
+
             <span class="badge-modulo">REPOSITÓRIOS PARA ESTUDO</span>
           </div>
         }
